@@ -15,6 +15,8 @@ const {
   ProgressPlugin
 } = webpack;
 
+console.log(entries, configurations)
+
 const DEFAULT_SERVER_CONFIG = {
   host: '0.0.0.0',
   port: 8080,

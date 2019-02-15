@@ -1,8 +1,9 @@
 import $ from 'jquery'
-import initInputNumber from '../../includes/mixins/InputNumber'
+import '../../includes/mixins/InputNumber'
 import '../../assets/style/common.scss'
 
 $(function () {
+  // Initialize .J_SearchTab
   const $searchTab = $('.J_SearchTab')
   const $inputType = $('input[name=t]')
 
@@ -17,5 +18,6 @@ $(function () {
     }
   })
 
-  initInputNumber()
+  // Initialize .J_InputNumber
+  $('.J_InputNumber').inputNumber(callback)
 })

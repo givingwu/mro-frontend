@@ -43,7 +43,7 @@
 ### BUILD
 
 + [webpack](https://webpack.js.org/) 构建
-+ support less/scss
++ support less/scss/postcss
 + support multiple pages
 + [postcss/autoprefixer](https://github.com/postcss/autoprefixer)
 + [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)

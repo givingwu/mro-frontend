@@ -3,6 +3,7 @@ const { paths } = require('../userConfig');
 const { transformer, formatter } = require('./utils/resolveLoaderError');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const resolvePath = p => path.resolve(paths.cwd, p);
 
 module.exports = {
@@ -104,6 +105,13 @@ module.exports = {
           }
         ]
       },
+      /* config.module.rule('vue') */
+      {
+        test: /\.vue$/,
+        use: [
+          { loader: 'vue-loader' }
+        ],
+      },
       /* config.module.rule('pug') */
       {
         test: /\.pug$/,
@@ -181,7 +189,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: 'vue-style-loader',
           },
           {
             loader: 'css-loader',
@@ -260,6 +268,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     /* config.plugin('case-sensitive-paths') */
     new CaseSensitivePathsPlugin(),
     // friendly error plugin displays very confusing errors when webpack

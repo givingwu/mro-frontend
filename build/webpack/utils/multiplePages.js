@@ -27,13 +27,25 @@ module.exports = {
 
   configurations: pagesFolders.map(page => {
     let templatePath = path.resolve(pagesFolderPath, page, 'index.pug');
+    let isVueFile = false
 
     if (!fs.existsSync(templatePath)) {
       templatePath = path.resolve(pagesFolderPath, page, 'index.html');
     }
+
+    if (!fs.existsSync(templatePath)) {
+      templatePath = path.resolve(pagesFolderPath, page, 'index.vue');
+
+      if (fs.existsSync(templatePath)) {
+        isVueFile = true;
+        templatePath = path.resolve(paths.public, 'index.html');
+      }
+    }
+
     if (!fs.existsSync(templatePath)) {
       templatePath = path.resolve(pagesFolderPath, page, page + '.pug');
     }
+
     if (!fs.existsSync(templatePath)) {
       throw new Error(templatePath + ' does not exists!');
     }

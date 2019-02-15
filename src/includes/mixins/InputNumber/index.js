@@ -144,6 +144,4 @@ $.fn.inputNumber = function (options = {}) {
   return this
 }
 
-export default function initInputNumber (callback) {
-  $('.J_InputNumber').inputNumber(callback)
-}
+export default $.fn.inputNumber
