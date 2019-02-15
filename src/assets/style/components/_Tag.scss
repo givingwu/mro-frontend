@@ -16,7 +16,7 @@
 
   &-ghost {
     color: $font-black-color;
-    border: 1px solid $font-gray-color;
+    border: 1px solid #E1E6EC;
 
     &-primary {
       @extend .tag-primary;

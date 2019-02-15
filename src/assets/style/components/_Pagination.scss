@@ -1,0 +1,40 @@
+
+// inline-pagination
+.inline-pagination {
+  color: $font-gray-color;
+  font-size: 12px;
+  vertical-align: middle;
+
+  &-total,
+  &-number {
+    padding: 0 .3em;
+    line-height: 1.5;
+  }
+
+  &-total {
+    color: $primary-color;
+  }
+
+  &-number {
+    margin-left: 20px;
+    margin-right: 5px;
+  }
+
+  &-trigger {
+    display: inline-block;
+    line-height: 28px;
+    border: 1px solid #E1E6EC;
+
+    a {
+      display: inline-block;
+      padding: 0 .5em;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+    }
+
+    &-prev {
+      border-right: 1px solid #E1E6EC;
+    }
+  }
+}

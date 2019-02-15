@@ -19,5 +19,7 @@ $(function () {
   })
 
   // Initialize .J_InputNumber
-  $('.J_InputNumber').inputNumber(callback)
+  $('.J_InputNumber').inputNumber(function callback (value) {
+    console.log(value)
+  })
 })

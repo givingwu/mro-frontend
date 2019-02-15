@@ -1,0 +1,11 @@
+mixin Cascader(address = [])
+  .cascader&attributes(attributes).J_Cascader
+    .cascader-hd
+      .cascader-hd-val.J_CascaderVal= address.join(' ')
+      .cascader-hd-icon
+        i.icon.icon-down
+    .cascader-bd
+    .cascader-ft
+      //- ul.cascader-menu
+      //-   li.cascader-item
+

@@ -2,13 +2,16 @@ mixin InlinePagination(totalLength, currentPage, pageNum)
   .inline-pagination&attributes(attributes)
     | 共
     span.inline-pagination-total 89
-      | 种商品
-    span.inline-pagination-num
-      | #{currentPage}/#{Math.ceil(totalLength / pageNum)}
+    span 种商品
+    span.inline-pagination-number
+      span.inline-pagination-current
+        | #{currentPage}
+      span.inline-pagination-separator
+        | /
+      span.inline-pagination-all
+        | #{Math.ceil(totalLength / pageNum)}
     span.inline-pagination-trigger
-      a(href="javascript:void(0);".title="上一页")
-        button.btn.btn-primary
-          i.icon.icon-prev prev
-      a(href="javascript:void(0);".title="下一页")
-        button.btn.btn-primary
+      a(href="javascript:void(0);".title="上一页").inline-pagination-trigger-prev
+        i.icon.icon-prev prev
+      a(href="javascript:void(0);".title="下一页").inline-pagination-trigger-next
           i.icon.icon-next next

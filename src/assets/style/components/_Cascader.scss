@@ -1,0 +1,25 @@
+.cascader {
+  display: inline-block;
+  *display: inline;
+  color: $font-black-color;
+  border: 1px solid #E1E6EC;
+
+  &-hd {
+    position: relative;
+    cursor: pointer;
+
+    &-val {
+      height: 28px;
+      padding-left: 8px;
+      padding-right: 8px;
+      line-height: 28px;
+      border: 0;
+    }
+
+    &-val,
+    &-icon {
+      display: inline-block;
+      *display: inline;
+    }
+  }
+}

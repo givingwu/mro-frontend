@@ -1,0 +1,25 @@
+
+.row {
+  position: relative;
+  display: block;
+  height: auto;
+  margin-left: 0;
+  margin-right: 0;
+  zoom: 1;
+  box-sizing: border-box;
+  @extend .clearfix;
+}
+
+.col-5 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.col-5 {
+  float: left;
+  display: block;
+  width: 50%;
+  box-sizing: border-box;
+}

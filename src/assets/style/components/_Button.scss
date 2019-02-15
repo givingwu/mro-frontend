@@ -1,0 +1,35 @@
+
+.btn {
+  display: inline-block;
+  *display: inline;
+  text-align: center;
+  border: none;
+
+  &-large {
+    width: 180px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+
+    & + & {
+      margin-left: 20px;
+    }
+  }
+
+  &-ghost {
+    border: 1px solid #E1E6EC;
+
+    &-primary {
+      color: $primary-color;
+      background-color: rgba(0,90,236,0.1);
+      border: 1px solid $primary-color;
+    }
+  }
+
+  &-primary {
+    color: #fff;
+    background-color: $primary-color;
+  }
+}

@@ -1,20 +1,105 @@
+- var placeholder = require('assets/image/placeholder.png')
+
 .footer-nav
   .container
-    ul.footer-nav-desc
+    ul.fn-desc
       li
-        span.sprite.resourceSupply-wrap
-          div.sprite.resourceSupply
-        span 优质的资源供应
+        .clearfix.fn-desc-item
+          span.sprite.resourceSupply-wrap
+            div.sprite.resourceSupply
+          span 优质的资源供应
       li
-        span.sprite.background-wrap
-          div.sprite.background
-        span 强大的行业背景
+        .clearfix.fn-desc-item
+          span.sprite.background-wrap
+            div.sprite.background
+          span 强大的行业背景
       li
-        span.sprite.finance-wrap
-          div.sprite.finance
-        span 融资一触即达
+        .clearfix.fn-desc-item
+          span.sprite.finance-wrap
+            div.sprite.finance
+          span 融资一触即达
       li
-        span.sprite.platform-wrap
-          div.sprite.platform
-        span 全球领先建筑交易平台
-  .footer-nav-list
+        .clearfix.fn-desc-item.last
+          span.sprite.platform-wrap
+            div.sprite.platform
+          span 全球领先建筑交易平台
+  .container.fn-wrap
+    ul.fn-list
+      li
+        dl(title="云筑集采")
+          dt(title="云筑集采") 云筑集采
+          dd
+            <a target="_blank" title="招标易" href="https://jc.yzw.cn/tendermgt/tender/list">招标易</a>
+            span.fn-divide
+            <a target="_blank" title="投标易" href="https://mall.yzw.cn/vendorportal/bidding/index">投标易</a>
+          dd
+            <a target="_blank" title="合同宝" href="https://jc.yzw.cn/contractmgt/contract/list">合同宝</a>
+            span.fn-divide
+            <a target="_blank" title="友商宝" href="https://jc.yzw.cn/suppliermgt/index/index">友商宝</a>
+      li
+        dl(title="云筑商城")
+          dt(title="云筑商城") 云筑商城
+          dd
+            <a title="名企直采" target="_blank" href="https://mall.yzw.cn/tender">名企直采</a>
+            span.fn-divide
+            <a title="名企直供" target="_blank" href="https://mall.yzw.cn/tender/supplierrecommend">名企直供</a>
+          dd
+            <a title="企业商城" target="_blank" href="https://mall.yzw.cn/ssl/enterprisemall">企业商城</a>
+            span.fn-divide
+            <a title="云筑优选" target="_blank" href="https://mall.yzw.cn/supplierchoice">云筑优选</a>
+      li
+        dl(title="云筑劳务")
+          dt(title="云筑劳务") 云筑劳务
+          dd
+            <a title="总包云" target="_blank" href="https://lw.yzw.cn">总包云</a>
+            span.fn-divide
+            <a title="分包云" target="_blank" href="https://lwjob.yzw.cn">分包云</a>
+          dd
+            <a target="_blank" title="实名易" href="https://lw.yzw.cn">实名易</a>
+            span.fn-divide
+            <a target="_blank" title="工人网" href="http://www.jzlw.org">工人网</a>
+      li
+        dl(title="云筑金服")
+          dt(title="云筑金服") 云筑金服
+          dd
+            <a title="保理易" href="https://jf.yzw.cn" target="_blank">保理易</a>
+            span.fn-divide
+            <a title="工薪宝" href="https://jf.yzw.cn" target="_blank">工薪宝</a>
+          dd
+            <a title="票据宝" href="https://jf.yzw.cn" target="_blank">票据宝</a>
+            span.fn-divide
+            <a title="信用宝" href="https://jf.yzw.cn" target="_blank">信用宝</a>
+      li
+        dl(title="云筑智联")
+          dt(title="云筑智联") 云筑智联
+          dd
+            <a title="管理平台" target="_blank" href="https://ibuild.yzw.cn">管理平台</a>
+            span.fn-divide
+            <a title="硬件设备" target="_blank" href="https://ibuild.yzw.cn">硬件设备</a>
+          dd
+            <a title="接入指南" target="_blank" href="https://ibuild.yzw.cn">接入指南</a>
+            span.fn-divide
+            <a title="云筑收货" target="_blank" href="https://yzsh.yzw.cn/">云筑收货</a>
+      li
+        dl(title="帮助中心")
+          dt(title="帮助中心") 帮助中心
+          dd
+            <a title="合作洽谈" target="_blank" href="https://www.yzw.cn/home/cooperation">合作洽谈</a>
+            span.fn-divide
+            <a title="常见问题" target="_blank" href="https://www.yzw.cn/home/commonquestion/877">常见问题</a>
+          dd
+            <a title="联系我们" target="_blank" href="https://www.yzw.cn/home/contactus">联系我们</a>
+            span.fn-divide
+            <a title="下载中心" id="aDownloadIndex" target="_blank" href="https://www.yzw.cn/hp/pc/index.html">下载中心</a>
+    ul.fn-qr
+        li
+          dl(title="云筑服务号")
+            dt(title="云筑服务号") 云筑服务号
+            dd
+              img(src=placeholder, alt="placeholder")
+        li
+          dl(title="云筑订阅号")
+            dt(title="云筑订阅号") 云筑订阅号
+            dd
+              img(src=placeholder, alt="placeholder")
+  .fn-cr 蜀ICP备15020860号-1

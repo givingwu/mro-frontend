@@ -1,6 +1,7 @@
 .input-number {
-  @extend .clearfix;
+  display: inline-block;
   border: 1px solid #E1E6EC;
+  @extend .clearfix;
 
   &__btn {
     display: inline-block;

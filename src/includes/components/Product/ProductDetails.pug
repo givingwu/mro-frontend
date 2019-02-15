@@ -37,49 +37,57 @@
       .pd-one.clearfix
         .pd-l
           span.tag.tag-primary 单价
-        .pd-r
+        .pd-r.pd-one-info
           span.pd-one-rmb ¥
           span.pd-one-price #{product.price}
           span.pd-one-separator /
           span.pd-one-unit #{product.unit}
-    .pd-addr.clearfix
-      .pd-l 配送至
-      .pd-r
-        div
-          if product.distributionAddr
-            // +AddressCascader(product.distributionAddr)
-            span.pd-addr= product.distributionAddr.join(' ')
-          a(href="") 查看供货区域
-        div
-          span.pd-gray 由常维工业制造商负责发货
-          span.pd-notice 预计3日送达
-    .pd-num.clearfix
-      .pd-l 采购数量
-      .pd-r
-        div
-          // +NumberTrigger(product.amount)
-          if product.stock
-            span.pd-bd-blue 智仓库存3980件
-        div
-          span.pd-bd-gray 请至少购买6件该商品且购买数量为3的倍数
-        div
-          a(href="/onlineService",title="产品在线咨询") 产品在线咨询
-  .pd-bd
-    div
+    .pd-addr
       .clearfix
+        .pd-l 配送至
+        .pd-r
+          div
+            if product.distributionAddr
+              include ../../mixins/Cascader/index.pug
+              +Cascader(product.distributionAddr)
+            a.pd-blue(href="") 查看供货区域
+      .pd-addr-b.clearfix
+        .pd-l
+        .pd-r
+          span.pd-gray 由常维工业制造商负责发货
+          span.pd-orange 预计3日送达
+    .pd-num.clearfix
+      .clearfix
+        .pd-l 采购数量
+        .pd-r
+          .pd-num-input
+            include ../../mixins/InputNumber/index.pug
+            +InputNumber(0)
+            if product.stock
+              span.pd-blue 智仓库存3980件
+      .clearfix
+        .pd-l
+        .pd-r
+            .pd-gray.pd-num-desc 请至少购买6件该商品且购买数量为3的倍数
+      .clearfix
+        .pd-l
+        .pd-r
+          a(href="/onlineService",title="产品在线咨询")
+            .tag.tag-ghost 产品在线咨询
+  .pd-bd
+    .pd-bd-row.row
+      .col-5.clearfix
         .pd-l 商品编号
         .pd-r= product.sku
-      .clearfix
+      .col-5.clearfix
         .pd-l 品牌
         .pd-r= product.brand
-    .clearfix
+    .pd-bd-row.row
       .pd-l 规格描述
       .pd-r= product.specification.join(' ')
   .pd-ft
-    a(href="")
-      button.pd-btn.pd-btn-ghost 直接购买
-    a(href="")
-      button.pd-btn.pd-btn-primary
-        i.icon.icon-cart
-        | 加入购物车
+    a(href="").btn.btn-large.btn-ghost.btn-ghost-primary 直接购买
+    a(href="").btn.btn-large.btn-primary
+      i.icon.icon-cart
+      | 加入购物车
 

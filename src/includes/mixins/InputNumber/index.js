@@ -64,18 +64,20 @@ class InputNumber {
 
   bindEvents () {
     const self = this
-    const { float, disabledClass } = this.options
+    const { float } = this.options
 
     self.$plusBtn.on('click', function () {
-      if (!self.$plusBtn.hasClass(disabledClass)) {
-        self.$input.val(self.getNextVal(ACTIONS.PLUS))
-      }
+      let value = self.getNextVal(ACTIONS.PLUS)
+
+      self.$input.val(value)
+      self.$input.attr('value', value)
     })
 
     self.$minusBtn.on('click', function () {
-      if (!self.$minusBtn.hasClass(disabledClass)) {
-        self.$input.val(self.getNextVal(ACTIONS.MINUS))
-      }
+      let value = self.getNextVal(ACTIONS.MINUS)
+
+      self.$input.val(value)
+      self.$input.attr('value', value)
     })
 
     self.$input.on('change input', function (e) {
@@ -92,7 +94,10 @@ class InputNumber {
         nextValue = +nextValue.replace(/[^0-9]/g, '')
       }
 
-      self.$input.val(self.getNextVal(ACTIONS.CHANGE, nextValue))
+      let value = self.getNextVal(ACTIONS.CHANGE, nextValue)
+
+      self.$input.val(value)
+      self.$input.attr('value', value)
     })
   }
 
