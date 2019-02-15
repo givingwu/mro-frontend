@@ -45,6 +45,7 @@
 + [webpack](https://webpack.js.org/) 构建
 + support less/scss/postcss
 + support multiple pages
++ support .vue
 + [postcss/autoprefixer](https://github.com/postcss/autoprefixer)
 + [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 + support [pug](http://naltatis.github.io/jade-syntax-docs/#text)
