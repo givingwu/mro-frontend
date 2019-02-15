@@ -1,0 +1,30 @@
+.footer-nav {
+  height: 98px;
+  background:#fff;
+  border-top: 1px solid #E1E6EC;
+  // box-shadow:0px 1px 0px 0px rgba(225,230,236,1);
+
+  span.sprite {
+    position: relative;
+    top: 50%;
+    margin-top: -60px;
+    transform: scale(0.5);
+  }
+
+  &-desc {
+    box-shadow:0px 1px 0px 0px rgba(225,230,236,1);
+    @extend .clearfix;
+
+    li {
+      float: left;
+      width: 25%;
+      height: 98px;
+
+      span {
+        float: left;
+        font-size: 18px;
+        line-height: 98px;
+      }
+    }
+  }
+}

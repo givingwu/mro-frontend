@@ -1,0 +1,50 @@
+- var loginStatus = false
+.site-nav
+  .container.site-nav-bd
+    ul.site-nav-bd-l
+      li.site-nav-menu#J_SiteNavLogin
+        .site-nav-menu-hd
+          if loginStatus
+            span.site-nav-user
+              | 您好，<a href="/user">张三</a>
+            span.site-nav-divide
+            span.site-nav-logout
+              a(href="/logout") 退出
+          else
+            span.site-nav-login
+              a(href="/login") 请登录
+            span.site-nav-divide
+            span.site-nav-register
+              a(href="/register") 立即注册
+    ul.site-nav-bd-r
+      li.site-nav-menu.site-nav--dropdown.J_MultiMenu#J_SiteNavMyYunzhu
+        .site-nav-menu-hd
+          a(href="javascript:void(0);")
+            span 我的云筑
+          span.site-nav-arrow
+            i.site-nav-icon.icon.more
+        .site-nav-menu-bd.site-nav-menu-list
+          .site-nav-menu-bd-panel.menu-bd-panel
+            a(href="/ssl/purchaser", target="_top") 采购商中心
+            a(href="/ssl/supplier/center", target="_top") 供应商中心
+      li.site-nav-menu
+        .site-nav-menu-hd
+          a(href="/mall") 云筑商城
+      li.site-nav-menu
+        .site-nav-menu-hd
+          a(href="/mro") 云筑集采
+      li.site-nav-menu
+        .site-nav-menu-hd
+          a(href="/") 云筑官网
+      li.site-nav-menu.site-nav--dropdown.J_MultiMenu#J_SiteNavAboutUS
+        .site-nav-menu-hd
+          a(href="javascript:void(0);")
+            span 关于我们
+          span.site-nav-arrow
+            i.site-nav-icon.icon.more
+        .site-nav-menu-bd.site-nav-menu-list
+          .site-nav-menu-bd-panel.menu-bd-panel
+            a(href="/contactus", target="_top") 联系我们
+            a(href="/commonquestion", target="_top") 常见问题
+            a(href="/sitemap", target="_top") 网站导航
+

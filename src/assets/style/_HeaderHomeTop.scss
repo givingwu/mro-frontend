@@ -1,0 +1,159 @@
+.head-top {
+  position: relative;
+  margin-top: $head-top-gap;
+
+  &-bd {
+    @extend .clearfix;
+  }
+
+  &-logo {
+    float: left;
+    width: $head-top-logo-width;
+    margin-top: 18px;
+    text-align: center;
+
+    &-bd {
+      display: block;
+      overflow: hidden;
+      height: $head-top-logo-height;
+      text-indent: -9999px;
+      background: url($logo-file) no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  &-search {
+    width: $head-top-input-width;
+    margin-left: $head-top-input-gap-l;
+  }
+
+  &-button {
+    position: absolute;
+    margin-left: $head-top-input-width + $head-top-input-gap-l + 40px;
+    top: $head-top-tag-height;
+
+    &-item {
+      height: $head-top-button-height;
+      padding-left: 12px;
+      padding-right: 12px;
+      background: rgba(255,255,255,1);
+      cursor: pointer;
+
+      &:hover {
+        color: $primary-color;
+        border-color: $primary-color;
+        background-color: rgba(0,90,236,0.1);
+      }
+    }
+
+    &__cart {
+      height: $head-top-button-height;
+      padding-left: 12px;
+      padding-right: 12px;
+      background: rgba(255,255,255,1);
+      border: 1px solid rgba(225,230,236,1);
+
+      &--badge {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        margin-left: 8px;
+        background: $notice-color;
+        border-radius: 9px;
+        color: #fff;
+      }
+    }
+
+    &__login {
+      min-width: 90px;
+      margin-left: 20px;
+      color: $primary-color;
+      border: 1px solid $primary-color;
+    }
+  }
+}
+
+.search {
+  @extend .clearfix;
+
+  &-triggers {
+    height: $head-top-tag-height;
+
+    &-tab {
+      float: left;
+      height: $head-top-tag-height;
+      padding-left: $head-top-tag-gap;
+      padding-right: $head-top-tag-gap;
+      color: $font-black-color;
+      text-align: center;
+      line-height: $head-top-tag-height;
+      font-family: PingFangSC-Regular;
+      cursor: pointer;
+
+      &.selected {
+        background-color: $primary-color;
+        color: #fff;
+      }
+    }
+  }
+
+  &-bd {
+    @extend .clearfix;
+  }
+
+  &-ft {
+    @extend .clearfix;
+    margin-top: 4px;
+  }
+
+  &-panel {
+    position: relative;
+
+    &-fields {
+      position: relative;
+      margin-right: $head-top-button-width;
+      border: 2px solid $primary-color;
+      border-right: none;
+      overflow: hidden;
+      height: $head-top-input-height;
+
+      input {
+        width: 100%;
+        padding: 9px;
+        border: 0;
+      }
+    }
+  }
+
+  &-button {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(0,134,255,1) 0%, rgba(0,52,236,1) 100%);
+
+    &-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: $head-top-button-width;
+      height: $head-top-button-height;
+      overflow: hidden;
+      text-align: center;
+    }
+  }
+
+  &-hots {
+    &-word {
+      a {
+        color: $font-gray-color;
+        margin-right: 10px;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}

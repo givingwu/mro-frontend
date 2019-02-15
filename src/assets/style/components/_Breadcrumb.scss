@@ -1,0 +1,25 @@
+
+.breadcrumb {
+  margin-top: $breadcrumb-item-gap;
+  margin-bottom: $breadcrumb-item-gap;
+
+  &-item {
+    height: $breadcrumb-item-height;
+    line-height: $breadcrumb-item-height;
+
+    & + & {
+      margin-left: $breadcrumb-item-gap;
+    }
+  }
+
+  span,
+  a {
+    color: $font-gray-color;
+  }
+
+  a {
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+doctype html
+head
+  meta(charset="UTF-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  meta(name="renderer", content="webkit")
+  meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+  meta(name="format-detection", content="telephone=no")
+  meta(name="format-detection", content="date=no")
+  meta(name="format-detection", content="address=no")
+  link(rel="bookmark", href="/favicon.ico")
+  link(rel="shortcut icon", type="image/x-icon" href="/favicon.ico")
+  if title
+    title #{title}
+  else
+    title 云筑商城-建筑行业一站式垂直电子商务服务平台
+  meta(name="keywords", content="云筑商城,yzw,云筑电商,中国建筑,中建商城,中建,中建集团,中建电商,供应信息,求购信息,批发,采购,建筑材料,建材求购信息,建材供应信息,建材采购批发,建材采购,钢材,土建材料,装饰材料,安装材料,市政材料,劳保用品,办公用品")
+  meta(name="description", content="云筑网B2B商城是中国建筑成员企业中建电商打造的建筑物资交易商城，集信息展示，商机发布，在线交易，品牌推广等多重服务于一体的电子商务平台。拥有海量且稳定的采购需求，提供优质的建筑物资货源，实惠的商品价格，一站式全品类服务。")
+  link(rel="dns-prefetch", href="//lwres.yzw.cn")
+  block headScripts
+body
+  block head
+    block HeaderNav
+      include components/HeaderSiteNav/index.pug
+    block HeaderTop
+      include components/HeaderHomeTop/index.pug
+      include components/HeaderHomeNav/index.pug
+  block content
+  block footer
+    include components/FooterSiteNav/index.pug
+
+  block scripts

@@ -1,0 +1,8 @@
+mixin breadcrumb(links)
+  .breadcrumb&attributes(attributes)
+    if links
+      for link in links
+        if (link.href)
+          a.breadcrumb-item(href=link.href, title=link.title)= link.title
+        else
+          span.breadcrumb-item(title=link.title)= link.title

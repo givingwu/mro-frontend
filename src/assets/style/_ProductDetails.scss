@@ -1,0 +1,85 @@
+// product-details
+$price-height: 88px;
+$pad-l-width: 10%;
+$pad-l-gap: 2%;
+$pad-r-width: 100% - $pad-l-width - $pad-l-gap;
+
+.pd {
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+
+  &-hd {
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #E1E6EC;
+  }
+
+  &-tit {
+    color: $font-black-color;
+
+    h3 {
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+
+  &-desc {
+    color: $font-gray-color-1;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &-kw {
+    a {
+      color: $primary-color;
+
+      & + a {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &-price {
+    height: $price-height;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  &-tax-free {
+    line-height: 22px;
+
+    &-num {
+      font-size: 14px;
+      color: $font-gray-color-1;
+    }
+  }
+
+  &-one {
+    &-rmb,
+    &-price,
+    &-separator,
+    &-unit {
+      margin-right: 5px;
+    }
+
+    .tag {
+      width: 3.3em;
+    }
+  }
+
+  &-l,
+  &-r {
+    float: left;
+  }
+
+  &-l {
+    width: $pad-l-width;
+    padding-right: $pad-l-gap;
+    color: $font-gray-color;
+    text-align: right;
+  }
+
+  &-r {
+    width: $pad-r-width;
+  }
+}

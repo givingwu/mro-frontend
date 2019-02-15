@@ -1,0 +1,21 @@
+.product {
+  margin-bottom: $product-intro-gap-b;
+
+  &-intro {
+    @extend .clearfix;
+
+    &-l {
+      width: $product-intro-image-previewer;
+      margin-right: $product-intro-gap-l;
+    }
+
+    &-r {
+      width: $product-intro-detail-width;
+    }
+
+    &-l,
+    &-r {
+      float: left;
+    }
+  }
+}

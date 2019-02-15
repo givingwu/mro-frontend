@@ -1,0 +1,28 @@
+- var fields = {
+-  info: '商品信息',
+-  brand: '品牌',
+-  spec: '规格描述',
+-  desc: '选购说明',
+-  price: '单价',
+-  stock: '库存',
+-  amount: '数量',
+-}
+- var pageNum = 5
+- var pageItems = Array(pageNum).fill(0).map((_, i) => i)
+
+.product-list
+  .product-list-hd
+    | 其他渠道
+    .product-list-hd-r
+      include ../../mixins/InlinePagination.pug
+      +InlinePagination(89, 1, pageNum)
+  .product-list-bd
+    .product-list-head
+      each fieldVal, fieldKey in fields
+        div.product-list-head-title(class="product-list-head-" + fieldKey)= fieldVal
+    .product-list-items
+      include ../../mixins/ProductListItem.pug
+      each item in pageItems
+        +ProductListItem(item % 2)
+
+

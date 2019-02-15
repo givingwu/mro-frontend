@@ -1,0 +1,81 @@
+// colors
+$primary-color: #005AEC;
+$notice-color: #F53A1E;
+
+$font-gray-color: #696D75;
+$font-gray-color-1: #979EA9;
+$font-black-color: #33363C;
+
+
+// assets
+$sprite: "~@/assets/image/sprite.png";
+$logo-file: "~@/assets/image/logo.png";
+
+
+// dimensions
+$container-width: 1200px;
+
+
+// common classes
+.container {
+  width: $container-width;
+  margin: 0 auto;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+
+// site-nav
+$site-nav-height: 40px;
+$site-nav-gap-l: 12px;
+$site-nav-gap-r: 20px;
+$site-nav-background-color: rgba(239,241,244,1);
+
+
+// head-home-top
+$head-top-height: 140px;
+$head-top-gap: 30px;
+$head-top-logo-width: 182px;
+$head-top-logo-height: 48px;
+$head-top-tag-gap: 5px;
+$head-top-tag-height: 22px;
+$head-top-input-width: 634px;
+$head-top-input-height: 40px;
+$head-top-input-gap-l: 280px;
+$head-top-button-width: 90px;
+$head-top-button-height: $head-top-input-height;
+
+
+// head-home-nav
+$head-home-gap-t: 20px;
+$head-home-category-width: 200px;
+$head-home-category-height: 40px;
+$head-home-category-gap: 20px;
+$head-home-link-width: $container-width - $head-home-category-width;
+$head-home-link-height: 40px;
+$head-home-link-gap-l: 70px;
+
+
+// breadcrumb
+$breadcrumb-item-gap: 10px;
+$breadcrumb-item-height: 40px;
+
+// product intro  > image preview switcher
+$product-intro-image-previewer: 420px;
+$product-intro-image-item: 60px;
+$product-intro-gap-l: 40px;
+$product-intro-image-gap-b: 20px;
+$product-intro-gap-b: 40px;
+
+// product intro > detail
+$product-intro-detail-width: $container-width - $product-intro-image-previewer - $product-intro-gap-l;
+

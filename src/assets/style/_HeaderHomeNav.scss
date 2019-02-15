@@ -1,0 +1,88 @@
+
+.home-nav {
+  margin-top: $head-home-gap-t;
+  border-bottom: 1px solid $primary-color;
+
+  &-bd,
+  &-link {
+    @extend .clearfix;
+  }
+
+  &-category {
+    width: $head-home-category-width;
+  }
+
+  &-link {
+    width: $head-home-link-width;
+  }
+
+  &-category,
+  &-menu-item,
+  &-link {
+    float: left;
+  }
+
+  &-menu {
+    &-item {
+      height: $head-home-link-height;
+      margin-left: $head-home-link-gap-l;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      font-family: PingFangSC-Semibold;
+      line-height: $head-home-link-height;
+
+      a {
+        color: $font-black-color;
+        // padding-left: 30px;
+        // padding-right: 30px;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  &--dropdown {
+    position: relative;
+
+    &__menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 130px;
+      margin-left: -65px;
+      background: #fff;
+      box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.12), 0px 0px 3px 0px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    &__item {
+      a {
+        display: block;
+        height: $head-home-link-height;
+        padding-left: 2em;
+        padding-right: 2em;
+        color: #000;
+        font-size: 14px;
+        font-weight: 400;
+        font-family: PingFangSC-Regular;
+        line-height: $head-home-link-height;
+        letter-spacing: 0.01em;
+
+        &:hover {
+          color: #fff;
+          background-color: $primary-color;
+        }
+      }
+    }
+
+    &:hover {
+      @at-root & > .home-nav--dropdown__menu {
+        display: block;
+      }
+    }
+  }
+}

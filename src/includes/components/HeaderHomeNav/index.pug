@@ -1,0 +1,29 @@
+- var links = [{ title: 'MRO 商城', href: '/mro' }, { title: '办公用品', href: '/work', children: [{
+-  title: '京东超市',
+- href: '/jd',
+- }, {
+-   title: '史泰博超市',
+-   href: '/staples',
+- }, {
+-   title: '得力超市',
+-   href: '/deli',
+- }] }]
+
+.home-nav
+  .container.home-nav-bd(role="navigation")
+    .home-nav-category
+      include CategoryMenu/index.pug
+    .home-nav-link
+      ul.home-nav-menu
+        for link in links
+          li.home-nav-menu-item.home-nav--dropdown
+            a(href=link.href, title=link.title)
+              | #{link.title}
+            if link.children
+              ul.home-nav--dropdown__menu
+                for child in link.children
+                  li.home-nav--dropdown__item
+                    a(href=child.href, title=child.title)
+                      | #{child.title}
+
+

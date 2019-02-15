@@ -1,0 +1,19 @@
+- var placeholder = require('assets/image/placeholder.png')
+
+mixin ProductListItem(tender)
+  .product-list-item&attributes(attributes)
+    .product-list-item-img
+      img(src=placeholder, alt="placeholder")
+    .product-list-item-info
+      .product-list-item-info-title JSP 01-9041 威力9 ABS T类安全帽 蓝色（内衬调整轮式）
+      if tender
+        span.tender 中标
+      .product-list-item-info-b
+        | 由江西工业制造商负责发货
+    .product-list-item-brand 海华
+    .product-list-item-spec 300MM 12寸 ABS 塑料/安全帽/上海禄华/蓝色...
+    .product-list-item-desc 请至少选购6顶，且订购数量为3的倍数
+    .product-list-item-price 88.90/顶
+    .product-list-item-stock 999
+    .product-list-item-amount
+

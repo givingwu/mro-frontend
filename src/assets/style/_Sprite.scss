@@ -1,0 +1,144 @@
+.sprite.background-wrap {
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+}
+.sprite.background {
+  background: url($sprite) -0px -0px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 0px;
+  _margin-left: -0px;
+  _padding-top: 0px;
+  _margin-top: -0px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.finance-wrap {
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+}
+.sprite.finance {
+  background: url($sprite) -120px -0px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 120px;
+  _margin-left: -120px;
+  _padding-top: 0px;
+  _margin-top: -0px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.resourceSupply-wrap {
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+}
+.sprite.resourceSupply {
+  background: url($sprite) -240px -0px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 240px;
+  _margin-left: -240px;
+  _padding-top: 0px;
+  _margin-top: -0px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.platform-wrap {
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+}
+.sprite.platform {
+  background: url($sprite) -360px -0px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 360px;
+  _margin-left: -360px;
+  _padding-top: 0px;
+  _margin-top: -0px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.logo-wrap {
+  height: 96px;
+  width: 364px;
+  overflow: hidden;
+}
+.sprite.logo {
+  background: url($sprite) -0px -120px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 0px;
+  _margin-left: -0px;
+  _padding-top: 120px;
+  _margin-top: -120px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.qrcode-wrap {
+  height: 50px;
+  width: 48px;
+  overflow: hidden;
+}
+.sprite.qrcode {
+  background: url($sprite) -480px -0px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 480px;
+  _margin-left: -480px;
+  _padding-top: 0px;
+  _margin-top: -0px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.back_top-wrap {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+}
+.sprite.back_top {
+  background: url($sprite) -528px -0px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 528px;
+  _margin-left: -528px;
+  _padding-top: 0px;
+  _margin-top: -0px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.query_builder-wrap {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+}
+.sprite.query_builder {
+  background: url($sprite) -480px -50px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 480px;
+  _margin-left: -480px;
+  _padding-top: 50px;
+  _margin-top: -50px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}
+.sprite.shopping_cart-wrap {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+}
+.sprite.shopping_cart {
+  background: url($sprite) -528px -50px no-repeat;
+  width: 100%;
+  height: 100%;
+  _background: none;
+  _padding-left: 528px;
+  _margin-left: -528px;
+  _padding-top: 50px;
+  _margin-top: -50px;
+  _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="$sprite");
+}

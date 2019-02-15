@@ -1,0 +1,29 @@
+.tag {
+  display: inline-block;
+  *display: inline;
+  padding: .2em .5em;
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+
+  &-primary {
+    background-color: $primary-color;
+  }
+
+  &-warning {
+    background-color: $notice-color;
+  }
+
+  &-ghost {
+    color: $font-black-color;
+    border: 1px solid $font-gray-color;
+
+    &-primary {
+      @extend .tag-primary;
+    }
+
+    &-warning {
+      @extend .tag-warning;
+    }
+  }
+}

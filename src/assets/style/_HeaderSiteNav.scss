@@ -1,0 +1,124 @@
+body {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.site-nav {
+  z-index: 10000;
+  width: 100%;
+  background-color: $site-nav-background-color;
+  box-shadow: 0px 1px 0px 0px rgba(225,230,236,1);
+
+  &-bd {
+    height: $site-nav-height;
+    -webkit-backface-visibility: hidden;
+    *zoom: 1;
+
+    &-l {
+      float: left;
+      visibility: visible;
+    }
+
+    &-r {
+      float: right;
+
+      .site-nav-menu-hd a {
+        margin-right: $site-nav-gap-r;
+      }
+    }
+
+    &-l,
+    &-r {
+      @at-root .site-nav-menu-hd {
+        a {
+          font-size: 12px;
+          color: $font-gray-color;
+        }
+
+        span {
+          float: left;
+        }
+      }
+    }
+  }
+
+  &-menu {
+    float: left;
+
+    &-hd {
+      z-index: 10002;
+      position: relative;
+      padding: 0 6px;
+      height: $site-nav-height;
+      line-height: $site-nav-height;
+      _display: inline;
+      _zoom: 1;
+    }
+
+    &-bd {
+      z-index: 10001;
+      position: relative;
+      display: none;
+      margin-top: -1px;
+
+      &-panel {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 8px;
+        line-height: normal;
+        border: 1px solid #EEE;
+        background: #FFF;
+
+        a:hover {
+          color: $font-gray-color;
+          background: #F5F5F5;
+        }
+      }
+    }
+
+    &-list {
+      @at-root .site-nav-menu-bd-panel {
+        padding: 8px 0;
+      }
+
+      a {
+        display: block;
+        padding: 0 5px;
+        line-height: 28px;
+        white-space: nowrap;
+        color: $font-gray-color;
+      }
+    }
+  }
+
+  &-divide {
+    position: relative;
+    width: 1px;
+    height: 12px;
+    margin: 14px $site-nav-gap-l 0;
+    background-color: #696D75;
+  }
+
+  &-login a,
+  &-user a,
+  &-menu-hd a:hover {
+    color: $primary-color;
+  }
+
+  &--dropdown:hover {
+    .site-nav-menu-hd {
+      padding: 0 5px;
+      border-width: 0 1px;
+      border-style: solid;
+      border-color: #EEE;
+      background: #FFF;
+    }
+
+    .site-nav-menu-bd {
+      display: block;
+    }
+  }
+}
+

@@ -1,0 +1,16 @@
+.category {
+  &-hd {
+    height: $head-home-category-height;
+    color: #fff;
+    font-size: 14px;
+    padding-left: $head-home-category-gap;
+    padding-right: $head-home-category-gap;
+    line-height: $head-home-category-height;
+    background-color: lighten($color: $primary-color, $amount: .1);
+
+    h2 {
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+  }
+}
