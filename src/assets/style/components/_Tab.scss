@@ -1,0 +1,9 @@
+.tab {
+  &-list {
+    &-item {
+      display: inline-block;
+    }
+
+    @include disabled;
+  }
+}

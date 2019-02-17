@@ -1,0 +1,11 @@
+mixin Tab(tabs)
+  .tab.tab-bar&attributes(attributes).J_Tab
+    if tabs
+      ul.tab-list.J_TabList
+        each tab, idx in tabs
+          if idx === 0
+            li.tab-list-item.active.J_TabListItem= tab
+          else
+            li.tab-list-item.J_TabListItem= tab
+      div.tab-cont.J_TabCont
+        | tab-content
