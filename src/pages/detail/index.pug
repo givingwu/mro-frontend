@@ -1,1 +1,15 @@
-h1.h1 i am detail page.
+extends ../../includes/layout.pug
+
+block content
+  - var links=[
+  -   { href: '/', title: '首页'},
+  -   { href: '/category/work', title: '劳保用品' },
+  -   { href: '/category/work/helmet', title: '️⛑安全帽'},
+  -   { title: '海华A3F'}
+  - ]
+
+  .container
+    include ../../includes/mixins/breadcrumb.pug
+    +breadcrumb(links)
+
+    include ../../includes/components/Product/ProductIntro.pug

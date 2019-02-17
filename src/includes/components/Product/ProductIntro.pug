@@ -1,7 +1,8 @@
 .product
   .product-intro
     .product-intro-l
-      include PreviewSwitcher.pug
+      include ../../mixins/PreviewSwitcher/index.pug
+      +PreviewSwitcher()
     .product-intro-r
       include ProductDetails.pug
   include ProductList.pug

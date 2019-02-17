@@ -25,6 +25,45 @@
 
 ## DESIGN
 
+### LOAD RESOURCES
++ put those into JS config
+```js
+var pageConfig = {
+  skuID: '',
+  buyURL: '',
+  modules: [
+    'inputNumber',
+    'previewSwitcher',
+    'summary',
+    'address',
+    'buyBtn',
+    'info',
+  ],
+  data: {
+    'inputNumber': {
+      min: 0,
+      max: 99999999,
+    }, /* config options */
+    'previewSwitcher': {
+      images: [
+        '{CDN}/pic-{skuId}-1.png',
+        '{CDN}/pic-{skuId}-2.png',
+        '{CDN}/pic-{skuId}-3.png',
+        '{CDN}/pic-{skuId}-4.png',
+        '{CDN}/pic-{skuId}-5.png',
+      ],
+    }
+    'address': {
+      value: [
+        12,
+        121,
+        1209
+      ]
+    }
+  }
+}
+```
+
 ### OPTIMIZATION
 
 仅渲染首屏可见区域DOM，需要用户交互显示的内容，通过客户端 JavaScript 动态增删 DOM 节点实现加快 [FP/FCP & FMP/TTI](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics#_6)。

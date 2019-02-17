@@ -1,16 +1,16 @@
-import $, { extend, isFunction } from 'jquery'
+import $, { extend, isFunction, noop } from 'jquery'
 
 const defaults = {
-  item: '.J_InputNumber',
+  ele: '.J_InputNumber',
   input: '.J_NumberInput',
   plusBtn: '.J_NumberPlus',
   minusBtn: '.J_NumberMinus',
-  disabledClass: 'disabled',
+  disabledCls: 'disabled',
   float: false,
-  max: 999999999,
+  max: 99999999,
   min: 0,
-  callback: (v) => {},
-  currentValue: 0
+  currentValue: 0,
+  callback: noop
 }
 
 const ACTIONS = {
@@ -22,42 +22,42 @@ const ACTIONS = {
 class InputNumber {
   constructor (options) {
     this.options = extend(defaults, options)
-    const { item, plusBtn, input, minusBtn, currentValue } = this.options
-    this.$item = $(item)
-    this.$input = this.$item.children(input)
-    this.$plusBtn = this.$item.children(plusBtn)
-    this.$minusBtn = this.$item.children(minusBtn)
+    const { ele, plusBtn, input, minusBtn, currentValue } = this.options
+    this.$ele = $(ele)
+    this.$input = this.$ele.children(input)
+    this.$plusBtn = this.$ele.children(plusBtn)
+    this.$minusBtn = this.$ele.children(minusBtn)
     this.currentValue = +this.$input.val() || currentValue
 
-    this.checkStatus()
+    this.checkState()
     this.bindEvents()
   }
 
-  checkStatus (nextValue) {
+  checkState (nextValue) {
     nextValue = nextValue !== undefined ? nextValue : this.currentValue
-    const { min, max, disabledClass } = this.options
-    const gtMax = nextValue > max
+    const { min, max, disabledCls } = this.options
+    const gtMax = nextValue >= max
     const ltMin = nextValue <= min
-    const disabledPlus = this.$plusBtn.hasClass(disabledClass)
-    const disabledMinus = this.$minusBtn.hasClass(disabledClass)
+    const disabledPlus = this.$plusBtn.hasClass(disabledCls)
+    const disabledMinus = this.$minusBtn.hasClass(disabledCls)
 
     if (gtMax) {
       if (!disabledPlus) {
-        this.$plusBtn.addClass(disabledClass)
+        this.$plusBtn.addClass(disabledCls)
       }
     } else {
       if (disabledPlus) {
-        this.$plusBtn.removeClass(disabledClass)
+        this.$plusBtn.removeClass(disabledCls)
       }
     }
 
     if (ltMin) {
       if (!disabledMinus) {
-        this.$minusBtn.addClass(disabledClass)
+        this.$minusBtn.addClass(disabledCls)
       }
     } else {
       if (disabledMinus) {
-        this.$minusBtn.removeClass(disabledClass)
+        this.$minusBtn.removeClass(disabledCls)
       }
     }
   }
@@ -66,14 +66,14 @@ class InputNumber {
     const self = this
     const { float } = this.options
 
-    self.$plusBtn.on('click', function () {
+    self.$plusBtn.click(function () {
       let value = self.getNextVal(ACTIONS.PLUS)
 
       self.$input.val(value)
       self.$input.attr('value', value)
     })
 
-    self.$minusBtn.on('click', function () {
+    self.$minusBtn.click(function () {
       let value = self.getNextVal(ACTIONS.MINUS)
 
       self.$input.val(value)
@@ -119,34 +119,43 @@ class InputNumber {
     const ltMin = nextValue <= min
 
     if (gtMax) {
-      nextValue = max - 1
+      nextValue = max
     }
 
     if (ltMin) {
       nextValue = min
     }
 
-    this.currentValue = nextValue
-    this.checkStatus(nextValue)
-    this.options.callback(nextValue)
+    this.execute(nextValue)
 
     return nextValue
   }
+
+  execute (nextValue) {
+    if (this.currentValue !== nextValue) {
+      this.currentValue = nextValue
+      this.checkState(nextValue)
+      this.options.callback(nextValue)
+    }
+  }
 }
 
-$.fn.inputNumber = function (options = {}) {
-  this.each(function () {
+$.fn.inputNumber = function $inputNumber (options = {}) {
+  return this.each(function () {
     return new InputNumber(
       isFunction(options) ? {
         callback: options,
-        item: this
+        ele: this
       } : {
-        item: this
+        ele: this
       }
     )
   })
-
-  return this
 }
 
-export default $.fn.inputNumber
+// Initialize .J_InputNumber with callback function
+export default $(() => {
+  return $('.J_InputNumber').inputNumber(function callback (value) {
+    console.log(value)
+  })
+})

@@ -1,6 +1,7 @@
 // theme-colors
 $primary-color: #005AEC;
 $notice-color: #F53A1E;
+$gray-color: #E0E6E0;
 
 
 // font-colors
@@ -19,10 +20,34 @@ $logo-file: "~@/assets/image/logo.png";
 $container-width: 1200px;
 
 
+// mixins
+@mixin disabled() {
+  &.disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin hover-primary() {
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+
 // common classes
 .container {
   width: $container-width;
+  min-width: $container-width;
   margin: 0 auto;
+}
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
 }
 
 .clearfix {

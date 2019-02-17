@@ -3,6 +3,8 @@ $gray-color: #EFF1F4;
 .preview {
   &-bd {
     overflow: hidden;
+    width: $product-intro-image-previewer;
+    height: $product-intro-image-previewer;
     // display: flex;
     // align-items: center;
     // justify-content: center;
@@ -10,8 +12,8 @@ $gray-color: #EFF1F4;
     border:1px solid rgba(225,230,236,1);
 
     img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
     }
 
   }
@@ -23,7 +25,7 @@ $gray-color: #EFF1F4;
 
   &-items {
     position: relative;
-    width: $product-intro-image-previewer - (12px + 10px) * 2;
+    width: $product-intro-image-previewer - (12px + 12px) * 2;
     height: $product-intro-image-item;
     overflow: hidden;
     margin: 0 auto;
@@ -34,6 +36,7 @@ $gray-color: #EFF1F4;
       width: 100%;
       top: 0px;
       left: 0px;
+      will-change: left;
     }
   }
 
@@ -41,15 +44,17 @@ $gray-color: #EFF1F4;
     float: left;
     width: $product-intro-image-item;
     height: $product-intro-image-item;
+    margin-right: 18px;
     border: 1px solid $gray-color;
 
-    & + & {
-      margin-left: 18px;
+    &.active {
+      border-width: 1px;
+      border-color: $primary-color;
     }
 
     img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -58,7 +63,16 @@ $gray-color: #EFF1F4;
     top: 0;
     width: 12px;
     height: $product-intro-image-item;
+    line-height: $product-intro-image-item;
+    color: $font-gray-color;
+    text-align: center;
     background-color: $gray-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    @include disabled;
   }
 
   &-prev {

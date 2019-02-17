@@ -17,10 +17,7 @@
       color: $primary-color;
     }
 
-    &.disabled {
-      opacity: .5;
-      cursor: not-allowed;
-    }
+    @include disabled;
   }
 
   &__plus {
