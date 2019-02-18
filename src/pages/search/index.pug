@@ -1,4 +1,29 @@
 extends ../../includes/layout.pug
 
 block content
+  - var links=[
+  -   { href: '/', title: '首页'},
+  -   { href: '/category/work', title: '劳保用品' },
+  - ]
   .container
+    .breadcrumb
+      if links
+        for link in links
+          if (link.href)
+            a.breadcrumb-item(href=link.href, title=link.title)= link.title
+            i.icon.yzwfont.icon-arrow-right
+          else
+            span.breadcrumb-item(title=link.title)= link.title
+        a.breadcrumb-item.breadcrumb-tag(href='./category/work/helmet', title='安全帽')
+          span.breadcrumb-tag--text 安全帽️️
+          span.breadcrumb-tag--icon
+            i.yzwfont.icon-remove
+        i.icon.yzwfont.icon-arrow-right
+        a.breadcrumb-item.breadcrumb-tag(href='./category/work/helmet/stronger', title='增强安全帽')
+          span.breadcrumb-tag--text 安全帽️️增强安全帽️️️⛑️
+          span.breadcrumb-tag--icon
+              i.yzwfont.icon-remove
+
+    // SpecSelector
+    include ../../includes/mixins/SpecSelector/index.pug
+    +SpecSelector()

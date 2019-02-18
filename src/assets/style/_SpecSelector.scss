@@ -1,0 +1,24 @@
+.spec-selector {
+  .ss {
+    &-item {
+      border-bottom: 1px solid #e2e4e6;
+    }
+
+    &-hd,
+    &-bd {
+      float: left;
+      line-height: 40px;
+    }
+
+    &-hd {
+      width: 10%;
+      color: $font-gray-color;
+      padding: 0 20px;
+      background-color: #EFF1F4;
+    }
+
+    &-bd {
+      width: 90%;
+    }
+  }
+}

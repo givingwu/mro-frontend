@@ -40,6 +40,22 @@ $container-width: 1200px;
   }
 }
 
+@mixin single-line-hide-text($width: 'auto') {
+  width: $width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  white-space: nowrap;
+}
+
+@mixin multiple-line-hide-text($lines: 3) {
+  display: -webkit-box;
+  word-wrap: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}
+
 // common classes
 body {
   min-width: $container-width;

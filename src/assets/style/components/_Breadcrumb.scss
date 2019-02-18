@@ -5,23 +5,58 @@
   margin-bottom: $breadcrumb-item-gap;
 
   &-item {
+    color: inherit;
     height: $breadcrumb-item-height;
     line-height: $breadcrumb-item-height;
+    vertical-align: middle;
 
     & + & {
       margin-left: $breadcrumb-item-gap;
     }
   }
 
-  .icon {
-    font-size: .7em;
-    color: #BABDC2;
-    margin: 0 .3em;
+  &-tag {
+    position: relative;
+    display: inline-block;
+    padding: 0 24px 0 8px;
+    height: 24px;
+    color: $primary-color;
+    line-height: 22px;
+    background: rgba(0,90,236,0.02);
+    border: 1px solid rgba(225,230,236,1);
+
+    &--text {
+      margin-right: 10px;
+    }
+
+    &--icon {
+      position: absolute;
+      top: -1px;
+      right: 0;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      font-size: .9em;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    &:hover {
+      .breadcrumb-tag--icon {
+        color: #fff;
+        background-color: $primary-color;
+      }
+
+      @extend .tag-ghost-primary;
+    }
   }
 
-  span,
-  a {
-    color: inherit;
+  .icon {
+    display: inline-block;
+    margin: 0 .3em;
+    color: #BABDC2;
+    font-size: .7em;
+    vertical-align: middle;
   }
 
   a {

@@ -1,0 +1,27 @@
+- var brands = new Array(20).fill(0)
+- var types = new Array(10).fill(0)
+- var colors = new Array(15).fill(0)
+- var sizes = new Array(25).fill(0)
+
+mixin SpecSelector()
+  .spec-selector
+    .ss-item.clearfix
+      .ss-hd 品牌
+      .ss-bd
+        each b,i in brands
+          a(href="javascript:void(0);").ss-bd-item= `品牌${i+1}`
+    .ss-item.clearfix
+      .ss-hd 类型
+      .ss-bd
+        each t,i in types
+          a(href="javascript:void(0);").ss-bd-item= `类型${i+1}`
+    .ss-item.clearfix
+      .ss-hd 颜色
+      .ss-bd
+        each c,i in colors
+          a(href="javascript:void(0);").ss-bd-item= `颜色${i+1}`
+    .ss-item.clearfix
+      .ss-hd 尺寸
+      .ss-bd
+        each s,i in sizes
+          a(href="javascript:void(0);").ss-bd-item= `尺寸${i+1}`

@@ -19,7 +19,8 @@
     border: 1px solid #E1E6EC;
 
     &-primary {
-      @extend .tag-primary;
+      color: $primary-color;
+      border: 1px solid $primary-color;
     }
 
     &-warning {

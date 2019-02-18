@@ -12,7 +12,9 @@
       +SearchTab()
     .head-top-button
         a(href="/shoppingCart")
-          button.head-top-button-item.head-top-button__cart 我的购物车
+          button.head-top-button-item.head-top-button__cart
+            i.icon.yzwfont.icon-shopping-cart-ghost
+            span 我的购物车
             if cartBadge
               span.head-top-button__cart--badge #{cartBadge}
         if !loginStatus

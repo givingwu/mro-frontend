@@ -1,16 +1,14 @@
 @import "components/Grid";
 @import "components/Button";
+@import "components/Breadcrumb"; //
 @import "components/Tag";
 @import "components/Tab";
-@import "components/Breadcrumb";
-@import "components/InputNumber";
-@import "components/PreviewSwitcher";
-@import "components/Cascader";
-@import "components/PaginationInline";
-@import "components/PaginationBlock";
+@import "components/InputNumber"; //
+@import "components/PreviewSwitcher"; //
+@import "components/Cascader"; //
+@import "components/PaginationInline"; //
+@import "components/PaginationBlock"; //
 
 @import "CategoryMenu";
-@import "ProductIntro";
-@import "ProductDetail";
-@import "ProductList";
 @import "ProductSalesRecordList";
+@import "SpecSelector";

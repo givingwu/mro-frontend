@@ -48,6 +48,13 @@
   content: "\e624";
 }
 
+.icon-remove {
+  display: inline-block;
+  transform: rotate(45deg);
+
+  @extend .icon-plus;
+}
+
 .icon-arrow-down:before {
   content: "\e625";
 }

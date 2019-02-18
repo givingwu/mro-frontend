@@ -5,6 +5,6 @@ import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/Tab'
 import '../../assets/style/common.scss'
-import '../../assets/style/detail.scss'
+import '../../assets/style/search.scss'
 
 console.log($)

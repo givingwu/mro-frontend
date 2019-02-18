@@ -53,6 +53,11 @@
       background: rgba(255,255,255,1);
       border: 1px solid rgba(225,230,236,1);
 
+      .icon {
+        margin-right: 5px;
+        font-size: 15px;
+      }
+
       &--badge {
         display: inline-block;
         width: 16px;
