@@ -101,7 +101,7 @@ $.fn.tab = function $tab (options = {}) {
 // Initialize .J_Preview with callback function
 export default $(() => {
   return $('.J_Tab').tab({
-    currentIndex: 1,
+    currentIndex: 0,
     callback: function callback (idx) {
       console.log(idx)
     }
