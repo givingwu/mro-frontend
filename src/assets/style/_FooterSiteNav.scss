@@ -15,27 +15,32 @@
       width: 25%;
       height: 98px;
       padding: 19px 0;
-
-      span {
-        float: left;
-        font-size: 18px;
-        line-height: 60px;
-
-        &.sprite {
-          position: relative;
-          top: -30px;
-          transform: scale(0.5);
-        }
-      }
     }
 
     &-item {
       height: 60px;
+      text-align: center;
       border-right: 1px solid #e1e6ec;
 
       &.last {
         border-right: 0;
       }
+    }
+
+    &-icon,
+    &-text {
+      display: inline-block;
+      line-height: 60px;
+      vertical-align: middle;
+    }
+
+    &-icon {
+      font-size: 60px;
+      margin-right: 12px;
+    }
+
+    &-text {
+      font-size: 18px;
     }
   }
 

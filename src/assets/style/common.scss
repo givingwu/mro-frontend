@@ -1,4 +1,6 @@
 @import "lib/reset";
+@import "lib/iconfont";
+
 @import "HeaderSiteNav";
 @import "HeaderHomeTop";
 @import "HeaderHomeNav";
@@ -9,6 +11,7 @@
 @import "components/Grid";
 @import "components/Button";
 @import "components/Tag";
+@import "components/Tab";
 @import "components/Breadcrumb";
 @import "components/InputNumber";
 @import "components/PreviewSwitcher";
@@ -16,5 +19,6 @@
 @import "components/Pagination";
 
 @import "ProductIntro";
-@import "ProductDetails";
+@import "ProductDetail";
 @import "ProductList";
+@import "ProductSalesRecordList";

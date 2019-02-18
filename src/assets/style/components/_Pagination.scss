@@ -22,15 +22,23 @@
 
   &-trigger {
     display: inline-block;
-    line-height: 28px;
+    line-height: 20px;
     border: 1px solid #E1E6EC;
+
+    .icon {
+      display: inline-block;
+      font-size: .8em;
+    }
 
     a {
       display: inline-block;
-      padding: 0 .5em;
-      height: 28px;
-      line-height: 28px;
+      padding: 0 .7em;
+      line-height: 20px;
       text-align: center;
+      color: $font-gray-color;
+
+      @include active-hover;
+      @include disabled;
     }
 
     &-prev {

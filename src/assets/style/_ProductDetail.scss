@@ -1,0 +1,157 @@
+// product-details
+$price-height: 88px;
+$pad-l-width: 50px;
+$pad-l-gap: 40px;
+$pad-r-gap: 20px;
+
+.product-detail {
+  .pd {
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+
+    &-hd {
+      padding-bottom: 20px;
+      border-bottom: 2px dashed #E1E6EC;
+    }
+
+    &-tit {
+      color: $font-black-color;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
+
+    &-desc {
+      color: $font-gray-color-1;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    &-kw {
+      a {
+        color: $primary-color;
+
+        & + a {
+          margin-left: 5px;
+        }
+      }
+    }
+
+    &-price {
+      height: $price-height;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    &-tax-free {
+      line-height: 22px;
+
+      &-num {
+        font-size: 14px;
+        color: $font-gray-color-1;
+      }
+    }
+
+    &-one {
+      overflow: hidden;
+      position: relative;
+
+      &-rmb,
+      &-price,
+      &-separator,
+      &-unit {
+        font-size: 14px;
+        color: $font-orange-color;
+        margin-right: 2px;
+        vertical-align: baseline;
+      }
+
+      &-price {
+        font-size: 28px;
+      }
+
+      &-info {
+        position: relative;
+        bottom: -4px;
+      }
+
+      .tag {
+        width: 3.3em;
+      }
+    }
+
+    &-num {
+      &-input {
+        .input {
+          max-width: 103px;
+        }
+
+        .pd-blue {
+          margin-left: 8px;
+        }
+      }
+
+      &-desc {
+        margin-top: 5px;
+        margin-bottom: 8px;
+      }
+    }
+
+    &-addr {
+      margin-bottom: 20px;
+
+      a {
+        margin-left: 8px;
+      }
+
+      &-b {
+        margin-top: 5px;
+
+        .pd-orange {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    &-l,
+    &-r {
+      display: inline-block;
+    }
+
+    &-l {
+      width: $pad-l-width;
+      margin-right: $pad-l-gap;
+      color: $font-gray-color;
+      margin-left: $pad-r-gap;
+    }
+
+    &-r {
+      width: auto;
+    }
+
+    &-gray {
+      color: $font-gray-color-1;
+    }
+
+    &-orange {
+      color: $font-orange-color;
+    }
+
+    &-blue {
+      color: $primary-color;
+    }
+
+    &-bd {
+      padding: 17.5px 0 17.5px 0;
+
+      &-row {
+        & + & {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}

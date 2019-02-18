@@ -1,5 +1,6 @@
 
 .breadcrumb {
+  color: $font-gray-color;
   margin-top: $breadcrumb-item-gap;
   margin-bottom: $breadcrumb-item-gap;
 
@@ -12,9 +13,15 @@
     }
   }
 
+  .icon {
+    font-size: .7em;
+    color: #BABDC2;
+    margin: 0 .3em;
+  }
+
   span,
   a {
-    color: $font-gray-color;
+    color: inherit;
   }
 
   a {

@@ -1,7 +1,7 @@
 // theme-colors
 $primary-color: #005AEC;
 $notice-color: #F53A1E;
-$gray-color: #E0E6E0;
+$gray-color: #E1E6EC;
 
 
 // font-colors
@@ -21,6 +21,12 @@ $container-width: 1200px;
 
 
 // mixins
+@mixin active-hover() {
+  &:hover {
+    color: $primary-color;
+  }
+}
+
 @mixin disabled() {
   &.disabled {
     opacity: .5;
@@ -48,6 +54,18 @@ $container-width: 1200px;
 
 .hide {
   display: none !important;
+}
+
+.font-black {
+  color: $font-black-color;
+}
+
+.font-gray {
+  color: $gray-color;
+}
+
+.font-primary {
+  color: $primary-color;
 }
 
 .clearfix {

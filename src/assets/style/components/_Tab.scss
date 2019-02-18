@@ -1,9 +1,57 @@
 .tab {
-  &-list {
-    &-item {
-      display: inline-block;
+  &-hd {
+    position: relative;
+    border: 1px solid $gray-color;
+
+    .tab-item {
+      border-right:  1px solid $gray-color;
+    }
+  }
+
+  &-large {
+    .tab-bd {
+      margin-top: 20px;
+    }
+  }
+
+  &-item {
+    display: inline-block;
+    text-align: center;
+
+    &.active {
+      color: $primary-color;
     }
 
     @include disabled;
+
+    &-large {
+      color: $font-black-color;
+      padding: 15px 20px;
+
+      span + span {
+        margin-left: .5em;
+      }
+    }
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &-cont {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &-active-bar {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 89px;
+    height: 2px;
+    background-color: $primary-color;
   }
 }

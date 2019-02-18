@@ -21,8 +21,8 @@
   }
 
   &__plus {
-    float: left;
-    border-right: 1px solid #E1E6EC;
+    float: right;
+    border-left: 1px solid #E1E6EC;
   }
 
   &__item {
@@ -35,8 +35,8 @@
   }
 
   &__minus {
-    float: right;
-    border-left: 1px solid #E1E6EC;
+    float: left;
+    border-right: 1px solid #E1E6EC;
   }
 
 }
