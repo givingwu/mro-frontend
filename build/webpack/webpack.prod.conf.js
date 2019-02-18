@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PreloadPlugin = require('@vue/preload-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const baseConfig = require('./webpack.base.conf')
 const { entries, configurations } = require('./utils/multiplePages');
@@ -16,8 +18,8 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
   output: {
-    filename: 'js/[name].[contenthash:8].js',
-    chunkFilename: 'js/[name].[contenthash:8].js'
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].js'
   },
   optimization: {
     minimizer: [
@@ -65,6 +67,14 @@ module.exports = merge(baseConfig, {
             safari10: true
           }
         }
+      }),
+      new OptimizeCSSAssetsPlugin({
+        assetNameRegExp: /\.css$/g,
+        cssProcessor: require('cssnano'),
+        cssProcessorPluginOptions: {
+          preset: ['default', { discardComments: { removeAll: true } }],
+        },
+        canPrint: true
       })
     ],
     splitChunks: {
@@ -85,6 +95,63 @@ module.exports = merge(baseConfig, {
       }
     }
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          /* {
+            loader: 'style-loader',
+            options: {
+              minimize: true
+            }
+          }, */
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+              importLoaders: 2
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: false
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s(c|a)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          /* {
+            loader: 'style-loader',
+            options: {
+              insertAt: 'top', //Insert style tag at top of <head>
+              singleton: true, //this is for wrap all your style in just one style tag
+            }
+          }, */
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: paths.theme,
+            }
+          }
+        ]
+      },
+    ]
+  },
   plugins: [
     /* config.plugin('define') */
     new DefinePlugin(
@@ -104,6 +171,10 @@ module.exports = merge(baseConfig, {
     /* config.plugin('named-chunks') */
     new NamedChunksPlugin(),
     /* config.plugin('html') */
+    new MiniCssExtractPlugin({
+      filename: "css/[name].css",
+      chunkFilename: "css/[id].css"
+    }),
     ...configurations.map(config => new HtmlWebpackPlugin(config)),
     /* config.plugin('preload') */
     new PreloadPlugin(

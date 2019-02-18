@@ -126,6 +126,10 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
+            options: {
+              insertAt: 'top', //Insert style tag at top of <head>
+              singleton: true, //this is for wrap all your style in just one style tag
+            }
           },
           {
             loader: 'css-loader',
@@ -166,6 +170,10 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
+            options: {
+              insertAt: 'top', //Insert style tag at top of <head>
+              singleton: true, //this is for wrap all your style in just one style tag
+            }
           },
           {
             loader: 'css-loader',
