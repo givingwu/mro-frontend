@@ -15,6 +15,7 @@ const defaults = {
   activeEle: '.J_PreviewCurrent > img',
   activeCls: 'active',
   disabledCls: 'disabled',
+  triggerEvents: 'mouseover',
   currentIndex: 0,
   getOriginUrl: ($currentImage) => $currentImage.attr('data-origin'),
   fallbackUrl: require('assets/image/placeholder.png'),
@@ -114,7 +115,7 @@ class PreviewSwitcher {
   bindEvents () {
     const self = this
     const { perItemWidth } = this
-    const { item, disabledCls } = this.options
+    const { item, disabledCls, triggerEvents } = this.options
     const itemCls = item.replace(/^(\.|#)/, '')
 
     this.$prevBtn && this.$prevBtn.click(function click () {
@@ -153,7 +154,7 @@ class PreviewSwitcher {
       }
     })
 
-    this.$itemsListWrapper.mouseover(function mouseover (e) {
+    this.$itemsListWrapper.on(triggerEvents, function mouseover (e) {
       let $target = $(e.target)
       const isImg = $target.prop('tagName') === 'IMG'
       const isLi = $target.prop('tagName') === 'LI'

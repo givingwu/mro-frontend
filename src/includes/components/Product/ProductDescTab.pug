@@ -1,0 +1,16 @@
+- var salesAmount = 4250
+.tab.tab-large.J_Tab
+  .tab-hd
+    div.tab-active-bar.J_TabActiveIndicator
+    a(href="javascript:void(0)")(data-index=0).tab-item.tab-item-large.active.J_TabItem
+      span 商品介绍
+    a(href="javascript:void(0)")(data-index=1).tab-item.tab-item-large.J_TabItem
+      span 销售记录
+      span.font-primary= salesAmount
+    a(href="javascript:void(0)")(data-index=2).tab-item.tab-item-large.J_TabItem
+      span test-item
+  .tab-bd
+    div.tab-cont.J_TabCont.active 后台自填充区域，商品详情描述内容
+    div.tab-cont.J_TabCont
+      include ProductSalesRecordList.pug
+    div.tab-cont.J_TabCont test.content

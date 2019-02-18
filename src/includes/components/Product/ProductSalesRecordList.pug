@@ -1,0 +1,22 @@
+- var pageNum = 10
+- var total = 4250
+- var currentPage = 5
+- var data = new Array(pageNum).fill({ b: '震坤行工业超市有限公司', n: 10, t: '2018-11-20 15:13:48' })
+
+.sales-record
+  .sr-hd.clearfix
+    .sr-b 采购商
+    .sr-n 购买数量
+    .sr-t 购买时间
+  .sr-bd
+    for item in data
+      .sr-bd-item.clearfix
+        .sr-bd-t.sr-b
+          .sr-bd-tc= item.b
+        .sr-bd-t.sr-n
+          .sr-bd-tc= item.n
+        .sr-bd-t.sr-t
+          .sr-bd-tc= item.t
+
+  include ../../mixins/BlockPagination.pug
+  +BlockPagination(total, currentPage, pageNum)

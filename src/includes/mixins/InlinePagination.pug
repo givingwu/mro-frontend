@@ -10,8 +10,8 @@ mixin InlinePagination(totalLength, currentPage, pageNum)
         | /
       span.inline-pagination-all
         | #{Math.ceil(totalLength / pageNum)}
-    span.inline-pagination-trigger
-      a(href="javascript:void(0);".title="上一页").inline-pagination-trigger-prev
-        i.icon.icon-prev prev
-      a(href="javascript:void(0);".title="下一页").inline-pagination-trigger-next
-          i.icon.icon-next next
+    span.inline-pagination-trigger.clearfix
+      a(href="javascript:void(0);", title="上一页").inline-pagination-trigger-prev
+        i.icon.yzwfont.icon-arrow-left
+      a(href="javascript:void(0);", title="下一页").inline-pagination-trigger-next
+        i.icon.yzwfont.icon-arrow-right
