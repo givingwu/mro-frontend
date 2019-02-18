@@ -4,13 +4,13 @@
     ul.site-nav-bd-l
       li.site-nav-menu#J_SiteNavLogin
         .site-nav-menu-hd
-          if loginStatus
+            //- if loginStatus
             span.site-nav-user
               | 您好，<a href="/user">张三</a>
             span.site-nav-divide
             span.site-nav-logout
               a(href="/logout") 退出
-          else
+            //- else
             span.site-nav-login
               a(href="/login") 请登录
             span.site-nav-divide
