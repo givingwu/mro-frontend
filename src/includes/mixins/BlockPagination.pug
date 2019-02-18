@@ -1,25 +1,26 @@
 - var pageNumOptions = [10, 20, 30, 50, 100]
 mixin BlockPagination(totalLength, currentPage, pageNum)
-  - var pages = new Array(pageNum).fill(0).map((_, i) => i)
+  - var pages = new Array(pageNum).fill(0).map((_, i) => (++i))
 
   .block-pagination&attributes(attributes)
-    select.bp-ops
-      for num in pageNumOptions
-        option(value=num, title=`每页${num}条`)= `每页${num}条`
-    a(href="javascript:void(0);").bp-1st 首页
-    a(href="javascript:void(0);").bp-prev
+    .bp-ops
+      select.bp-select
+        for num in pageNumOptions
+          option(value=num, title=`每页${num}条`)= `每页${num}条`
+      span.bp-ops-icon
+        i.icon.yzwfont.icon-arrow-down
+    a(href="javascript:void(0);").bp-item.bp-1st 首页
+    a(href="javascript:void(0);").bp-item.bp-prev
       i.icon.yzwfont.icon-arrow-left
     for page in pages
       if currentPage === page
-        a(href="javascript:void(0);").bp-num.active
+        a(href="javascript:void(0);").bp-item.bp-num.active= page
       else
-        a(href="javascript:void(0);").bp-num
-    a(href="javascript:void(0);").bp-next
+        a(href="javascript:void(0);").bp-item.bp-num= page
+    a(href="javascript:void(0);").bp-item.bp-next
       i.icon.yzwfont.icon-arrow-right
-    a(href="javascript:void(0);").bp-last 尾页
+    a(href="javascript:void(0);").bp-item.bp-last 尾页
     .bp-jump
       span 跳至
-      input.bp-jump-input
+      input.bp-input
       span 页
-
-

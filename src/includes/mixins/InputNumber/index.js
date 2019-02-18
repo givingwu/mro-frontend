@@ -144,9 +144,11 @@ $.fn.inputNumber = function $inputNumber (options = {}) {
   return this.each(function () {
     return new InputNumber(
       isFunction(options) ? {
+        ...options,
         callback: options,
         ele: this
       } : {
+        ...options,
         ele: this
       }
     )

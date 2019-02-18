@@ -65,7 +65,7 @@ class Tab {
     this.execute(nextIndex)
   }
 
-  updateIndicator($item) {
+  updateIndicator ($item) {
     const left = $item.position().left
     const width = $item.outerWidth()
 
@@ -87,9 +87,11 @@ $.fn.tab = function $tab (options = {}) {
   return this.each(function () {
     return new Tab(
       isFunction(options) ? {
+        ...options,
         callback: options,
         ele: this
       } : {
+        ...options,
         ele: this
       }
     )
@@ -98,7 +100,10 @@ $.fn.tab = function $tab (options = {}) {
 
 // Initialize .J_Preview with callback function
 export default $(() => {
-  return $('.J_Tab').tab(function callback (idx) {
-    console.log(idx)
+  return $('.J_Tab').tab({
+    currentIndex: 1,
+    callback: function callback (idx) {
+      console.log(idx)
+    }
   })
 })

@@ -217,9 +217,11 @@ $.fn.previewSwitcher = function $previewSwitcher (options = {}) {
   return this.each(function () {
     return new PreviewSwitcher(
       isFunction(options) ? {
+        ...options,
         callback: options,
         ele: this
       } : {
+        ...options,
         ele: this
       }
     )

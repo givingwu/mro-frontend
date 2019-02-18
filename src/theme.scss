@@ -40,11 +40,13 @@ $container-width: 1200px;
   }
 }
 
-
 // common classes
+body {
+  min-width: $container-width;
+}
+
 .container {
   width: $container-width;
-  min-width: $container-width;
   margin: 0 auto;
 }
 
