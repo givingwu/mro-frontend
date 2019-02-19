@@ -3,7 +3,7 @@ const { paths } = require('../userConfig');
 const { transformer, formatter } = require('./utils/resolveLoaderError');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+// const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const resolvePath = p => path.resolve(paths.cwd, p);
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: paths.dist,
     filename: '[name].js',
-    publicPath: '/',
+    publicPath: './',
     globalObject: 'this'
   },
   resolve: {

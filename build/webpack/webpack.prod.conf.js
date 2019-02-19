@@ -68,6 +68,7 @@ module.exports = merge(baseConfig, {
           }
         }
       }),
+      /* https://github.com/webpack-contrib/mini-css-extract-plugin */
       new OptimizeCSSAssetsPlugin({
         assetNameRegExp: /\.css$/g,
         cssProcessor: require('cssnano'),
@@ -102,12 +103,6 @@ module.exports = merge(baseConfig, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'style-loader',
-            options: {
-              minimize: true
-            }
-          },
-          {
             loader: 'css-loader',
             options: {
               sourceMap: false,
@@ -127,13 +122,11 @@ module.exports = merge(baseConfig, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'style-loader',
-            options: {
-              minimize: true
-            }
-          },
-          {
             loader: 'css-loader',
+            options: {
+              sourceMap: false,
+              importLoaders: 3
+            }
           },
           {
             loader: 'postcss-loader',
