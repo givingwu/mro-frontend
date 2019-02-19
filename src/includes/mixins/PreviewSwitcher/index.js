@@ -229,8 +229,4 @@ $.fn.previewSwitcher = function $previewSwitcher (options = {}) {
 }
 
 // Initialize .J_Preview with callback function
-export default $(() => {
-  return $('.J_Preview').previewSwitcher(function callback (item) {
-    console.log(item)
-  })
-})
+export default PreviewSwitcher

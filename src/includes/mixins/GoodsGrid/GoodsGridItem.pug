@@ -3,8 +3,8 @@ mixin GoodsGridItem(title)
   - var specification = ['威力', '300MM', '12寸']
   - var company = '震坤行工业超市有限公司'
   include ../PreviewSwitcher/index.pug
-  .grid-item
-    +PreviewSwitcher(3)
+  .grid-item.clearfix
+    +PreviewSwitcher(3, false)
     .grid-item-title
       = title
     .grid-item-spec

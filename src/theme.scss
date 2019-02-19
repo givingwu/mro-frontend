@@ -130,6 +130,14 @@ body {
   }
 }
 
+input,
+select {
+  &:focus {
+    outline: $primary-color solid 1px;
+    outline-offset: 0;
+  }
+}
+
 
 // site-nav
 $site-nav-height: 40px;
