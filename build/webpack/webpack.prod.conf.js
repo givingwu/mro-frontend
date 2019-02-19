@@ -101,12 +101,12 @@ module.exports = merge(baseConfig, {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          /* {
+          {
             loader: 'style-loader',
             options: {
               minimize: true
             }
-          }, */
+          },
           {
             loader: 'css-loader',
             options: {
@@ -126,13 +126,12 @@ module.exports = merge(baseConfig, {
         test: /\.s(c|a)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          /* {
+          {
             loader: 'style-loader',
             options: {
-              insertAt: 'top', //Insert style tag at top of <head>
-              singleton: true, //this is for wrap all your style in just one style tag
+              minimize: true
             }
-          }, */
+          },
           {
             loader: 'css-loader',
           },

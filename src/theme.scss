@@ -40,7 +40,8 @@ $container-width: 1200px;
   }
 }
 
-@mixin single-line-hide-text($width: 'auto') {
+@mixin single-line-hide-text($width: auto) {
+  max-width: $width;
   width: $width;
   overflow: hidden;
   text-overflow: ellipsis;

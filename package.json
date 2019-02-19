@@ -16,8 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "jquery": "^3.3.1",
-    "vue": "^2.6.6"
+    "jquery": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -57,9 +56,6 @@
     "terser-webpack-plugin": "^1.2.2",
     "thread-loader": "^2.1.2",
     "url-loader": "^1.1.2",
-    "vue-loader": "^15.6.2",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.6",
     "webpack": "^4.29.3",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.3",

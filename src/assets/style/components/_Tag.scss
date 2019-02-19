@@ -1,12 +1,17 @@
 .tag {
   display: inline-block;
-  *display: inline;
-  padding: .2em .5em;
-  color: #fff;
+  padding: .273em .5em;
   text-align: center;
   font-size: 11px;
 
+  &-default {
+    color: $font-gray-color;
+
+    @include active-hover;
+  }
+
   &-primary {
+    color: #fff;
     background-color: $primary-color;
   }
 
@@ -15,7 +20,7 @@
   }
 
   &-ghost {
-    color: $font-black-color;
+    @extend .tag-default;
     border: 1px solid #E1E6EC;
 
     &-primary {

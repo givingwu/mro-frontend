@@ -197,7 +197,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: 'vue-style-loader',
+            loader: 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -276,7 +276,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin(),
+    // new VueLoaderPlugin(),
     /* config.plugin('case-sensitive-paths') */
     new CaseSensitivePathsPlugin(),
     // friendly error plugin displays very confusing errors when webpack
