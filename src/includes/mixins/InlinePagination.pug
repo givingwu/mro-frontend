@@ -1,5 +1,6 @@
 mixin InlinePagination(totalLength, currentPage, pageNum)
   - var lastPageNum = Math.ceil(totalLength / pageNum);
+  - pageNum = Math.min(pageNum || 10);
   .inline-pagination&attributes(attributes)
     | 共
     span.inline-pagination-total 89

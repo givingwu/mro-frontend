@@ -1,5 +1,5 @@
-- var pageNumOptions = [10, 20, 30, 50, 100]
 mixin BlockPagination(totalLength, currentPage, pageNum)
+  - var pageNumOptions = [10, 20, 30, 50, 100]
   - var pages = new Array(pageNum).fill(0).map((_, i) => (++i))
 
   .block-pagination&attributes(attributes)
@@ -22,5 +22,5 @@ mixin BlockPagination(totalLength, currentPage, pageNum)
     a(href="javascript:void(0);").bp-item.bp-last 尾页
     .bp-jump
       span 跳至
-      input.bp-input
+      input(type="number").bp-input
       span 页

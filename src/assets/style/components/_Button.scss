@@ -4,6 +4,11 @@
   *display: inline;
   text-align: center;
   border: none;
+  cursor: pointer;
+
+  &-default {
+    padding: .25em .5em;
+  }
 
   &-large {
     width: 180px;
@@ -32,4 +37,6 @@
     color: #fff;
     background-color: $primary-color;
   }
+
+  @include disabled;
 }

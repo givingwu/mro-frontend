@@ -5,6 +5,11 @@ mixin GoodsGridItem(title)
   include ../PreviewSwitcher/index.pug
   .grid-item.clearfix
     +PreviewSwitcher(3, false)
+    .grid-item-price
+      span.currency ¥
+      span.text 88.90
+      span.separator /
+      span.unit 顶
     .grid-item-title
       = title
     .grid-item-spec
@@ -12,7 +17,7 @@ mixin GoodsGridItem(title)
     .grid-item-company
       = company
     .grid-item-btn
-      .btn.btn-default
+      button.btn.btn-default.btn-ghost
         i.icon.yzwfont.icon-shopping-cart-ghost
-        span 加入购物车
+        span.text 加入购物车
 

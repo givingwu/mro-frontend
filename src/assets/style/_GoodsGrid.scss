@@ -17,6 +17,11 @@
     border: 1px solid $gray-color;
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     transform: translate3d(0, -2px, 0);
+
+    .btn {
+      color: #fff;
+      background-color: $primary-color;
+    }
   }
 
   .preview {
@@ -35,6 +40,55 @@
       width: 24px;
       height: 24px;
       margin-right: 6px;
+    }
+  }
+
+  &-price,
+  &-title,
+  &-spec,
+  &-company {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  &-price {
+    color: $notice-color;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    .currency,
+    .text {
+      font-size: 18px;
+    }
+  }
+
+  &-title,
+  &-spec {
+    color: $font-black-color;
+  }
+
+  &-company {
+    color: $font-gray-color-1;
+  }
+
+  &-btn {
+    .btn {
+      transition: all .2s;
+    }
+
+    .icon,
+    .text {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .icon {
+      font-size: 1.2em;
+      margin-right: 4px;
     }
   }
 }

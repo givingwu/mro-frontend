@@ -36,3 +36,6 @@ block content
     //- Goods
     include ../../includes/mixins/GoodsGrid/index.pug
     +GoodsGrid(pageNum)
+
+    include ../../includes/mixins/BlockPagination.pug
+    +BlockPagination(totalLength, currentPage, pageNum).gap20.gap-b-40
