@@ -19,7 +19,8 @@
 -   l: '//img13.360buyimg.com/n1/jfs/t1/29231/34/5693/214861/5c407a74Ea6956b61/c5aed9f3c9303341.jpg'
 - }]
 
-mixin PreviewSwitcher()
+mixin PreviewSwitcher(length)
+  - images = length ? images.splice(0, length) : images
   .preview.J_Preview#J_Preview
     .preview-bd.J_PreviewCurrent
       if images

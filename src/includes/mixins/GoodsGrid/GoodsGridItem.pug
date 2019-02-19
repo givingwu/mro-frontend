@@ -1,0 +1,18 @@
+mixin GoodsGridItem(title)
+  - var img = ''
+  - var specification = ['威力', '300MM', '12寸']
+  - var company = '震坤行工业超市有限公司'
+  include ../PreviewSwitcher/index.pug
+  .grid-item
+    +PreviewSwitcher(3)
+    .grid-item-title
+      = title
+    .grid-item-spec
+      = specification.join(' ')
+    .grid-item-company
+      = company
+    .grid-item-btn
+      .btn.btn-default
+        i.icon.yzwfont.icon-shopping-cart-ghost
+        span 加入购物车
+

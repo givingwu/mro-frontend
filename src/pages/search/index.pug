@@ -5,6 +5,7 @@ block content
   -   { href: '/', title: '首页'},
   -   { href: '/category/work', title: '劳保用品' },
   - ]
+  - var totalLength = 90, currentPage = 1, pageNum = 20
   .container
     .breadcrumb
       if links
@@ -29,7 +30,9 @@ block content
     +SpecSelector()
 
     //- RuleBar
-    include ../../includes/components/RuleBar/index.pug
+    include ../../includes/mixins/RuleBar/index.pug
+    +RuleBar(totalLength, currentPage, pageNum)
 
-    //- ProductList
-    //- include ../../includes/components/ProductList/index.pug
+    //- Goods
+    include ../../includes/mixins/GoodsGrid/index.pug
+    +GoodsGrid(pageNum)
