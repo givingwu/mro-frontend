@@ -1,5 +1,14 @@
 // theme-colors
+$default-color: #CDD1D7;
+$default-hover-color: #B5B8BD;
+$default-active-color: #6699EC;
+$default-disabled-color:#EFF1F4;
+
 $primary-color: #005AEC;
+$primary-hover-color: rgb(56, 126, 236);
+$primary-active-color: rgb(33, 109, 231);
+
+$disabled-color: #A1A8B5;
 $notice-color: #F53A1E;
 $gray-color: #E1E6EC;
 
@@ -22,13 +31,32 @@ $container-width: 1200px;
 
 // mixins
 @mixin active-hover() {
+  cursor: pointer;
+
   &:hover {
-    color: $primary-color;
+    color: $primary-hover-color;
+  }
+
+  &:active {
+    color: $primary-active-color;
+  }
+}
+
+@mixin onMouseOver() {
+  &.active {
+    color: $primary-hover-color;
+  }
+}
+
+@mixin onMouseDown() {
+  &.hover {
+    color: $primary-active-color;
   }
 }
 
 @mixin disabled() {
   &.disabled {
+    color: $disabled-color;
     opacity: .5;
     cursor: not-allowed;
   }
@@ -81,6 +109,10 @@ body {
 
 .font-gray {
   color: $gray-color;
+}
+
+.font-gray-light {
+  color: $font-gray-color-1;
 }
 
 .font-primary {

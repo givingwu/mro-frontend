@@ -44,4 +44,12 @@
       border-right: 1px solid #E1E6EC;
     }
   }
+
+  &.black {
+    color: $font-black-color;
+
+    .inline-pagination-trigger {
+      background-color: #fff;
+    }
+  }
 }

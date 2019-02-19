@@ -6,7 +6,7 @@ const defaults = {
   expandBtn: '.J_ShowMoreBtn',
   expandCls: 'expanded',
   callback: noop,
-  geneStatusText: (expanded) => expanded ? '收起' : '展开',
+  geneStatusText: (expanded) => expanded ? '收起' : '展开'
 }
 
 class Selector {
@@ -36,12 +36,12 @@ class Selector {
         $target = $target.parent()
       }
 
-      self.expanded = !!!self.expanded
+      self.expanded = !self.expanded
 
       const $item = $target.parent().parent()
 
       self.toggleClass($icon, 'icon-arrow-up')
-      self.toggleClass($item, expandCls)
+      self.toggleClass($item, expandCls)/* .siblings().removeClass(expandCls) */
       $target.children('span').text(geneStatusText(self.expanded))
 
       callback(self.expanded)
@@ -50,6 +50,7 @@ class Selector {
 
   toggleClass ($ele, cls) {
     $ele.toggleClass(cls, this.expanded)
+    return $ele
   }
 }
 

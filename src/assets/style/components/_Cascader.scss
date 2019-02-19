@@ -1,8 +1,7 @@
 .cascader {
   display: inline-block;
-  *display: inline;
-  color: $font-black-color;
   border: 1px solid #E1E6EC;
+  vertical-align: middle;
 
   &-hd {
     position: relative;
@@ -19,7 +18,11 @@
     &-val,
     &-icon {
       display: inline-block;
-      *display: inline;
+      vertical-align: middle;
+    }
+
+    &-icon {
+      padding: 4px 8px;
     }
   }
 }
