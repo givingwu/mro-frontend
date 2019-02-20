@@ -14,6 +14,7 @@
 -  specification: ['威力', '300MM', '12寸'],
 -  winBind: true,
 -}
+- var showOnlineService = false
 
 .product-detail
   .pd-hd
@@ -69,17 +70,18 @@
         .pd-l
         .pd-r
             .pd-gray.pd-num-desc 请至少购买6件该商品且购买数量为3的倍数
-      .clearfix
-        .pd-l
-        .pd-r
-          a(href="/onlineService",title="产品在线咨询")
-            .tag.tag-ghost 产品在线咨询
+      if showOnlineService
+        .clearfix
+          .pd-l
+          .pd-r
+            a(href="/onlineService",title="产品在线咨询")
+              .tag.tag-ghost 产品在线咨询
   .pd-bd
     .pd-bd-row.row
-      .col-5.clearfix
+      .col.col-12.clearfix
         .pd-l 商品编号
         .pd-r= product.sku
-      .col-5.clearfix
+      .col.col-12.clearfix
         .pd-l 品牌
         .pd-r= product.brand
     .pd-bd-row.row
@@ -87,7 +89,7 @@
       .pd-r= product.specification.join(' ')
   .pd-ft
     a(href="").btn.btn-large.btn-ghost.btn-ghost-primary 直接购买
-    a(href="").btn.btn-large.btn-primary
+    a(href="").btn.btn-large.btn-primary.J_ShoppingCartBtn
       i.icon.icon-cart
       | 加入购物车
 

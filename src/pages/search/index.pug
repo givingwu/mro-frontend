@@ -33,9 +33,13 @@ block content
     include ../../includes/mixins/RuleBar/index.pug
     +RuleBar(totalLength, currentPage, pageNum)
 
-    //- Goods
+    //- Goods Grid Layout
     include ../../includes/mixins/GoodsGrid/index.pug
     +GoodsGrid(pageNum)
+
+    //- Goods List Layout
+    include ../../includes/mixins/GoodsList/index.pug
+    +GoodsList(pageNum)
 
     include ../../includes/mixins/BlockPagination.pug
     +BlockPagination(totalLength, currentPage, pageNum).gap20.gap-b-40

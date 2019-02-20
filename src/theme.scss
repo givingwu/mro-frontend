@@ -131,10 +131,11 @@ body {
 }
 
 input,
-select {
+select,
+button {
   &:focus {
     outline: $primary-color solid 1px;
-    outline-offset: 0;
+    outline-offset: -1px;
   }
 }
 

@@ -1,0 +1,20 @@
+mixin GoodsList(num)
+  .goods-list
+    - var goods = new Array(num).fill(0).map((_, i) => ++i)
+    - var title = '塑料威力T类安全帽黄色（内衬调整轮式）'
+    include GoodsListItem.pug
+    .gl-hd.row
+      .col.gl-image
+      .col.gl-info
+        span 商品信息
+      .col.gl-brand
+        span 品牌
+      .col.gl-spec
+        span 规格描述
+      .col.gl-price
+        span 单价
+      .col.gl-amount
+        span 数量
+    .gl-bd.clearfix
+      each good, index in goods
+        +GoodsListItem(`${title}${good}`, index)

@@ -20,6 +20,7 @@
 
     .btn {
       color: #fff;
+      border-color: $primary-color;
       background-color: $primary-color;
     }
   }
@@ -52,7 +53,7 @@
   }
 
   &-price {
-    color: $notice-color;
+    color: $font-orange-color;
 
     span {
       display: inline-block;

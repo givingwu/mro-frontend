@@ -1,0 +1,87 @@
+.goods-list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.gl {
+  &-hd {
+    height: 40px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    color: $font-gray-color;
+    background-color: #EFF1F4;
+  }
+
+  &-image {
+    width: 10%;
+  }
+
+  &-info {
+    width: 30%;
+  }
+
+  &-brand {
+    width: 12%;
+  }
+
+  &-spec {
+    width: 20%;
+  }
+
+  &-price {
+    width: 14%;
+  }
+
+  &-image,
+  &-info,
+  &-brand,
+  &-spec,
+  &-price {
+    padding-right: 10px;
+  }
+}
+
+.list-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $gray-color;
+
+  &-image {
+    width: 108px;
+    height: 108px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-title,
+  &-bid,
+  &-company,
+  &-brand,
+  &-spec,
+  &-price,
+  &-amount {
+    margin-top: 8px;
+  }
+
+  &-title {
+    color: $font-black-color;
+  }
+
+  &-company,
+  &-brand,
+  &-spec {
+    color: $font-gray-color-1;
+  }
+
+  &-price {
+    font-size: 14px;
+    color: $font-orange-color;
+
+    span {
+      margin-right: 2px;
+    }
+  }
+}

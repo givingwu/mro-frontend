@@ -1,0 +1,37 @@
+mixin GoodsListItem(title, index)
+  - var img = '//img12.360buyimg.com/n1/jfs/t22165/247/1896928691/521531/6371965e/5b3cdb09N115c836c.png'
+  - var specification = ['威力', '300MM', '12寸']
+  - var company = '震坤行工业超市有限公司'
+  - var brand = index % 2 ? '海华' : '卓立'
+  - var odd = index % 2 ? 0 : 1
+  - var bid = index % 2 === 0
+
+  .row.list-item
+    .col.gl-image
+      .list-item-image
+        img(src=img, alt=company)
+    .col.gl-info
+      .list-item-title
+        = title
+      if bid
+        .list-item-bid
+          span.icon.yzwimg.bid
+      .list-item-company
+        = company
+    .col.gl-brand
+      .list-item-brand
+        = brand
+    .col.gl-spec
+      .list-item-spec
+        = specification.join(' ')
+    .col.gl-price
+      .list-item-price
+        span.currency ¥
+        span.text 88.90
+        span.separator /
+        span.unit 顶
+    .col.gl-amount
+      include ../InputNumber/index.pug
+      +InputNumber(odd)
+
+
