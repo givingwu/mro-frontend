@@ -5,6 +5,7 @@ mixin GoodsListItem(title, index)
   - var brand = index % 2 ? '海华' : '卓立'
   - var odd = index % 2 ? 0 : 1
   - var bid = index % 2 === 0
+  - var skuID = '5b3cdb09N115c836c'
 
   .row.list-item
     .col.gl-image
@@ -12,10 +13,10 @@ mixin GoodsListItem(title, index)
         img(src=img, alt=company)
     .col.gl-info
       .list-item-title
-        = title
+        a(href=`/detail.html?id=${skuID}`, title=title, target="_blank")= title
       if bid
         .list-item-bid
-          span.icon.yzwimg.bid
+          i.icon.yzwimg.bid
       .list-item-company
         = company
     .col.gl-brand

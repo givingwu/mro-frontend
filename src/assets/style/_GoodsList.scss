@@ -1,6 +1,7 @@
 .goods-list {
   margin-top: 20px;
   margin-bottom: 20px;
+  line-height: 1.4166666666666667;
 }
 
 .gl {
@@ -67,7 +68,17 @@
   }
 
   &-title {
-    color: $font-black-color;
+    height: 34px;
+    max-height: 34px;
+    font-weight: 400;
+    @include multiple-line-hide-text($lines: 3);
+
+    a {
+      color: $font-black-color;
+      transition: color .2s;
+
+      @include active-hover;
+    }
   }
 
   &-company,

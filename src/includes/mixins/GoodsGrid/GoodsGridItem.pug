@@ -2,20 +2,21 @@ mixin GoodsGridItem(title)
   - var img = ''
   - var specification = ['威力', '300MM', '12寸']
   - var company = '震坤行工业超市有限公司'
+  - var skuID = '5b3cdb09N115c836c'
   include ../PreviewSwitcher/index.pug
   .grid-item.clearfix
-    +PreviewSwitcher(3, false)
+    +PreviewSwitcher(3, false).grid-item-preview
     .grid-item-price
       span.currency ¥
       span.text 88.90
       span.separator /
       span.unit 顶
     .grid-item-title
-      = title
+      a(href=`/detail.html?id=${skuID}`, title=title, target="_blank")= title
     .grid-item-spec
-      = specification.join(' ')
+      span(title=specification.join(' '))= specification.join(' ')
     .grid-item-company
-      = company
+      span(title=company)= company
     .grid-item-btn
       button.btn.btn-default.btn-ghost.J_ShoppingCartBtn
         i.icon.yzwfont.icon-shopping-cart-ghost
