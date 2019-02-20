@@ -12,7 +12,8 @@
 .home-nav
   .container.home-nav-bd(role="navigation")
     .home-nav-category
-      include CategoryMenu/index.pug
+      include ../../mixins/CategoryMenu/index.pug
+      +CategoryMenu()
     .home-nav-link
       ul.home-nav-menu
         for link in links

@@ -91,6 +91,7 @@ body {
 }
 
 .container {
+  position: relative;
   width: $container-width;
   margin: 0 auto;
 }

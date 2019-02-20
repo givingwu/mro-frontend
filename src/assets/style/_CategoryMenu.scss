@@ -1,5 +1,12 @@
 .category {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+
   &-hd {
+    position: absolute;
+    width: 100%;
     height: $head-home-category-height;
     color: #fff;
     font-size: 14px;
@@ -12,5 +19,15 @@
       font-weight: normal;
       letter-spacing: 0.02em;
     }
+  }
+
+  &-bd {
+    position: absolute;
+    top: $head-home-category-height;
+    left: 0;
+    width: 100%;
+    height: 520px;
+    padding: 20px;
+    background: rgba(0,0,0,0.5);
   }
 }

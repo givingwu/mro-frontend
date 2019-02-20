@@ -4,16 +4,18 @@
   border-bottom: 1px solid $primary-color;
 
   &-bd,
-  &-link {
+  &-menu {
     @extend .clearfix;
   }
 
   &-category {
+    position: relative;
     width: $head-home-category-width;
   }
 
   &-link {
     width: $head-home-link-width;
+    margin-left: $head-home-category-width;
   }
 
   &-category,

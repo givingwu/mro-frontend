@@ -4,7 +4,7 @@ mixin GoodsGridItem(title)
   - var company = '震坤行工业超市有限公司'
   - var skuID = '5b3cdb09N115c836c'
   include ../PreviewSwitcher/index.pug
-  .grid-item.clearfix
+  .grid-item.clearfix&attributes(attributes)
     +PreviewSwitcher(3, false).grid-item-preview
     .grid-item-price
       span.currency ¥

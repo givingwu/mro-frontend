@@ -7,7 +7,7 @@ mixin GoodsListItem(title, index)
   - var bid = index % 2 === 0
   - var skuID = '5b3cdb09N115c836c'
 
-  .row.list-item
+  .row.list-item&attributes(attributes)
     .col.gl-image
       .list-item-image
         img(src=img, alt=company)

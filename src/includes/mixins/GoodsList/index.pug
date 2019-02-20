@@ -1,5 +1,5 @@
 mixin GoodsList(num)
-  .goods-list
+  .goods-list&attributes(attributes)
     - var goods = new Array(num).fill(0).map((_, i) => ++i)
     - var title = '塑料威力T类安全帽黄色（内衬调整轮式）'
     include GoodsListItem.pug
