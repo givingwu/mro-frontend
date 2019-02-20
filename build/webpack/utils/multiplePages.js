@@ -54,7 +54,7 @@ module.exports = {
     return {
       filename: `${page}.html`,
       template: templatePath,
-      chunks: [page],
+      chunks: ['chunk-vendors', 'chunk-common', page],
     };
   }),
 };

@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const baseConfig = require('./webpack.base.conf')
 const { entries, configurations } = require('./utils/multiplePages');
@@ -91,7 +92,7 @@ module.exports = merge(baseConfig, {
           minChunks: 2,
           priority: -20,
           chunks: 'initial',
-          reuseExistingChunk: true
+          reuseExistingChunk: false
         }
       }
     }
@@ -101,7 +102,14 @@ module.exports = merge(baseConfig, {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '../'
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -120,7 +128,14 @@ module.exports = merge(baseConfig, {
       {
         test: /\.s(c|a)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '../'
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -199,6 +214,11 @@ module.exports = merge(baseConfig, {
           ]
         }
       ]
-    )
+    ),
+    /* https://github.com/webpack-contrib/webpack-bundle-analyzer */
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'build-report.html',
+    })
   ],
 })

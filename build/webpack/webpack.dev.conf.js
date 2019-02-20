@@ -9,6 +9,7 @@ const baseConfig = require('./webpack.base.conf');
 const { paths, devServer } = require('../userConfig');
 const { entries, configurations } = require('./utils/multiplePages');
 const {
+  NamedModulesPlugin,
   DefinePlugin,
   HotModuleReplacementPlugin,
   NoEmitOnErrorsPlugin,
@@ -47,6 +48,7 @@ module.exports = merge(baseConfig, {
         }
       }
     ),
+    new NamedModulesPlugin(),
     /* config.plugin('hmr') */
     new HotModuleReplacementPlugin(),
     /* config.plugin('no-emit-on-errors') */

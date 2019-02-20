@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const { ProvidePlugin } = webpack;
 const { paths } = require('../userConfig');
 const { transformer, formatter } = require('./utils/resolveLoaderError');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -104,13 +106,6 @@ module.exports = {
             }
           }
         ]
-      },
-      /* config.module.rule('vue') */
-      {
-        test: /\.vue$/,
-        use: [
-          { loader: 'vue-loader' }
-        ],
       },
       /* config.module.rule('pug') */
       {
@@ -284,7 +279,11 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin({
       additionalTransformers: [transformer],
       additionalFormatters: [formatter],
-    })
+    }),
+    new ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
   ],
   node: {
     setImmediate: false,
