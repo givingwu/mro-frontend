@@ -72,6 +72,7 @@ var pageConfig = {
 + [PWA](https://infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/)
 + *使用 [.webp] 图片格式
 + 动态加载 JavaScript\CSS\Image 等静态资源文件 with `lazyload` tech
++ 优化图片大小
 
 ### CACHE
 
