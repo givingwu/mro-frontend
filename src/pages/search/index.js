@@ -1,5 +1,5 @@
-import $ from 'jquery'
 import '../../assets/style/search.scss'
+import $ from 'jquery'
 import '../../includes/mixins/SearchTab'
 import '../../includes/mixins/CheckBox'
 import '../../includes/mixins/InputNumber'
