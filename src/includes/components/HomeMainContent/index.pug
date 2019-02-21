@@ -20,23 +20,27 @@
 - ]
 
 .yzw-content
-  .banner-wrapper
-    .container
-      .banner
-        ul.banner-list
-          li.banner-item.active
+  .banner-wrapper.loading
+    .banner
+      ul.banner-list
+        li(data-background-color="#2b37e0").banner-item.active
+          .banner-item-inner
             img(src=banner, alt="云筑电商官网")
-          li.banner-item
+        li(data-background-color="red").banner-item
+          .banner-item-inner
             img(src=banner, alt="云筑电商官网")
-          li.banner-item
+        li(data-background-color="#005AEC").banner-item
+          .banner-item-inner
             img(src=banner, alt="云筑电商官网")
-          li.banner-item
+        li(data-background-color="green").banner-item
+          .banner-item-inner
             img(src=banner, alt="云筑电商官网")
-        ol.banner-indicators
-          li.banner-indicator-item
-          li.banner-indicator-item
-          li.banner-indicator-item
-          li.banner-indicator-item
+      .banner-nav
+        ol.banner-nav-list
+          li.banner-nav-item.active
+          li.banner-nav-item
+          li.banner-nav-item
+          li.banner-nav-item
   .container
     .yzw-section.yzw-ad-banner
       img(src=adBanner, alt="云筑智能仓库")
@@ -44,19 +48,19 @@
       .yzw-title
         h2 企业智选
           small 精挑细选，为您选购
-      .yzw-tab
+      .yzw-tab.J_Tab
         .yzw-tab-hd
-          ul.row.yzw-tab-list
-            li.col.col-8.yzw-tab-item.active
+          .row.yzw-tab-list
+            a.col.col-8.yzw-tab-item.J_TabItem.active
               span 房建工程
-            li.col.col-8.yzw-tab-item
+            a.col.col-8.yzw-tab-item.J_TabItem
               span 公路工程
-            li.col.col-8.yzw-tab-item
+            a.col.col-8.yzw-tab-item.J_TabItem
               span 管廊/地铁工程
         .yzw-tab-bd
-          .yzw-tab-cont.active
-          .yzw-tab-cont
-          .yzw-tab-cont
+          .yzw-tab-cont.J_TabCont.active 1
+          .yzw-tab-cont.J_TabCont 2
+          .yzw-tab-cont.J_TabCont 3
     .yzw-section.yzw-promo
       //- .yzw-promo-conte
         figure.yzw-promo-item

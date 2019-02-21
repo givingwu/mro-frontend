@@ -1,14 +1,66 @@
 .banner {
+  overflow: hidden;
   position: relative;
+  width: 100%;
+  height: 520px;
+  background-color: #2b37e0;
 
   &-wrapper {
     overflow: hidden;
+    width: 100%;
     height: 520px;
-    background-color: #2B37E0;
+
+    &.loading {
+      background: url(data:image/gif;base64,R0lGODlhyQBjANUAAFtbWvdXSaioqM7PzlNTHn19fPj394R3SSgjF…IpZgEhouEBjn4iGCh39D2IJkyHckkfi4vGKAB95VUapZY6UmDLpZWW96ifWnSaBKBOHhEEADs=)
+        center center no-repeat #e5e5e5 !important;
+    }
   }
 
   img {
     width: 100%;
     height: 100%;
+  }
+
+  &-item {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    width: $container-width;
+    height: 520px;
+    margin: 0 auto;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &-nav {
+    position: relative;
+    width: $container-width;
+    height: 8px;
+    margin: 0 auto;
+
+    &-list {
+      position: absolute;
+      right: 40px;
+      bottom: 60px;
+      margin: 0 auto;
+    }
+
+    &-item {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-left: 10px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 100%;
+      transition: all .2s ease-in-out;
+
+      &.active {
+        width: 16px;
+        background: rgba(216, 216, 216, 1);
+        border-radius: 4px;
+      }
+    }
   }
 }

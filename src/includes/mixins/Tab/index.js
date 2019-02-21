@@ -8,7 +8,7 @@ const defaults = {
   activeCls: 'active',
   disabledCls: 'disabled',
   currentIndex: 0,
-  getItemIndex: ($currentItem) => $currentItem.attr('data-index'),
+  getItemIndex: ($currentItem) => $currentItem.attr('data-index') || $currentItem.index(),
   triggerEvents: 'click',
   callback: noop
 }
@@ -38,9 +38,11 @@ class Tab {
 
     this.$items.parent().bind(triggerEvents, function bindingEvents (e) {
       let $target = $(e.target)
-      const isSpan = $target.prop('tagName') === 'SPAN'
-      const isAnchor = $target.prop('tagName') === 'A'
-      let isItem = !isSpan && isAnchor && $target.hasClass(itemCls)
+      const tagName = $target.prop('tagName')
+      const isSpan = tagName === 'SPAN'
+      const isAnchor = tagName === 'A'
+      const isLi = tagName === 'LI'
+      let isItem = !isSpan && (isAnchor || isLi) && $target.hasClass(itemCls)
 
       if (isSpan) {
         $target = $target.parent()
@@ -54,6 +56,7 @@ class Tab {
   }
 
   updateActiveByIndex (nextIndex) {
+    if (isNaN(+nextIndex)) return
     const { activeCls } = this.options
     const $currentItem = this.$items.eq(nextIndex)
     const $currentContent = this.$contents.eq(nextIndex)
@@ -69,7 +72,7 @@ class Tab {
     const left = $item.position().left
     const width = $item.outerWidth()
 
-    this.$indicator.animate({
+    this.$indicator && this.$indicator.animate({
       left,
       width
     }, 'fast')
