@@ -1,27 +1,27 @@
 import $, { extend, isFunction, noop } from 'jquery'
 
 const defaults = {
-  ele: '.J_Tab',
-  item: '.J_TabItem',
-  content: '.J_TabCont',
-  indicator: '.J_TabActiveIndicator',
+  ele: '.J_OpacityBanner',
+  item: '.J_OpacityBannerItem',
+  nav: '.J_OpacityBannerNav',
   activeCls: 'active',
   disabledCls: 'disabled',
   currentIndex: 0,
-  getItemIndex: ($currentItem) => $currentItem.attr('data-index') || $currentItem.index(),
+  getItemColor: ($currentItem) => $currentItem.attr('data-background-color') || 'pink',
   triggerEvents: 'click',
+  duration: 3000,
+  toggleDuration: 300,
   callback: noop
 }
 
-class Tab {
+class OpacityBanner {
   constructor (options) {
     this.options = extend(defaults, options)
-    const { ele, item, content, currentIndex, indicator } = this.options
+    const { ele, item, currentIndex, nav } = this.options
 
     this.$ele = $(ele)
     this.$items = this.$ele.find(item)
-    this.$contents = this.$ele.find(content)
-    this.$indicator = this.$ele.find(indicator)
+    this.$navs = this.$ele.find(nav)
     this.currentIndex = currentIndex || 0
 
     this.checkState()
@@ -32,11 +32,10 @@ class Tab {
   checkState () {}
 
   bindEvents () {
-    const self = this
-    const { triggerEvents, item, getItemIndex } = this.options
+    const { triggerEvents, item } = this.options
     const itemCls = item.replace(/^(\.|#)/, '')
 
-    this.$items.parent().bind(triggerEvents, function bindingEvents (e) {
+    this.$items.parent().bind(triggerEvents, (e) => {
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
       const isSpan = tagName === 'SPAN'
@@ -50,25 +49,31 @@ class Tab {
       }
 
       if (isItem) {
-        self.updateActiveByIndex(getItemIndex($target))
+        this.updateActiveByIndex(this.getIndex($target))
       }
     })
   }
 
   updateActiveByIndex (nextIndex) {
     if (isNaN(+nextIndex) || nextIndex < 0) return
-    const { activeCls } = this.options
+
+    const { activeCls, duration, toggleDuration } = this.options
     const $currentItem = this.$items.eq(nextIndex)
-    const $currentContent = this.$contents.eq(nextIndex)
+    const $currentNav = this.$navs.eq(nextIndex)
 
-    $currentItem.addClass(activeCls).siblings().removeClass(activeCls)
-    $currentContent.addClass(activeCls).siblings().removeClass(activeCls)
+    $currentItem.animate({
+      opacity: 1,
+      display: 'block',
+    }, toggleDuration, function () {
+      $currentItem.addClass(activeCls).siblings().removeClass(activeCls)
+      $currentNav.addClass(activeCls).siblings().removeClass(activeCls)
+    })
 
-    this.updateIndicator($currentItem)
+    // this.updateNavigator($currentItem)
     this.execute(nextIndex)
   }
 
-  updateIndicator ($item) {
+  updateNavigator ($item) {
     const left = $item.position().left
     const width = $item.outerWidth()
 
@@ -76,6 +81,10 @@ class Tab {
       left,
       width
     }, 'fast')
+  }
+
+  getIndex($item) {
+    return $item && $item.attr('data-index') || $item.index() || -1
   }
 
   execute (nextIndex) {
@@ -86,7 +95,7 @@ class Tab {
   }
 }
 
-$.fn.initTab = function $tab (options = {}) {
+$.fn.tab = function $tab (options = {}) {
   return this.each(function () {
     return new Tab(
       isFunction(options) ? {
@@ -101,14 +110,5 @@ $.fn.initTab = function $tab (options = {}) {
   })
 }
 
-$(() => {
-  return $('.J_Tab').initTab({
-    currentIndex: 0,
-    callback: function callback (idx) {
-      console.log(idx)
-    }
-  })
-})
-
 // Initialize .J_Preview with callback function
-export default Tab
+export default OpacityBanner

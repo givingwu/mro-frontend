@@ -28,8 +28,11 @@
     width: $container-width;
     height: 520px;
     margin: 0 auto;
+    opacity: 0;
+    transition: all ease-in-out .3s;
 
     &.active {
+      opacity: 1;
       display: block;
     }
   }
@@ -48,13 +51,16 @@
     }
 
     &-item {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      margin-left: 10px;
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 100%;
-      transition: all .2s ease-in-out;
+
+      &-inner {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-left: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 100%;
+        transition: all .2s ease-in-out;
+      }
 
       &.active {
         width: 16px;

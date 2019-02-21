@@ -20,27 +20,8 @@
 - ]
 
 .yzw-content
-  .banner-wrapper.loading
-    .banner
-      ul.banner-list
-        li(data-background-color="#2b37e0").banner-item.active
-          .banner-item-inner
-            img(src=banner, alt="云筑电商官网")
-        li(data-background-color="red").banner-item
-          .banner-item-inner
-            img(src=banner, alt="云筑电商官网")
-        li(data-background-color="#005AEC").banner-item
-          .banner-item-inner
-            img(src=banner, alt="云筑电商官网")
-        li(data-background-color="green").banner-item
-          .banner-item-inner
-            img(src=banner, alt="云筑电商官网")
-      .banner-nav
-        ol.banner-nav-list
-          li.banner-nav-item.active
-          li.banner-nav-item
-          li.banner-nav-item
-          li.banner-nav-item
+  include ../../mixins/OpacityBanner/index.pug
+  +OpacityBanner()
   .container
     .yzw-section.yzw-ad-banner
       img(src=adBanner, alt="云筑智能仓库")
