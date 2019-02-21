@@ -9,6 +9,7 @@ mixin CategoryMenu()
           li(data-index=index).category-item.J_CategoryMenuItem
             a(href=link.href, title=link.title)= link.title
     .category-ft.J_CategoryPanelWrapper
+      //- lazyload DOM structure
       //- .category-panel.J_CategoryPanel
         .category-panel-item
           .category-panel-title

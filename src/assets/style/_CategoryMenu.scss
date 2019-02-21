@@ -112,7 +112,7 @@ $base-index: 10;
 
         @include active-hover;
         &:hover {
-          color: #3F6FBC;
+          // color: #3F6FBC;
           text-decoration: underline;
         }
       }
