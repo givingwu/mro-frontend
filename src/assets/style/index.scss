@@ -1,6 +1,5 @@
-@import "common.scss";
-@import "components/Banner";
-
+@import 'common.scss';
+@import 'components/Banner';
 
 .home-section {
   margin-top: 40px;
@@ -13,10 +12,10 @@
     margin-bottom: 40px;
   }
 
-  &-banner {
+  &-ad-banner {
     height: 100px;
     margin: 40px auto;
-    background-image: linear-gradient(135deg,rgba(255,133,47,1) 0%,rgba(255,104,15,1) 100%);
+    background-image: linear-gradient(135deg, rgba(255, 133, 47, 1) 0%, rgba(255, 104, 15, 1) 100%);
 
     img {
       width: 100%;
@@ -51,12 +50,12 @@
     &-hd {
       height: 64px;
       line-height: 64px;
-      background-color: #EFF1F4;
+      background-color: #eff1f4;
     }
 
     &-bd {
       height: 420px;
-      border: 1px solid #E1E6EC;
+      border: 1px solid #e1e6ec;
     }
 
     &-item {
@@ -66,32 +65,89 @@
 
       &.active {
         color: #fff;
-        background-image: linear-gradient(135deg,rgba(0,134,255,1) 0%,rgba(0,52,236,1) 100%);
-        box-shadow: 0 2px 10px 0 rgba(0,52,236,0.46);
+        background-image: linear-gradient(
+          135deg,
+          rgba(0, 134, 255, 1) 0%,
+          rgba(0, 52, 236, 1) 100%
+        );
+        box-shadow: 0 2px 10px 0 rgba(0, 52, 236, 0.46);
       }
     }
   }
 
   &-promo {
     height: 427px;
-    background: rgba(0,0,0,1);
+    background: rgba(0, 0, 0, 1);
     border-radius: 3px;
     opacity: 0.49670000000000003;
   }
 
-  &-brands {}
+  &-brands {
+  }
+
+  &-floors {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f6f7f8;
+  }
+
+  &-floor {
+    .yzw-title {
+      margin-bottom: 20px;
+    }
+
+    & + & {
+      margin-top: 40px;
+    }
+  }
+
+  &-stage {
+    height: 480px;
+    // margin-bottom: 40px;
+    @extend .clearfix;
+
+    &-item {
+      float: left;
+      width: 234px;
+
+      &-top {
+        width: 234px;
+        height: 300px;
+        margin-bottom: 10px;
+        background-color: #fff;
+      }
+
+      &-btm {
+        width: 234px;
+        height: 169px;
+        background-color: #fff;
+      }
+
+      & + & {
+        margin-left: 10px;
+      }
+    }
+
+    &-image {
+      width: 224px;
+      height: 480px;
+      background-color: #fff;
+    }
+
+    &-image,
+    &-item-top,
+    &-item-btm {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  }
 }
 
 .brand {
   &s {
-    border-top: 1px solid #EFF1F4;
-    border-left: 1px solid #EFF1F4;
-    background-color: #EFF1F4;
-  }
-
-  &s,
-  &-list {
     margin-right: -1px;
+    border-top: 1px solid #eff1f4;
+    border-left: 1px solid #eff1f4;
+    background-color: #eff1f4;
   }
 
   &-item {
@@ -104,7 +160,7 @@
     &:hover {
       .brand-item-mask {
         opacity: 1;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=100)";
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(opacity=100)';
       }
     }
 
@@ -130,8 +186,8 @@
       height: 100%;
       text-align: center;
       background-color: #333;
-      background-color: rgba(0,0,0,.8);
-      transition: all .3s ease-out;
+      background-color: rgba(0, 0, 0, 0.8);
+      transition: all 0.3s ease-out;
       opacity: 0;
       filter: alpha(opacity=0);
       z-index: 1;
