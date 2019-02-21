@@ -1,8 +1,11 @@
 .banner {
   position: relative;
-  overflow: hidden;
-  height: 520px;
-  background-color: #2B37E0;
+
+  &-wrapper {
+    overflow: hidden;
+    height: 520px;
+    background-color: #2B37E0;
+  }
 
   img {
     width: 100%;
