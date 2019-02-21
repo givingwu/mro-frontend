@@ -1,5 +1,4 @@
 .footer-nav {
-  height: 98px;
   background: #fff;
   border-top: 1px solid #e1e6ec;
   // box-shadow:0px 1px 0px 0px rgba(225,230,236,1);
@@ -7,6 +6,7 @@
 
 .fn {
   &-desc {
+    height: 98px;
     box-shadow: 0px 1px 0px 0px rgba(225, 230, 236, 1);
     @extend .clearfix;
 

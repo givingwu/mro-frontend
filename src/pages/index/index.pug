@@ -5,10 +5,4 @@ block HeaderHomeNav
   +HeaderHomeNav(false)
 
 block content
-  .site-banner
-    .container
-      img(src=require('assets/image/banner.png'), alt="")
-  .ad-banner
-    .container
-      .ad-banner-inner
-        img(src=require('assets/image/ad-banner.png'), alt="云筑智能仓库")
+  include ../../includes/components/HomeMainContent/index.pug

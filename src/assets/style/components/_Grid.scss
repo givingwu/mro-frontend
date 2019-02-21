@@ -24,3 +24,9 @@
     width: 100% / (24 / $i);
   }
 }
+
+@for $i from 1 through 24 {
+  .col-#{$i} {
+    float: left;
+  }
+}
