@@ -3,7 +3,7 @@ mixin CategoryMenu()
   .category&attributes(attributes).J_CategoryMenu
     .category-hd
       h2 全部商品分类
-    .category-bd.show
+    .category-bd
       ul.category-list.J_CategoryList
         each link, index in links
           li(data-index=index).category-item.J_CategoryMenuItem

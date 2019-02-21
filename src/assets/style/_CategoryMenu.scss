@@ -1,7 +1,7 @@
 $base-index: 10;
 
 .category {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   z-index: $base-index + 1;
@@ -37,6 +37,10 @@ $base-index: 10;
     padding-bottom: 20px;
     background-color: rgba(0,0,0,0.5);
     z-index: $base-index + 1;
+  }
+
+  &-ft {
+    position: relative;
   }
 
   &-item {
