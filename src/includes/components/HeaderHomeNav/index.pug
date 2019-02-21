@@ -1,4 +1,4 @@
-mixin HeaderHomeNav()
+mixin HeaderHomeNav(hideCategoryMenu)
   - var links = [{ title: 'MRO 商城', href: '/mro' }, { title: '办公用品', href: '/work', children: [{
   -  title: '京东超市',
   - href: '/jd',
@@ -12,10 +12,12 @@ mixin HeaderHomeNav()
 
   .home-nav&attributes(attributes).J_CategoryMenu
     .container.home-nav-bd(role="navigation")
+      include ../../mixins/CategoryMenu/index.pug
       .home-nav-category
-        block NavCategoryMenu
-        include ../../mixins/CategoryMenu/index.pug
-        +CategoryMenu()
+        if hideCategoryMenu
+          +CategoryMenu(true).hide-category-menu
+        else
+          +CategoryMenu(false)
       .home-nav-link
         ul.home-nav-menu
           for link in links

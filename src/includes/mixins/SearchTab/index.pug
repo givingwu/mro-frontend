@@ -1,4 +1,5 @@
 mixin SearchTab()
+  - var searchUrl = '/search.html' // //s.yzw.cn/search
   .search-wrap
     .search-bd
       .search-triggers
@@ -6,7 +7,7 @@ mixin SearchTab()
           li(data-type=1).search-triggers-tab.search-tab-mro.selected MRO
           li(data-type=2).search-triggers-tab.search-tab-work 办公用品
       .search-panel.J_SearchPanel
-        form(action="//s.yzw.cn/search", target="_top", name="search")
+        form(action=searchUrl, target="_top", name="search")
           .search-button-wrap
             button(type="submit").search-button 搜索
           .search-panel-fields

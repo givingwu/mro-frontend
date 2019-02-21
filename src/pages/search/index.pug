@@ -2,10 +2,7 @@ extends ../../includes/layout.pug
 
 block HeaderHomeNav
   include ../../includes/components/HeaderHomeNav/index.pug
-  +HeaderHomeNav(false)
-    block NavCategoryMenu
-      include ../../includes/mixins/CategoryMenu/index.pug
-      +CategoryMenu(true)
+  +HeaderHomeNav(true)
 
 block content
   - var links=[

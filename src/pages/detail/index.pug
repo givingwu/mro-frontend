@@ -1,5 +1,9 @@
 extends ../../includes/layout.pug
 
+block HeaderHomeNav
+  include ../../includes/components/HeaderHomeNav/index.pug
+  +HeaderHomeNav(true)
+
 block content
   - var links=[
   -   { href: '/', title: '首页'},
