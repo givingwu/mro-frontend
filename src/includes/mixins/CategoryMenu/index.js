@@ -30,6 +30,9 @@ const defaults = {
   triggerEvents: 'mouseenter'
 }
 
+// source (2018-03-11): https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js
+// const isVisible = elem => !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length)
+
 class CategoryMenu {
   constructor (options) {
     this.options = extend({}, defaults, options)
@@ -49,7 +52,7 @@ class CategoryMenu {
   initEvents () {
     const { triggerEvents } = this.options
 
-    this.$list.on(triggerEvents, (e) => {
+    this.$items.on(triggerEvents, (e) => {
       let $target = $(e.target)
       const tagName = this.getTagName($target)
       const isAnchor = tagName === 'A'
@@ -60,77 +63,63 @@ class CategoryMenu {
       }
 
       if (isItem) {
-        this.updatePanelByIndex(
-          $target.attr('data-index') || $target.index(),
-          true
-        )
+        const attrIdx = +$target.attr('data-index')
+        const index = isNaN(attrIdx) ? $target.index() : attrIdx
+
+        /* Make sure index has been changed to update Panel */
+        if (index >= 0) {
+          // this.currentIndex = -1 // reset current index flag
+          this.offEvents() // clean before document event listener
+          this.updatePanelByIndex(index, true)
+        }
       }
     })
   }
 
-  onEvents () {
-    console.trace('onEvents')
-    const $containers = [this.$item, this.$panel].filter(Boolean)
-
+  onEvents ($panel, $item) {
     // https://stackoverflow.com/questions/1403615/use-jquery-to-hide-a-div-when-the-user-clicks-outside-of-it
-    this.$doc.on('mouseup.cm.mouseup', e => {
+    this.$doc.on('mouseover.cm.mouseover', e => {
       const t = e.target
-      // let $target = $(t)
-      let contained = $containers.some($el => $el.is(t) || $el.has(t))
-
-      console.log(contained)
+      let contained = [$item, $panel].some($el => $el.is(t) || $el.has(t).length)
+      // console.log('contained: ', contained)
 
       if (!contained) {
+        this.offEvents()
         this.updatePanelByIndex(this.currentIndex, false)
       }
     })
   }
 
   offEvents () {
-    this.$doc.off('mouseup.cm.mouseup')
+    this.$doc.off('mouseover.cm.mouseover')
   }
 
   updatePanelByIndex (index, visible) {
-    console.trace('index: ', index)
-    index = +index
-
-    if (isNaN(index) || index < 0) return
-    if (visible && this.currentIndex === index) return
-    this.currentIndex = index
-
     const panelCls = this.getElementClass(index)
     let $panel = this.getCachedElement(panelCls)
 
-    const $items = this.$list.children()
-    const $item = $items.eq(index)
+    const $item = this.$items.eq(index)
     const { activeCls } = this.options
 
     if (visible) {
       if (!$panel) {
-        $panel = this.setCachedElement(panelCls, this.installPanel())
+        $panel = this.setCachedElement(panelCls, this.installPanel(index))
+      } else {
+        if ($panel.is(':visible')) return
       }
 
-      $panel && $panel.show && $panel.show().siblings().hide()
+      $panel && $panel.show().siblings().hide()
       $item.addClass(activeCls).siblings().removeClass(activeCls)
-    } else {
-      if ($panel) {
-        $panel.hide()
-      }
 
+      if ($panel && $item) {
+        this.onEvents($panel, $item)
+      }
+    } else {
+      $panel && $panel.hide()
       $item.removeClass(activeCls)
     }
 
-    if (this.$panel || this.$item) {
-      this.offEvents()
-    }
-
-    if (visible) {
-      this.$panel = $panel
-      this.$item = $item
-      this.onEvents()
-    }
-
-    this.options.callback(this.currentIndex)
+    this.options.callback(this.currentIndex = +index)
   }
 
   getTagName ($el) {
@@ -150,11 +139,10 @@ class CategoryMenu {
     return this._cachedElements[key]
   }
 
-  installPanel () {
+  installPanel (index) {
     const { panelWrapTpl, panelTitle, panelList, panelItemTpl, menuDataSet } = this.options
-    const data = menuDataSet[this.currentIndex]
+    const data = menuDataSet[index]
     if (!isArray(data) || !data.length) return
-
     const $panelWrap = $(panelWrapTpl)
 
     for (let i = 0, l = data.length; i < l; i++) {
@@ -180,7 +168,7 @@ class CategoryMenu {
       }
 
       $panelWrap.append($panelItem)
-      $panelWrap.addClass(this.getElementClass(this.currentIndex))
+      $panelWrap.addClass(this.getElementClass(index))
     }
 
     this.$panelWrapper.append($panelWrap)
