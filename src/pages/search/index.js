@@ -1,6 +1,6 @@
-import '../../assets/style/search.scss'
 import $ from 'jquery'
-import '../../includes/mixins/SearchTab'
+import '../../assets/style/search.scss'
+import '../../common'
 import '../../includes/mixins/CheckBox'
 import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'

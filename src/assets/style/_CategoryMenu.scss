@@ -123,3 +123,12 @@ $base-index: 10;
     }
   }
 }
+
+.category.hide-category-menu {
+  .category {
+    &-bd {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}

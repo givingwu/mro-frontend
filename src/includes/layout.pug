@@ -19,12 +19,13 @@ head
   link(rel="dns-prefetch", href="//lwres.yzw.cn")
   block headScripts
 body
-  block head
-    block HeaderNav
-      include components/HeaderSiteNav/index.pug
-    block HeaderTop
-      include components/HeaderHomeTop/index.pug
-      include components/HeaderHomeNav/index.pug
+  block HeaderSiteNav
+    include components/HeaderSiteNav/index.pug
+  block HeaderHomeTop
+    include components/HeaderHomeTop/index.pug
+  block HeaderHomeNav
+    include components/HeaderHomeNav/index.pug
+    +HeaderHomeNav()
   block content
   block footer
     include components/FooterSiteNav/index.pug

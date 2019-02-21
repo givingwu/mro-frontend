@@ -5,6 +5,10 @@ const config = window.config = window.config || {}
 const defaults = {
   el: '.J_CategoryMenu',
   list: '.J_CategoryList',
+  item: '.J_CategoryMenuItem',
+  head: '.J_CategoryMenuHead',
+  body: '.J_CategoryMenuBody',
+  hideCls: 'hide-category-menu',
 
   panelWrapper: '.J_CategoryPanelWrapper',
   panel: '.J_CategoryPanel',
@@ -36,12 +40,12 @@ const defaults = {
 class CategoryMenu {
   constructor (options) {
     this.options = extend({}, defaults, options)
-    const { el, list, panelWrapper } = this.options
+    const { el, list, item, panelWrapper } = this.options
 
     this.$doc = $(document)
     this.$el = $(el)
     this.$list = this.$el.find(list)
-    this.$items = this.$list.children()
+    this.$items = this.$list.children(item)
     this.$panelWrapper = this.$el.find(panelWrapper)
     this.currentIndex = -1
     this._cachedElements = {}
@@ -50,8 +54,29 @@ class CategoryMenu {
   }
 
   initEvents () {
-    const { triggerEvents } = this.options
+    const { triggerEvents, hideCls, head, body } = this.options
 
+    if (this.$el.hasClass(hideCls)) {
+      const $head = this.$el.children(head)
+      const $body = this.$el.children(body)
+
+      $head.mouseover(() => {
+        $body.show()
+
+        this.$doc.on('mouseover.hd.contained', e => {
+          const t = e.target
+          let contained = [this.$el].some($el => $el.is(t) || $el.has(t).length)
+          // console.log('mouseover.hd.contained contained: ', contained, t)
+
+          if (!contained) {
+            this.$doc.off('mouseover.hd.contained')
+            $body.hide()
+          }
+        })
+      })
+    }
+
+    // FIXME: event listener be triggered twice
     this.$items.on(triggerEvents, (e) => {
       let $target = $(e.target)
       const tagName = this.getTagName($target)
@@ -68,7 +93,6 @@ class CategoryMenu {
 
         /* Make sure index has been changed to update Panel */
         if (index >= 0) {
-          // this.currentIndex = -1 // reset current index flag
           this.offEvents() // clean before document event listener
           this.updatePanelByIndex(index, true)
         }
@@ -78,10 +102,10 @@ class CategoryMenu {
 
   onEvents ($panel, $item) {
     // https://stackoverflow.com/questions/1403615/use-jquery-to-hide-a-div-when-the-user-clicks-outside-of-it
-    this.$doc.on('mouseover.cm.mouseover', e => {
+    this.$doc.on('mouseover.cm.contained', e => {
       const t = e.target
       let contained = [$item, $panel].some($el => $el.is(t) || $el.has(t).length)
-      // console.log('contained: ', contained)
+      // console.log('mouseover.cm.contained: ', contained)
 
       if (!contained) {
         this.offEvents()
@@ -91,7 +115,7 @@ class CategoryMenu {
   }
 
   offEvents () {
-    this.$doc.off('mouseover.cm.mouseover')
+    this.$doc.off('mouseover.cm.contained')
   }
 
   updatePanelByIndex (index, visible) {
@@ -100,6 +124,8 @@ class CategoryMenu {
 
     const $item = this.$items.eq(index)
     const { activeCls } = this.options
+
+    this.options.callback(this.currentIndex = +index, visible)
 
     if (visible) {
       if (!$panel) {
@@ -118,8 +144,6 @@ class CategoryMenu {
       $panel && $panel.hide()
       $item.removeClass(activeCls)
     }
-
-    this.options.callback(this.currentIndex = +index)
   }
 
   getTagName ($el) {
@@ -177,7 +201,7 @@ class CategoryMenu {
   }
 }
 
-$.fn.CategoryMenu = function $CategoryMenu (options = {}) {
+$.fn.initCategoryMenu = function $CategoryMenu (options = {}) {
   return this.each(function () {
     return new CategoryMenu(
       isFunction(options) ? {
@@ -191,5 +215,8 @@ $.fn.CategoryMenu = function $CategoryMenu (options = {}) {
     )
   })
 }
+
+// initialize CategoryMenu plugin with callback function
+$('.J_CategoryMenu').initCategoryMenu((val, vis) => console.trace(val, vis))
 
 export default CategoryMenu

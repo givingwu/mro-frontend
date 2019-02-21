@@ -1,5 +1,12 @@
 extends ../../includes/layout.pug
 
+block HeaderHomeNav
+  include ../../includes/components/HeaderHomeNav/index.pug
+  +HeaderHomeNav(false)
+    block NavCategoryMenu
+      include ../../includes/mixins/CategoryMenu/index.pug
+      +CategoryMenu(true)
+
 block content
   - var links=[
   -   { href: '/', title: '首页'},
