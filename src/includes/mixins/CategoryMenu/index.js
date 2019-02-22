@@ -219,10 +219,9 @@ $.fn.initCategoryMenu = function $CategoryMenu (options = {}) {
 
 if (!menuDataSet || !menuDataSet.length) {
   import('./menu').then(({ default: data }) => {
-    console.log("import('./menu') data: ", data)
     initCategoryMenu(data)
   }).catch(() => {
-    console.error('lazy load data failed!')
+    console.error('Lazy load menuDataSet data failed!')
   })
 } else {
   initCategoryMenu()

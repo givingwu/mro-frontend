@@ -27,7 +27,6 @@ class OpacityBanner {
     this.checkState()
     this.bindEvents()
     this.updateActiveByIndex(this.currentIndex)
-    console.log(this, this.$navs.parent())
   }
 
   checkState () {

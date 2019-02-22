@@ -22,9 +22,13 @@
             a.col.col-8.yzw-tab-item.J_TabItem
               span 管廊/地铁工程
         .yzw-tab-bd
-          .yzw-tab-cont.J_TabCont.active 1
-          .yzw-tab-cont.J_TabCont 2
-          .yzw-tab-cont.J_TabCont 3
+          include TabPanel.pug
+          .yzw-tab-cont.J_TabCont.active
+            +TabPanel()
+          .yzw-tab-cont.J_TabCont
+            +TabPanel()
+          .yzw-tab-cont.J_TabCont
+            +TabPanel()
     .yzw-section.yzw-promo
       //- .yzw-promo-conte
         figure.yzw-promo-item

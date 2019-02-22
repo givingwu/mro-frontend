@@ -1,9 +1,18 @@
 @import 'common.scss';
 @import 'components/Banner';
+@import 'mixin/HomeTabPanel';
 
 .home-section {
   margin-top: 40px;
   margin-bottom: 40px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: $font-black-color;
+}
+
+small {
+  color: $font-gray-color-1;
 }
 
 .yzw {
@@ -34,20 +43,50 @@
 
     h2 {
       height: 40px;
-      color: $font-black-color;
       font-size: 28px;
       line-height: 40px;
       font-weight: 400;
 
       small {
         margin-left: 10px;
-        color: $font-gray-color-1;
         font-size: 50%;
       }
     }
   }
 
+  &-small-title {
+    h3 {
+      height: 33px;
+      font-size: 24px;
+      line-height: 33px;
+      font-weight: 400;
+    }
+
+    h3 + small {
+      display: inline-block;
+      margin-top: 8px;
+      color: $font-gray-color-1;
+      font-size: 14px;
+    }
+
+    h4 {
+      height: 25px;
+      color: $font-black-color;
+      font-size: 18px;
+      line-height: 25px;
+      font-weight: 400;
+    }
+
+    h4 + small {
+      display: inline-block;
+      margin-top: 6px;
+      color: $font-gray-color-1;
+    }
+  }
+
   &-tab {
+    position: relative;
+
     &-hd {
       height: 64px;
       line-height: 64px;
@@ -56,8 +95,10 @@
 
     &-bd {
       @extend .clearfix;
-      height: 420px;
-      border: 1px solid #e1e6ec;
+      height: 320px;
+      // border: 1px solid #e1e6ec;
+
+      @include tab-panel;
     }
 
     &-item {

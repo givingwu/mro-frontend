@@ -10,7 +10,6 @@ $base-index: 10;
     position: absolute;
     width: 100%;
     height: $head-home-category-height;
-    color: #fff;
     font-size: 14px;
     padding-left: $head-home-category-gap;
     padding-right: $head-home-category-gap;
@@ -18,6 +17,7 @@ $base-index: 10;
     background-color: lighten($color: $primary-color, $amount: .1);
 
     h2 {
+      color: #fff;
       font-weight: normal;
       letter-spacing: 0.02em;
     }
