@@ -7,10 +7,10 @@ const defaults = {
   activeCls: 'active',
   disabledCls: 'disabled',
   currentIndex: 0,
-  defaultBackgroundColor: 'yellow',
+  defaultBackgroundColor: '#2B37E0',
   triggerEvents: 'mouseover click',
   duration: 3000,
-  toggleDuration: 1000,
+  toggleDuration: 300,
   callback: noop
 }
 
@@ -27,6 +27,7 @@ class OpacityBanner {
     this.checkState()
     this.bindEvents()
     this.updateActiveByIndex(this.currentIndex)
+    console.log(this, this.$navs.parent())
   }
 
   checkState () {
@@ -42,36 +43,37 @@ class OpacityBanner {
   }
 
   bindEvents () {
-    const { triggerEvents, item } = this.options
-    const itemCls = item.replace(/^(\.|#)/, '')
+    const { triggerEvents, nav } = this.options
+    const selectorPrefixReg = /^(\.|#)/
+    const navCls = nav.replace(selectorPrefixReg, '')
 
-    this.$navs.parent().bind(triggerEvents, e => {
+    this.$navs.on(triggerEvents, e => {
       let $target = $(e.target)
-      const tagName = $target.prop('tagName')
-      console.log('tagName: ', tagName)
-      const isSpan = tagName === 'SPAN'
-      const isAnchor = tagName === 'A'
-      const isLi = tagName === 'LI'
-      let isItem = !isSpan && (isAnchor || isLi) && $target.hasClass(itemCls)
+      let isNav = $target.hasClass(navCls)
 
-      if (isSpan) {
-        $target = $target.parent()
-        isItem = $target.hasClass(itemCls)
-      }
+      console.log("$currentItem.children('div').on('mouseleave'), isNav: ", isNav, 'index: ', this.getIndex($target))
 
-      if (isItem) {
-        this.updateActiveByIndex(this.getIndex($target))
+      if (isNav) {
+        this.updateActiveByIndex(this.getIndex($target), true)
       }
     })
   }
 
-  updateActiveByIndex (nextIndex) {
-    if (isNaN(+nextIndex) || nextIndex < 0) return
-    nextIndex = nextIndex > this.$items.length - 1 ? 0 : nextIndex
+  updateActiveByIndex (nextIndex, forceUpdate) {
+    if (isNaN(+nextIndex) || nextIndex < 0 || nextIndex === this.currentIndex) return
+    console.trace('updateActiveByIndex', nextIndex)
+
+    nextIndex = nextIndex >= this.$items.length ? 0 : nextIndex
+
+    if (forceUpdate && this.timeoutId) {
+      this.timeoutId = clearTimeout(this.timeoutId)
+    }
 
     const { toggleDuration } = this.options
     const $currentItem = this.$items.eq(nextIndex)
     const $currentNav = this.$navs.eq(nextIndex)
+
+    this.onEvents($currentItem)
 
     $currentItem.show()
     $currentItem.animate({
@@ -99,9 +101,49 @@ class OpacityBanner {
 
     this.timeoutId = setTimeout(() => {
       clearTimeout(this.timeoutId)
+      this.offEvents($currentItem)
       this.updateActiveByIndex(++nextIndex)
     }, duration)
     this.execute(nextIndex)
+  }
+
+  onEvents ($currentItem) {
+    /* https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#extra-mouseout-when-leaving-for-a-child */
+    $currentItem.children('div').on('mouseenter', (e) => {
+      console.log("$currentItem.children('div').on('mouseenter')")
+      let $target = $(e.target)
+      const tagName = $target.prop('tagName')
+      const isChildDiv = tagName === 'DIV'
+      const isChildImg = tagName === 'IMG'
+
+      if (isChildDiv || isChildImg) {
+        if (this.timeoutId) {
+          this.timeoutId = clearTimeout(this.timeoutId)
+        }
+      }
+    })
+
+    $currentItem.children('div').on('mouseleave', (e) => {
+      console.log("$currentItem.children('div').on('mouseleave')")
+      let $target = $(e.target)
+      const tagName = $target.prop('tagName')
+      const isChildDiv = tagName === 'DIV'
+      const isChildImg = tagName === 'IMG'
+
+      if (isChildDiv || isChildImg) {
+        if (!this.timeoutId) {
+          this.timeoutId = setTimeout(() => {
+            clearTimeout(this.timeoutId)
+            this.offEvents($currentItem)
+            this.updateActiveByIndex(++this.currentIndex)
+          }, this.options.duration)
+        }
+      }
+    })
+  }
+
+  offEvents ($currentItem) {
+    $currentItem.children('div').off()
   }
 
   updateNavigator ($item) {
@@ -119,7 +161,14 @@ class OpacityBanner {
   }
 
   getIndex ($item) {
-    return ($item && $item.attr('data-index')) || $item.index() || -1
+    const attrIdx = $item.attr('data-index')
+    const DOMIndex = $item.index()
+
+    if (attrIdx !== undefined && !isNaN(+attrIdx)) {
+      return +attrIdx
+    }
+
+    return DOMIndex
   }
 
   getColor ($item) {
@@ -151,8 +200,10 @@ $.fn.initOpacityBanner = function $initOpacityBanner (options = {}) {
 }
 
 // Initialize .J_OpacityBanner with callback function
-$('.J_OpacityBanner').initOpacityBanner(
-  (v) => console.log(v)
-)
+$(() => {
+  $('.J_OpacityBanner').initOpacityBanner(
+    (v) => console.log(v)
+  )
+})
 
 export default OpacityBanner

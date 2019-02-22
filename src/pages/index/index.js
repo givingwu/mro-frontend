@@ -2,6 +2,6 @@
 import '../../assets/style/index.scss'
 import '../../common'
 import '../../includes/mixins/SearchTab'
-import '../../includes/mixins/CategoryMenu/index'
-import '../../includes/mixins/OpacityBanner/index'
+import '../../includes/mixins/CategoryMenu'
+import '../../includes/mixins/OpacityBanner'
 import '../../includes/mixins/Tab'
