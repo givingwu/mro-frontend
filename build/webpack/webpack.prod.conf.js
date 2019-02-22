@@ -11,7 +11,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const baseConfig = require('./webpack.base.conf')
 const { entries, configurations } = require('./utils/multiplePages');
 const { paths } = require('../userConfig');
-const { DefinePlugin, HashedModuleIdsPlugin, NamedChunksPlugin } = webpack;
+const { DefinePlugin, HashedModuleIdsPlugin, NamedChunksPlugin, BannerPlugin } = webpack;
 
 
 module.exports = merge(baseConfig, {
@@ -160,6 +160,11 @@ module.exports = merge(baseConfig, {
     ]
   },
   plugins: [
+    new BannerPlugin({
+      banner: `This file:[file] was created by https://www.yzw.cn<vuchan.c.wu@yzw.cn>,\nCopyright to http://www.yzw.cn`,
+      entryOnly: true,
+      test: /\.?(chunk|common)\.(js|css)/
+    }),
     /* config.plugin('define') */
     new DefinePlugin(
       {
