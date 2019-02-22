@@ -1,7 +1,8 @@
 import $, { extend, isArray, isFunction, isEmptyObject, noop } from 'jquery'
-import menuDataSet from './menu'
+// import menuDataSet from './menu'
 
 const config = window.config = window.config || {}
+const menuDataSet = config.menuDataSet
 const defaults = {
   el: '.J_CategoryMenu',
   list: '.J_CategoryList',
@@ -29,7 +30,7 @@ const defaults = {
     </div>
   `,
 
-  menuDataSet: config.menuDataSet || (menuDataSet && menuDataSet.length ? menuDataSet : []),
+  menuDataSet: menuDataSet && menuDataSet.length ? menuDataSet : [],
   callback: noop,
   triggerEvents: 'mouseenter'
 }
@@ -50,10 +51,10 @@ class CategoryMenu {
     this.currentIndex = -1
     this._cachedElements = {}
 
-    this.initEvents()
+    this.bindEvents()
   }
 
-  initEvents () {
+  bindEvents () {
     const { triggerEvents, hideCls, head, body } = this.options
 
     if (this.$el.hasClass(hideCls)) {
@@ -216,7 +217,25 @@ $.fn.initCategoryMenu = function $CategoryMenu (options = {}) {
   })
 }
 
-// initialize CategoryMenu plugin with callback function
-$('.J_CategoryMenu').initCategoryMenu((val, vis) => console.trace(val, vis))
+if (!menuDataSet || !menuDataSet.length) {
+  import('./menu').then(({ default: data }) => {
+    console.log("import('./menu') data: ", data)
+    initCategoryMenu(data)
+  }).catch(() => {
+    console.error('lazy load data failed!')
+  })
+} else {
+  initCategoryMenu()
+}
+
+function initCategoryMenu (data) {
+  $(() => {
+    // initialize CategoryMenu plugin with callback function
+    $('.J_CategoryMenu').initCategoryMenu({
+      menuDataSet: data || [],
+      callback: (val, vis) => console.trace(val, vis)
+    })
+  })
+}
 
 export default CategoryMenu

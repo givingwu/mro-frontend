@@ -146,20 +146,6 @@ class OpacityBanner {
     $currentItem.children('div').off()
   }
 
-  updateNavigator ($item) {
-    const left = $item.position().left
-    const width = $item.outerWidth()
-
-    this.$indicator &&
-      this.$indicator.animate(
-        {
-          left,
-          width
-        },
-        'fast'
-      )
-  }
-
   getIndex ($item) {
     const attrIdx = $item.attr('data-index')
     const DOMIndex = $item.index()
