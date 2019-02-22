@@ -7,10 +7,10 @@ const defaults = {
   activeCls: 'active',
   disabledCls: 'disabled',
   currentIndex: 0,
-  getItemColor: ($currentItem) => $currentItem.attr('data-background-color') || 'pink',
-  triggerEvents: 'click',
+  defaultBackgroundColor: 'yellow',
+  triggerEvents: 'mouseover click',
   duration: 3000,
-  toggleDuration: 300,
+  toggleDuration: 1000,
   callback: noop
 }
 
@@ -29,15 +29,26 @@ class OpacityBanner {
     this.updateActiveByIndex(this.currentIndex)
   }
 
-  checkState () {}
+  checkState () {
+    const self = this
+
+    this.$items.each(function () {
+      const $item = $(this)
+
+      $item.css({
+        backgroundColor: self.getColor($item)
+      })
+    })
+  }
 
   bindEvents () {
     const { triggerEvents, item } = this.options
     const itemCls = item.replace(/^(\.|#)/, '')
 
-    this.$items.parent().bind(triggerEvents, (e) => {
+    this.$navs.parent().bind(triggerEvents, e => {
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
+      console.log('tagName: ', tagName)
       const isSpan = tagName === 'SPAN'
       const isAnchor = tagName === 'A'
       const isLi = tagName === 'LI'
@@ -56,20 +67,40 @@ class OpacityBanner {
 
   updateActiveByIndex (nextIndex) {
     if (isNaN(+nextIndex) || nextIndex < 0) return
+    nextIndex = nextIndex > this.$items.length - 1 ? 0 : nextIndex
 
-    const { activeCls, duration, toggleDuration } = this.options
+    const { toggleDuration } = this.options
     const $currentItem = this.$items.eq(nextIndex)
     const $currentNav = this.$navs.eq(nextIndex)
 
+    $currentItem.show()
     $currentItem.animate({
-      opacity: 1,
-      display: 'block',
-    }, toggleDuration, function () {
-      $currentItem.addClass(activeCls).siblings().removeClass(activeCls)
-      $currentNav.addClass(activeCls).siblings().removeClass(activeCls)
+      zIndex: 1,
+      opacity: 1
+    },
+    toggleDuration,
+    () => {
+      this.handleComplete($currentItem, $currentNav, nextIndex)
     })
+  }
 
-    // this.updateNavigator($currentItem)
+  handleComplete ($currentItem, $currentNav, nextIndex) {
+    const { options: { activeCls, duration } } = this
+
+    $currentItem
+      .addClass(activeCls)
+      .siblings()
+      .hide()
+      .removeClass(activeCls)
+    $currentNav
+      .addClass(activeCls)
+      .siblings()
+      .removeClass(activeCls)
+
+    this.timeoutId = setTimeout(() => {
+      clearTimeout(this.timeoutId)
+      this.updateActiveByIndex(++nextIndex)
+    }, duration)
     this.execute(nextIndex)
   }
 
@@ -77,14 +108,22 @@ class OpacityBanner {
     const left = $item.position().left
     const width = $item.outerWidth()
 
-    this.$indicator && this.$indicator.animate({
-      left,
-      width
-    }, 'fast')
+    this.$indicator &&
+      this.$indicator.animate(
+        {
+          left,
+          width
+        },
+        'fast'
+      )
   }
 
-  getIndex($item) {
-    return $item && $item.attr('data-index') || $item.index() || -1
+  getIndex ($item) {
+    return ($item && $item.attr('data-index')) || $item.index() || -1
+  }
+
+  getColor ($item) {
+    return $item.attr('data-background-color') || this.options.defaultBackgroundColor
   }
 
   execute (nextIndex) {
@@ -95,20 +134,25 @@ class OpacityBanner {
   }
 }
 
-$.fn.tab = function $tab (options = {}) {
+$.fn.initOpacityBanner = function $initOpacityBanner (options = {}) {
   return this.each(function () {
-    return new Tab(
-      isFunction(options) ? {
-        ...options,
-        callback: options,
-        ele: this
-      } : {
-        ...options,
-        ele: this
-      }
+    return new OpacityBanner(
+      isFunction(options)
+        ? {
+          ...options,
+          callback: options,
+          ele: this
+        } : {
+          ...options,
+          ele: this
+        }
     )
   })
 }
 
-// Initialize .J_Preview with callback function
+// Initialize .J_OpacityBanner with callback function
+$('.J_OpacityBanner').initOpacityBanner(
+  (v) => console.log(v)
+)
+
 export default OpacityBanner

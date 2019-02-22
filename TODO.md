@@ -6,3 +6,4 @@
 4. use template engine instead of JavaScript render code
 5. light template engine
 6. banner scroller
+  * optimize slide effect
