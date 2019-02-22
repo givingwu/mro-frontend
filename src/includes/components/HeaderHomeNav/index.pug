@@ -1,5 +1,5 @@
 mixin HeaderHomeNav(hideCategoryMenu)
-  - var links = [{ title: 'MRO 商城', href: '/mro' }, { title: '办公用品', href: '/work', children: [{
+  - var links = [{ title: 'MRO 商城', href: '/mro' }, { icon: true, title: '办公用品', href: '/work', children: [{
   -  title: '京东超市',
   - href: '/jd',
   - }, {
@@ -23,7 +23,9 @@ mixin HeaderHomeNav(hideCategoryMenu)
           for link in links
             li.home-nav-menu-item.home-nav--dropdown
               a(href=link.href, title=link.title)
-                | #{link.title}
+                span= link.title
+                if link.icon
+                  i.home-nav-menu-icon.yzwicon.yzwicon-discount
               if link.children
                 ul.home-nav--dropdown__menu
                   for child in link.children
