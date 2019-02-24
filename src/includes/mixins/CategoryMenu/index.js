@@ -232,7 +232,7 @@ function initCategoryMenu (data) {
     // initialize CategoryMenu plugin with callback function
     $('.J_CategoryMenu').initCategoryMenu({
       menuDataSet: data || [],
-      callback: (val, vis) => console.trace(val, vis)
+      callback: (val, vis) => console.log(val, vis)
     })
   })
 }

@@ -1,4 +1,5 @@
 .cascader {
+  position: relative;
   display: inline-block;
   border: 1px solid #E1E6EC;
   vertical-align: middle;
@@ -23,6 +24,76 @@
 
     &-icon {
       padding: 4px 8px;
+    }
+  }
+
+  &-bd {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);
+    border: 1px solid rgba(225,230,236,1);
+    z-index: 12;
+  }
+
+  &-panel {
+    &-hd {
+      width: 410px;
+      min-width: 410px;
+      border-bottom: 1px solid rgba(225,230,236,1);
+      background-color:rgba(239,241,244,1);
+
+      a {
+        display: inline-block;
+        padding: 0.5em 1em;
+        border-right: 1px solid rgba(225,230,236,1);
+
+        @include active-hover;
+        @include disabled;
+
+        &.active {
+          height: 31px;
+          margin-bottom: -1px;
+          background-color: #fff;
+        }
+      }
+    }
+
+    &-bd {
+      overflow: auto;
+      padding: 20px 15px;
+      // height: 120px;
+      // max-height: 120px;
+    }
+
+    &-item {
+      display: none;
+      width: 100%;
+      // padding: 20px 15px;
+
+      &.active {
+        display: block;
+      }
+
+      a {
+        @extend .tag;
+        @extend .tag-default;
+        @include active-hover;
+        @include disabled;
+
+        &.active {
+          @extend .tag-primary;
+        }
+
+        &.disabled {
+          color: $font-gray-color-1;
+        }
+      }
+
+      a /* + a */ {
+        margin-right: 10px;
+      }
     }
   }
 }
