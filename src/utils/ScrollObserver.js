@@ -7,30 +7,93 @@ const defaults = {
   throttle: 0,
   el: '.J_ScrollObserver',
   base: window,
-  trigger: 'always', // String<'always' | 'scroll-in' | 'scroll-out'>
+  /* true: 一旦滚动，就会触发
+     false: 仅通过 滚动触发器 TRIGGERS 触发回调 */
+  always: false,
+  init: true,
   pos: null, // Object<{ x: Number!, y: Number! }>
   manual: false, /// observe manually
   callback: noop // Function
 }
 
 const TRIGGERS = {
-  ALWAYS: 0x00,
-  SCROLL_IN: 0x01,
-  SCROLL_OUT: 0x02
+  SCROLL_OUT: -1,
+  DEFAULT: 0,
+  SCROLL_IN: 1
 }
 
 export default class ScrollObserver {
   constructor (options) {
-    // super()
     this.options = extend({}, defaults, options)
-    const { el, pos, base, manual } = this.options
+    const { el, pos, base, manual, init } = this.options
 
     this.$el = $(el)
     this.$base = $(base)
 
+    this.w = this.$el.width()
+    this.h = this.$el.height()
+
+    this.state = TRIGGERS.DEFAULT // default state: 0
     this.pos = this._geneEleBounding(this.$el, pos)
     this.eventName = this._geneEventName()
+
+    // 初始化节点就开始坚持滚动状态
+    init && this.checkState(this.$base)
+    // 是否自行手动开启 $base 元素的 scroll 监听
     !manual && this.observe()
+  }
+
+  checkState ($target) {
+    const { x: posX, y: posY } = this.pos
+    const x = $target.scrollLeft()
+    const y = $target.scrollTop()
+    let state = TRIGGERS.DEFAULT
+    let offset = {
+      x: 0,
+      y: 0
+    }
+
+    if (x >= posX || y >= posY) {
+      state = TRIGGERS.SCROLL_IN
+      offset = {
+        x: x - posX,
+        y: y - posY
+      }
+    } else if (x < posX || y < posY) {
+      state = TRIGGERS.SCROLL_OUT
+      offset = {
+        x: x - posX,
+        y: y - posY
+      }
+    }
+
+    if (this.options.always) {
+      this.options.callback.call(this, offset, state)
+    } else { /* only callback on changed */
+      if (state && this.state !== state) {
+        this.state = state
+        this.options.callback.call(this, offset, state)
+      }
+    }
+  }
+
+  observe () {
+    const { debounce: debounceTime, throttle: throttleTime } = this.options
+    let handleScroll = this._handleScroll.bind(this)
+
+    if (debounceTime) {
+      handleScroll = debounce(debounceTime, true, handleScroll)
+    } else if (throttle) {
+      handleScroll = throttle(throttleTime, handleScroll)
+    }
+
+    this.$base.on(this.eventName, handleScroll)
+  }
+
+  unobserve () {
+    if (this.eventName) {
+      this.$base.off(this.eventName)
+    }
   }
 
   /**
@@ -46,61 +109,21 @@ export default class ScrollObserver {
     if (!isEmptyObject(pos)) {
       x = pos.x
       y = pos.y
-    } else if (isNumeric(pos)) {
-      x = pos
     }
 
-    if (!isNumeric(x)) {
+    if (!isNumeric(x) || !x) {
       x = $el.offset().left
     }
 
-    if (!isNumeric(y)) {
+    if (!isNumeric(y) || !y) {
       y = $el.offset().top
     }
 
     return { x, y }
   }
 
-  observe () {
-    const { debounce: debounceTime, throttle: throttleTime } = this.options
-    let handleScroll = this._handleScroll.bind(this)
-
-    if (debounceTime) {
-      handleScroll = debounce(debounceTime, handleScroll)
-    } else if (throttle) {
-      handleScroll = throttle(throttleTime, handleScroll)
-    }
-
-    this.$base.on(this.eventName, handleScroll)
-  }
-
-  destroy () {
-    if (this.eventName) {
-      this.$base.off(this.eventName)
-    }
-  }
-
   _handleScroll (e) {
-    const { trigger, callback } = this.options
-    const $target = $(e.target)
-    const x = $target.scrollLeft()
-    const y = $target.scrollTop()
-    let call = false
-
-    if (trigger === TRIGGERS.ALWAYS) {
-      call = true
-    } else if (trigger === TRIGGERS.SCROLL_IN) {
-      if (x >= this.pos.x || y >= this.pos.y) {
-        call = true
-      }
-    } else if (trigger === TRIGGERS.SCROLL_OUT) {
-      if (x < this.pos.x || y < this.pos.y) {
-        call = true
-      }
-    }
-
-    // eslint-disable-next-line
-    call && callback({ x, y }, this.$el, e)
+    this.checkState($(e.target))
   }
 
   _geneEventName () {
