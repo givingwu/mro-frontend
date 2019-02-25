@@ -6,3 +6,7 @@
 8. [ ] Remove addStyle.js for Prod env
 9. [ ] Child panel support remote data load & lazy DOM load
 10. [ ] URL request param
+
+
+# FIXME
+1. [] the callback function of initCategoryMenu be called twice
