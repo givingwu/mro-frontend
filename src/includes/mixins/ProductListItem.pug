@@ -8,7 +8,8 @@ mixin ProductListItem(tender)
       .product-list-item-cont
         .product-list-head-info-t JSP 01-9041 威力9 ABS T类安全帽 蓝色（内衬调整轮式）
         if tender
-          .tender 中标
+          .product-list-head-info-i
+            i.icon.yzwicon.yzwicon-bid
         .product-list-head-info-b
           | 由江西工业制造商负责发货
     .product-list-head-title.product-list-head-brand
@@ -30,4 +31,6 @@ mixin ProductListItem(tender)
       .product-list-item-cont
         include InputNumber/index.pug
         +InputNumber(0)
+        include ShoppingCartIcon.pug
+        +ShoppingCartIcon(tender)
 

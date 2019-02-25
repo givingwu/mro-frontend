@@ -10,7 +10,6 @@ const defaults = {
   currentIndex: 0,
   getItemIndex: ($currentItem) => $currentItem.attr('data-index') || $currentItem.index(),
   triggerEvents: 'click',
-  hasIndicator: false,
   callback: noop
 }
 
@@ -58,14 +57,14 @@ class Tab {
 
   updateActiveByIndex (nextIndex) {
     if (isNaN(+nextIndex) || nextIndex < 0) return
-    const { activeCls, hasIndicator, indicator } = this.options
+    const { activeCls, indicator } = this.options
     const $currentItem = this.$items.eq(nextIndex)
     const $currentContent = this.$contents.eq(nextIndex)
 
     $currentItem.addClass(activeCls).siblings().removeClass(activeCls)
     $currentContent.addClass(activeCls).siblings().removeClass(activeCls)
 
-    if (hasIndicator && indicator && this.$indicator.length) {
+    if (indicator && this.$indicator.length) {
       this.updateIndicator($currentItem)
     }
     this.execute(nextIndex)
