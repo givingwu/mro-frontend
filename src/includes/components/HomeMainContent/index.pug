@@ -48,6 +48,8 @@
                   span 点击查看
 
   .yzw-floors
+    include ../../mixins/FloatBar/index.pug
+    +FloatBar()
     .container
       include Floor.pug
       +Floor('劳保防护', '安全可靠更放心')

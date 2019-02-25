@@ -2,11 +2,11 @@ $float-bar-gap: 40px;
 $float-bar-width: 88px;
 
 .float-bar {
-  position: fixed;
-  bottom: 50px;
+  position: absolute;
+  top: 90px;
   left: 50%;
   text-align: center;
-  margin-left: -($container-width / 2) - $float-bar-gap - $float-bar-width;
+  margin-left: -($container-width / 2) - $float-bar-width - $float-bar-gap;
   width: 50px;
   background: rgba(255,255,255,1);
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);

@@ -39,3 +39,13 @@ export default class FloatBar {
     this.$win.on('resize', debounce(this.options.debounce, this.initLayout).bind(this))
   }
 }
+
+
+$.fn.initFloatBar = function $initFloatBar (options = {}) {
+  return this.each(function () {
+    return new FloatBar({
+      ...options,
+      ele: this
+    })
+  })
+}

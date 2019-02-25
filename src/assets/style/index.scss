@@ -145,6 +145,7 @@ small {
   }
 
   &-floors {
+    position: relative;
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #f6f7f8;
@@ -152,7 +153,7 @@ small {
 
   &-floor {
     .yzw-title {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     & + & {

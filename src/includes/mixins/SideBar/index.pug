@@ -6,41 +6,41 @@ mixin SideBar()
   - var waitForPayCount = 11
 
   .side-bar.J_SideBar
-    .side-bar-item.shopping-cart
+    a.side-bar-item.shopping-cart
       .side-bar-icon
         i.icon.yzwfont.icon-shopping-cart
       .side-bar-text.shopping-cart-text 购物车
       if shoppingCartCount
         .side-bar-badge= shoppingCartCount
-    .side-bar-item
+    a.side-bar-item
       .side-bar-icon
         i.icon.yzwfont.icon-shopping-cart
       .side-bar-text 待收货
       if waiting4GoodCount
         .side-bar-badge= waiting4GoodCount
-    .side-bar-item
+    a.side-bar-item
       .side-bar-icon
         i.icon.yzwfont.icon-shopping-cart
       .side-bar-text 退货中
       if putBack2BCount
         .side-bar-badge= putBack2BCount
-    .side-bar-item
+    a.side-bar-item
       .side-bar-icon
         i.icon.yzwfont.icon-shopping-cart
       .side-bar-text 待结算
       if waitForOrderCount
         .side-bar-badge= waitForOrderCount
-    .side-bar-item
+    a.side-bar-item
       .side-bar-icon
         i.icon.yzwfont.icon-wallet
       .side-bar-text 待付款
       if waitForPayCount
         .side-bar-badge= waitForPayCount
 
-    .side-bar-item.qrcode
-      .side-bar-icon
+    a.side-bar-item.qrcode
+      .side-bar-icon.J_QRCode
         i.icon.yzwfont.icon-qrcode
-    .side-bar-item.back-top
+    a.side-bar-item.back-top.J_BackTop
       .side-bar-icon
         i.icon.yzwfont.icon-back-top
 
