@@ -14,6 +14,14 @@ $pad-r-gap: 20px;
       border-bottom: 2px dashed #E1E6EC;
     }
 
+    &-ft {
+      @extend .clearfix;
+
+      .btn {
+        float: left;
+      }
+    }
+
     &-tit {
       color: $font-black-color;
 
@@ -102,12 +110,13 @@ $pad-r-gap: 20px;
     &-addr {
       margin-bottom: 20px;
 
+      .pd-blue,
+      .pd-orange {
+        margin-left: 8px;
+      }
+
       &-b {
         margin-top: 5px;
-
-        .pd-orange {
-          margin-left: 8px;
-        }
       }
     }
 

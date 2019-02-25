@@ -85,62 +85,6 @@ $container-width: 1200px;
   overflow: hidden;
 }
 
-// common classes
-body {
-  min-width: $container-width;
-}
-
-.container {
-  position: relative;
-  width: $container-width;
-  margin: 0 auto;
-}
-
-.show {
-  display: block !important;
-}
-
-.hide {
-  display: none !important;
-}
-
-.font-black {
-  color: $font-black-color;
-}
-
-.font-gray {
-  color: $gray-color;
-}
-
-.font-gray-light {
-  color: $font-gray-color-1;
-}
-
-.font-primary {
-  color: $primary-color;
-}
-
-.clearfix {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-}
-
-input,
-select,
-button {
-  &:focus {
-    outline: $primary-color solid 1px;
-    outline-offset: -1px;
-  }
-}
-
-
 // site-nav
 $site-nav-height: 40px;
 $site-nav-gap-l: 12px;

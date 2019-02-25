@@ -1,4 +1,4 @@
-import $, { extend, isString, isArray, isNumeric, isFunction, isEmptyObject, noop } from 'jquery'
+import $, { extend, /* isString,  */isArray,/*  isNumeric, */ isFunction, isEmptyObject, noop } from 'jquery'
 import { getMapDataSet, getValByStr } from './utils'
 import Tab from '../Tab'
 

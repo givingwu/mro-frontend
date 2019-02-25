@@ -43,7 +43,7 @@ export default class SideBar {
   }
 
   bindEvents () {
-    const { durationTime, debounceTime } = this.options
+    const { debounceTime } = this.options
 
     this.$win.on('resize', debounce(debounceTime, this.initLayout).bind(this))
     this.$go2top.click(() => {
@@ -52,7 +52,7 @@ export default class SideBar {
   }
 
   go2topWithAnimate () {
-    $('html').animate({ scrollTop: 0 }, durationTime)
+    $('html').animate({ scrollTop: 0 }, this.options.durationTime)
   }
 }
 
@@ -60,7 +60,7 @@ $.fn.initSideBar = function $initSideBar (options = {}) {
   return this.each(function () {
     return new SideBar({
       ...options,
-      ele: this
+      el: this
     })
   })
 }

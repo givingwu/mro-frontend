@@ -45,7 +45,7 @@ $.fn.initFloatBar = function $initFloatBar (options = {}) {
   return this.each(function () {
     return new FloatBar({
       ...options,
-      ele: this
+      el: this
     })
   })
 }

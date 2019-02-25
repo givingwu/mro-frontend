@@ -35,7 +35,7 @@
     }
 
     .product-list-head-info {
-      width: 210px;
+      width: 200px;
     }
 
     .product-list-head-brand,
@@ -50,6 +50,10 @@
     .product-list-head-desc,
     .product-list-head-stock {
       color: $font-black-color;
+    }
+
+    .shopping-cart-icon {
+      margin-left: 45px;
     }
   }
 
@@ -78,10 +82,10 @@
     }
 
     &-info {
-      width: 300px;
+      width: 290px;
       text-align: center;
 
-      .tender,
+      &-i,
       &-t,
       &-b {
         text-align: left;
@@ -96,11 +100,14 @@
         color: $font-gray-color-1;
       }
 
-      &-i {}
+      &-i {
+        height: 20px;
+        text-align: left;
+      }
     }
 
     &-brand {
-      width: 100px;
+      width: 70px;
       text-align: center;
     }
 
@@ -109,7 +116,7 @@
     }
 
     &-desc {
-      width: 280px;
+      width: 270px;
     }
 
     &-price {
@@ -117,7 +124,11 @@
     }
 
     &-stock {
-      width: 110px;
+      width: 100px;
+    }
+
+    &-amount {
+      width: 190px;
     }
   }
 }
