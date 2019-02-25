@@ -47,8 +47,12 @@ export default class SideBar {
 
     this.$win.on('resize', debounce(debounceTime, this.initLayout).bind(this))
     this.$go2top.click(() => {
-      $('html').animate({ scrollTop: 0 }, durationTime)
+      this.go2topWithAnimate()
     })
+  }
+
+  go2topWithAnimate () {
+    $('html').animate({ scrollTop: 0 }, durationTime)
   }
 }
 

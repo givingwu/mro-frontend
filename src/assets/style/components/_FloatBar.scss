@@ -2,8 +2,9 @@ $float-bar-gap: 40px;
 $float-bar-width: 88px;
 
 .float-bar {
-  position: absolute;
+  position: absolute; /* fixed */
   top: 90px;
+  // bottom: 50px;
   left: 50%;
   text-align: center;
   margin-left: -($container-width / 2) - $float-bar-width - $float-bar-gap;

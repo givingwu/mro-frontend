@@ -1,6 +1,7 @@
 .side-bar {
-  position: fixed;
-  bottom: 50px;
+  position: absolute; /* fixed */
+  top: 20px;
+  // bottom: 50px;
   left: 50%;
   text-align: center;
   margin-left: ($container-width / 2) + 30px;

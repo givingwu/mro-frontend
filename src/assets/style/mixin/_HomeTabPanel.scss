@@ -23,6 +23,7 @@ $border-color: #E1E6EC;
 
       &-l,
       &-r {
+        overflow: hidden;
         float: left;
         width: 184px;
         height: 184px;
@@ -33,6 +34,7 @@ $border-color: #E1E6EC;
       }
 
       &-r {
+        padding-top: 30px;
         text-align: right;
       }
 
