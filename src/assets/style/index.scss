@@ -13,6 +13,12 @@ h1,h2,h3,h4,h5,h6 {
   color: $font-black-color;
 }
 
+$item-width: 234px;
+$item-padding-horizontal: 12px;
+$item-left-size: 92px;
+$item-left-gap: 12px;
+$item-right-width: $item-width - $item-left-gap - $item-left-size - $item-padding-horizontal * 2;
+
 small {
   color: $font-gray-color-1;
 }
@@ -145,8 +151,7 @@ small {
     opacity: 0.49670000000000003;
   }
 
-  &-brands {
-  }
+  &-brands {}
 
   &-floors {
     position: relative;
@@ -172,7 +177,7 @@ small {
 
     &-item {
       float: left;
-      width: 234px;
+      width: $item-width;
 
       & + & {
         margin-left: 10px;
@@ -207,17 +212,17 @@ small {
     }
 
     &-b {
-      width: 234px;
+      width: $item-width;
       height: 169px;
       text-align: center;
       background-color: #fff;
-      padding: 38px 12px;
+      padding: 38px $item-padding-horizontal;
       text-align: left;
       @extend .clearfix;
 
       &-l {
-        width: 92px;
-        height: 92px;
+        width: $item-left-size;
+        height: $item-left-size;
 
         img {
           max-width: 82%;
@@ -232,7 +237,14 @@ small {
       }
 
       &-r {
-        margin-left: 12px;
+        overflow: hidden;
+        width: $item-right-width;
+        height: 100px;
+        margin-left: $item-left-gap;
+
+        h4 {
+          @include single-line-hide-text();
+        }
       }
     }
 

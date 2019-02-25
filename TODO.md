@@ -1,9 +1,8 @@
 # TODO
 
-1. sw.js
-2. sprite.png & sprite.css
-3. add new plugin of webpack to optimize image's size
-4. use template engine instead of JavaScript render code
-5. light template engine
-6. banner scroller
-  * optimize slide effect
+1. [ ] sw.js
+3. [ ] add new plugin of webpack to optimize image's size
+7. [ ] Map-> FE GEOLocation | BE IPLocation
+8. [ ] Remove addStyle.js for Prod env
+9. [ ] Child panel support remote data load & lazy DOM load
+10. [ ] URL request param
