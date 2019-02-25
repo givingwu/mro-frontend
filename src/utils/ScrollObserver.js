@@ -1,4 +1,4 @@
-import $, { extend, isObject, isNumeric, noop } from 'jquery'
+import $, { extend, isEmptyObject, isNumeric, noop } from 'jquery'
 import { debounce, throttle } from 'throttle-debounce'
 
 let uid = 0
@@ -43,7 +43,7 @@ export default class ScrollObserver {
     /* eslint-disable-next-line */
     let x = 0, y = 0
 
-    if (isObject(pos)) {
+    if (!isEmptyObject(pos)) {
       x = pos.x
       y = pos.y
     } else if (isNumeric(pos)) {
@@ -51,11 +51,11 @@ export default class ScrollObserver {
     }
 
     if (!isNumeric(x)) {
-      x = $el.offset().top
+      x = $el.offset().left
     }
 
     if (!isNumeric(y)) {
-      y = $el.offset().left
+      y = $el.offset().top
     }
 
     return { x, y }
@@ -74,41 +74,45 @@ export default class ScrollObserver {
     this.$base.on(this.eventName, handleScroll)
   }
 
-  destroy() {
+  destroy () {
     if (this.eventName) {
       this.$base.off(this.eventName)
     }
   }
 
-  _geneEventName () {
-    return ['scroll', ++uid].join('.')
-  }
-
-  _handleScroll(e) {
+  _handleScroll (e) {
     const { trigger, callback } = this.options
     const $target = $(e.target)
-    const x = $target.scrollTop()
-    const y = $target.scrollLeft()
+    const x = $target.scrollLeft()
+    const y = $target.scrollTop()
+    let call = false
 
     if (trigger === TRIGGERS.ALWAYS) {
-      callback({ x, y }, this.$el, e)
+      call = true
     } else if (trigger === TRIGGERS.SCROLL_IN) {
-      if (x >= x || y >= y) {
-        callback({ x, y }, this.$el, e)
+      if (x >= this.pos.x || y >= this.pos.y) {
+        call = true
       }
     } else if (trigger === TRIGGERS.SCROLL_OUT) {
-      if (x < x || y < y) {
-        callback({ x, y }, this.$el, e)
+      if (x < this.pos.x || y < this.pos.y) {
+        call = true
       }
     }
+
+    // eslint-disable-next-line
+    call && callback({ x, y }, this.$el, e)
+  }
+
+  _geneEventName () {
+    return ['scroll', ++uid].join('.')
   }
 }
 
 $.fn.ScrollObserver = function $ScrollObserver (options) {
   return this.each(function () {
-    return new FloatBar({
+    return new ScrollObserver({
       ...options,
-      ele: this
+      el: this
     })
   })
 }

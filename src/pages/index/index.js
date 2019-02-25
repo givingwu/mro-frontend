@@ -9,13 +9,16 @@ import '../../includes/mixins/SideBar'
 import '../../includes/mixins/FloatBar'
 import ScrollObserver from '../../utils/ScrollObserver'
 
-$(function() {
+$(function () {
   $('.J_SideBar').initSideBar()
   $('.J_FloatBar').initFloatBar()
   const sideBarSO = new ScrollObserver({
-    ele: '.J_SideBar',
-    debounce: 100
+    el: '.J_SideBar',
+    debounce: 100,
+    callback (...args) {
+      console.log(args)
+    }
   })
 
-  console.log(sideBarSO);
+  console.log(sideBarSO)
 })
