@@ -1,0 +1,71 @@
+.side-bar {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  text-align: center;
+  margin-left: ($container-width / 2) + 30px;
+  width: 50px;
+  padding-top: 20px;
+  // height: 593px;
+  background: rgba(255,255,255,1);
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);
+  z-index: 9999;
+
+  &-item {
+    position: relative;
+    width: 40px;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: $font-black-color;
+    border-bottom: 1px solid #E1E6EC;
+
+    &.shopping-cart {
+      padding-bottom: 25px;
+      font-size: 14px;
+      font-weight: 400;
+
+      .shopping-cart-text {
+        width: 20px;
+        color: inherit;
+      }
+    }
+
+    &.qrcode {
+      margin-top: 60px;
+    }
+
+    &.back-top {
+      border-bottom: none;
+    }
+  }
+
+  &-icon {
+    color: $font-black-color;
+    font-size: 20px;
+  }
+
+  &-text {
+    color: $font-gray-color;
+    font-size: 11px;
+  }
+
+  &-icon,
+  &-text {
+    margin: 0 auto;
+  }
+
+  &-badge {
+    position: absolute;
+    display: inline-block;
+    top: 6px;
+    height: 15px;
+    font-size: 11px;
+    line-height: 15px;
+    background-color: #F53A1E;
+    border-radius: 8px;
+    color: #fff;
+
+    @include single-line-hide-text($width: 21px);
+  }
+}

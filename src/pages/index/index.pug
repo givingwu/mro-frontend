@@ -6,3 +6,7 @@ block HeaderHomeNav
 
 block content
   include ../../includes/components/HomeMainContent/index.pug
+  include ../../includes/mixins/SideBar/index.pug
+  +SideBar()
+  include ../../includes/mixins/FloatBar/index.pug
+  +FloatBar()

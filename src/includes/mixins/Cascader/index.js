@@ -1,5 +1,5 @@
 import $, { extend, isString, isArray, isNumeric, isFunction, isEmptyObject, noop } from 'jquery'
-import { getMapDataSet, getValByStr, getStrByVal } from './utils'
+import { getMapDataSet, getValByStr } from './utils'
 import Tab from '../Tab'
 
 const defaults = {
@@ -7,7 +7,7 @@ const defaults = {
   parentItem: '.J_TabItem',
   childrenItem: '.J_TabCont',
   panel: '.J_CascaderPanel',
-  data: [], // address data ['北京', '东城区', '主城区'] or [11, 1101, 110101]
+  data: [], // address data ['北京'?, '东城区'?, '主城区'?] or [11?, 1101?, 110101?]
 
   hideCls: 'hide',
   activeCls: 'active',
@@ -31,7 +31,7 @@ const PANEL_INDEX = {
 // source (2018-03-11): https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js
 // const isVisible = elem => !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length)
 
-class Cascader {
+class AddressCascader {
   constructor (options) {
     this.options = extend({}, defaults, options)
     const { el, data, parentItem, childrenItem } = this.options
@@ -69,10 +69,13 @@ class Cascader {
 
   checkState (value) {
     const [ province, city, area ] = value
+    if (province) {
+      this.province = province.children
+    }
 
-    this.updatePanelByType(province, PANEL_INDEX.PROVINCE, true)
-    this.updatePanelByType(city, PANEL_INDEX.CITY, true)
-    this.updatePanelByType(area, PANEL_INDEX.AREA, true)
+    province && this.updatePanelByType(province, PANEL_INDEX.PROVINCE, true)
+    city && this.updatePanelByType(city, PANEL_INDEX.CITY, true)
+    area && this.updatePanelByType(area, PANEL_INDEX.AREA, true)
     this.$tab.updateActiveByIndex(value.length - 1)
   }
 
@@ -86,39 +89,64 @@ class Cascader {
       if (isAnchor) {
         const id = +$target.attr('data-id')
         const index = this.getIndex($target)
-        // const text = $target.text().trim()
+        const text = $target.text().trim()
 
         /* Make sure index has been changed to update Panel */
         if (id !== undefined) {
-          this.updatePanelByIndex(index/* id, text, true */)
+          this.updatePanelByIndex(index, id, text, true)
         }
       }
     })
   }
 
-  updatePanelByIndex (index) {
+  updatePanelByIndex (index, id, text) {
     const { activeCls, hideCls } = this.options
-    const [ province, city, area ] = this.currentValue
+    let [ province, city, area ] = this.currentValue
 
     switch (index) {
       case PANEL_INDEX.PROVINCE:
-        this.$parentItems.eq(index).addClass(activeCls).siblings().removeClass(hideCls)
-        this.updatePanelByType(city, PANEL_INDEX.CITY, true)
-        break;
+        // 根节点变更
+        if (province) {
+          if (text !== province.label) {
+            // 更新数据源根节点 active state & 当前根节点的子节点
+            province = getValByStr(province.data, text, true)[0]
+            console.log(province)
+            city = province.children
+
+            this.updatePanelByType(province, PANEL_INDEX.PROVINCE, true)
+            this.updatePanelByType({
+              data: city,
+              value: province.value
+            }, PANEL_INDEX.CITY, true)
+            this.$tab.updateActiveByIndex(PANEL_INDEX.CITY)
+          }
+
+          this.$parentItems.eq(index).text(text).addClass(activeCls).siblings().removeClass(hideCls)
+        }
+        break
       case PANEL_INDEX.CITY:
-        this.$parentItems.eq(PANEL_INDEX.AREA).hide()
+        this.$parentItems.eq(PANEL_INDEX.AREA)
         this.updatePanelByType(area, PANEL_INDEX.AREA, true)
-        break;
-      /* case PANEL_INDEX.AREA:
-        this.$parentItems.eq(PANEL_INDEX.AREA).hide()
-        break; */
+        this.$tab.updateActiveByIndex(PANEL_INDEX.AREA)
+        break
+      case PANEL_INDEX.AREA:
+        // this.$parentItems.eq(PANEL_INDEX.AREA).hide()
+        // const currentArea = getValByStr(city)
+        break
       default:
-        break;
+        break
     }
   }
 
   updatePanelByType (panel, index, visible) {
-    const { data, value: id } = panel
+    let { value: id } = panel
+    const { data } = panel
+
+    // 如果是省级选择器，不需要缓存 DOM, ID 全部设为 0
+    if (index === PANEL_INDEX.PROVINCE) {
+      id = 0
+    }
+
     const panelCls = this.getElementClass(id)
     let $panel = this.getCachedElement(panelCls)
 
@@ -180,8 +208,9 @@ class Cascader {
       const $item = $(panelBodyItemTpl)
 
       $item.attr('title', label)
+      $item.attr('data-label', label)
       $item.attr('data-id', value)
-      $item.attr('index', index)
+      $item.attr('data-index', index)
       $item.text(label)
 
       if (active) $item.addClass(activeCls)
@@ -195,9 +224,9 @@ class Cascader {
   }
 }
 
-$.fn.initCascader = function $Cascader (options = {}) {
+$.fn.initAddressCascader = function $AddressCascader (options = {}) {
   return this.each(function () {
-    return new Cascader(
+    return new AddressCascader(
       isFunction(options) ? {
         ...options,
         callback: options,
@@ -210,4 +239,4 @@ $.fn.initCascader = function $Cascader (options = {}) {
   })
 }
 
-export default Cascader
+export default AddressCascader

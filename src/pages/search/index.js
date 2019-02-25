@@ -16,7 +16,7 @@ $(() => {
     }
   })
 
-  $('.J_Cascader').initCascader({
+  $('.J_Cascader').initAddressCascader({
     data: ['四川', '成都', '高新区', '华阳镇街道'],
     callback: (val, vis) => console.log(val, vis)
   })

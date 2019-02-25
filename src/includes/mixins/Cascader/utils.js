@@ -15,14 +15,24 @@ export async function getMapDataSet() {
 
 /**
  * filterRegionsByStr
- * @param  {Array}  [area=regions]
- * @param  {Array<String> | String} str
+ * @param  {Array<Region<T>>}  [area=regions]
+ * @param  {Array<string> | Array<number> | string} str
  * @param  {Array}  [values=[]]
+ * @param  {Array<'label' | 'value'>}
  * @return {Array}
  * @example
- *  getValByStr(regions, ["北京", "县", "密云"])  // ["11", "1102", "110228"]
+ *  getValByStr(regions, "北京 县 县"])
+ *  getValByStr(regions, ["北京", "县"])
+ *  getValByStr(regions, ["北京", "县", "密云"]) // [{ Region<Province> }, { Region<City> }, { Region<Area> }]
+ *  getValByStr(regions, ["11 1101 110101"])
+ *  getValByStr(regions, ["11"])
+ *  getValByStr(regions, ["11", "1101", "110101"]) // [{ Region<Province> }, { Region<City> }, { Region<Area> }]
  */
-export const getValByStr = function filterAreaByStr(area = [], str = '') {
+export const getValByStr = function filterAreaByStr(
+  area = [],
+  str = '',
+  compareKey = 'label'
+) {
   if (!area.length || !str) return
   const keys = (Array.isArray(str) ? str : str.split(/\s/)).slice(0, 3)
 
@@ -32,12 +42,14 @@ export const getValByStr = function filterAreaByStr(area = [], str = '') {
   let i = 0, j = 0
   while (vals.length < keys.length && j < keys.length) {
     if (i >= area.length) break
-    let { label, value, children = [] } = (area[i] || {})
-    let key = keys[j]
-    const isSameLabel = label && key && key === label
+    const item = (area[i] || {})
+    const { label, value, children = [] } = item
+    const key = keys[j]
+    const isSame = item[compareKey] && key && key === item[compareKey]
 
-    if (isSameLabel) {
+    if (isSame) {
       vals.push({
+        children: children,
         data: area,
         label,
         value,
@@ -45,7 +57,7 @@ export const getValByStr = function filterAreaByStr(area = [], str = '') {
       })
     }
 
-    if (isSameLabel) {
+    if (isSame) {
       area[i].active = true
       area = children
       j++
@@ -59,47 +71,3 @@ export const getValByStr = function filterAreaByStr(area = [], str = '') {
   return vals
 }
 
-
-/**
- * filterRegionsByCode
- * @param  {Array}  [area=regions]
- * @param  {Array<Number> | String} val
- * @param  {Array}  [values=[]]
- * @return {Array}
- * @example
- *  getStrByVal(regions, '110228')   // ["北京", "县", "密云"]
- */
-export const getStrByVal = function filterRegionsByCode(area = [], val = '') {
-  if (!area.length || !val) return
-  const vals = (Array.isArray(val) ? val : val.split(/\s/)).slice(0, 3)
-
-  if (!vals.length) return
-  const keys = []
-
-  let i = 0, j = 0
-  while (keys.length < vals.length && j < vals.length) {
-    if (i >= area.length) break
-    let { label, value, children = [] } = (area[i] || {})
-    let key = vals[j]
-    const isSameValue = label && key && key === label
-
-    if (isSameValue) {
-      keys.push({
-        data: area,
-        label,
-        value,
-        index: i
-      })
-    }
-
-    if (isSameValue) {
-      area = children
-      j++
-      i = 0
-    } else {
-      i++
-    }
-  }
-
-  return keys
-}
