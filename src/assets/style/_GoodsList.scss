@@ -40,6 +40,12 @@
   &-price {
     padding-right: 10px;
   }
+
+  &-amount {
+    .shopping-cart-icon {
+      margin-left: 35px;
+    }
+  }
 }
 
 .list-item {

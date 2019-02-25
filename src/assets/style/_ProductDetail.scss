@@ -38,6 +38,8 @@ $pad-r-gap: 20px;
     }
 
     &-kw {
+      line-height: 20px;
+
       a {
         color: $primary-color;
 
@@ -49,6 +51,8 @@ $pad-r-gap: 20px;
 
     &-price {
       height: $price-height;
+      padding-top: 11.5px;
+      padding-bottom: 11.5px;
       margin-top: 10px;
       margin-bottom: 20px;
     }
@@ -102,7 +106,7 @@ $pad-r-gap: 20px;
       }
 
       &-desc {
-        margin-top: 5px;
+        margin-top: 8px;
         margin-bottom: 8px;
       }
     }
@@ -116,7 +120,7 @@ $pad-r-gap: 20px;
       }
 
       &-b {
-        margin-top: 5px;
+        margin-top: 8px;
       }
     }
 
@@ -149,12 +153,10 @@ $pad-r-gap: 20px;
     }
 
     &-bd {
-      padding: 17.5px 0 17.5px 0;
+      padding: 20px 0;
 
-      &-row {
-        & + & {
-          margin-top: 5px;
-        }
+      .row + .row {
+        margin-top: 8px;
       }
     }
   }
