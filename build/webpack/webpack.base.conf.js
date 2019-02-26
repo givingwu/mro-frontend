@@ -111,8 +111,14 @@ module.exports = {
       {
         test: /\.pug$/,
         use: [
-          /* config.module.rule('pug').use('pug-plain-loader') */
-          { loader: 'pug-loader' }
+          /* config.module.rule('pug').use('pug-loader') */
+          {
+            loader: 'pug-loader',
+            options: {
+              /* https://github.com/kangax/html-minifier */
+              minify: 'production',
+            }
+          }
         ]
       },
       /* config.module.rule('css') */
