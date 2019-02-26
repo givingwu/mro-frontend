@@ -16,7 +16,5 @@ $(function () {
   $('.J_FloatBar').initFloatBar()
 
   // eslint-disable-next-line
-  new LazyLoadModule({
-
-  })
+  new LazyLoadModule()
 })

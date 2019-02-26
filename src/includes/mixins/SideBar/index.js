@@ -35,13 +35,13 @@ export default class SideBar {
       el: this.$el,
       always: true,
       throttle: 50,
-      callback (offset) {
-        const elH = this.$el.height()
-        const wrapH = $(scrollWrapper).height()
-        const maxTop = wrapH - elH - 40 /* padding-bottom */ - 20 /* top */ - 2 /* border */
+      relative: scrollWrapper,
+      callback: (instance) => {
+        const { offset: { y }, eh, rh } = instance
+        const maxTop = rh - eh - 40 /* padding-bottom */ - 20 /* top */ - 2 /* border */
 
-        if (offset.y >= -20) {
-          if (offset.y < maxTop) {
+        if (y >= -20) {
+          if (y < maxTop) {
             this.$el.css({
               position: 'fixed',
               top: 20
