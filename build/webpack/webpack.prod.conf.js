@@ -161,9 +161,8 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new BannerPlugin({
-      banner: `This file:[file] was created by https://www.yzw.cn<vuchan.c.wu@yzw.cn>,\nCopyright to http://www.yzw.cn`,
-      entryOnly: true,
-      test: /\.?(chunk|common)\.(js|css)/
+      banner: `This file:[file] was created by https://www.yzw.cn<vuchan.c.wu@yzw.cn, givingwu@gmail.com>,\nCopyright to http://www.yzw.cn`,
+      entryOnly: true
     }),
     /* config.plugin('define') */
     new DefinePlugin(
