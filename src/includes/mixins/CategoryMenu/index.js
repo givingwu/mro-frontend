@@ -1,7 +1,7 @@
 import $, { extend, isArray, isFunction, isEmptyObject, noop } from 'jquery'
 // import menuDataSet from './menu'
 
-const config = window.config = window.config || {}
+const config = window.pageConfig = window.pageConfig || {}
 const menuDataSet = config.menuDataSet
 const defaults = {
   el: '.J_CategoryMenu',

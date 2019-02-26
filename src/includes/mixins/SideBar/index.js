@@ -1,11 +1,13 @@
 import $, { extend } from 'jquery'
 import { debounce } from 'throttle-debounce'
+import ScrollObserver from '../../../utils/ScrollObserver'
 
 const defaults = {
   el: '.J_SideBar',
   gap: 30,
   go2top: '.J_BackTop',
   qrcode: '.J_QRCode',
+  scrollWrapper: '.J_HomeContent',
   debounceTime: 300,
   durationTime: 300,
   containerWidth: 1200
@@ -21,9 +23,44 @@ export default class SideBar {
     this.$go2top = $(el).find(go2top)
     this.$qrcode = $(el).find(qrcode)
 
+    this.initScrollObserver()
     this.initLayout()
     this.bindEvents()
-    console.log(this);
+  }
+
+  initScrollObserver () {
+    const { scrollWrapper } = this.options
+
+    this.so = new ScrollObserver({
+      el: this.$el,
+      always: true,
+      throttle: 50,
+      callback (offset) {
+        const elH = this.$el.height()
+        const wrapH = $(scrollWrapper).height()
+        const maxTop = wrapH - elH - 40 /* padding-bottom */ - 20 /* top */ - 2 /* border */
+
+        if (offset.y >= -20) {
+          if (offset.y < maxTop) {
+            this.$el.css({
+              position: 'fixed',
+              top: 20
+            })
+          } else {
+            this.$el.css({
+              position: 'absolute',
+              top: maxTop
+            })
+          }
+        } else {
+          this.$el.css({
+            position: 'absolute',
+            top: 20,
+            bottom: 'auto'
+          })
+        }
+      }
+    })
   }
 
   initLayout () {

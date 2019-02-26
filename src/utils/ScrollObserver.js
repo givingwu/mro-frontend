@@ -5,11 +5,12 @@ let uid = 0
 const defaults = {
   debounce: 0,
   throttle: 0,
-  el: '.J_ScrollObserver',
+  el: null, /* .J_ScrollObserver */
   base: window,
   /* true: 一旦滚动，就会触发
      false: 仅通过 滚动触发器 TRIGGERS 触发回调 */
   always: false,
+  trigger: 0,
   init: true,
   pos: null, // Object<{ x: Number!, y: Number! }>
   manual: false, /// observe manually
@@ -26,6 +27,10 @@ export default class ScrollObserver {
   constructor (options) {
     this.options = extend({}, defaults, options)
     const { el, pos, base, manual, init } = this.options
+
+    if (!el) {
+      throw new ReferenceError(`options.el cannot be ${el}!`)
+    }
 
     this.$el = $(el)
     this.$base = $(base)
@@ -44,7 +49,7 @@ export default class ScrollObserver {
   }
 
   checkState ($target) {
-    const { x: posX, y: posY } = this.pos
+    const { x: posX, y: posY, trigger } = this.pos
     const x = $target.scrollLeft()
     const y = $target.scrollTop()
     let state = TRIGGERS.DEFAULT
@@ -67,12 +72,19 @@ export default class ScrollObserver {
       }
     }
 
-    if (this.options.always) {
+    if (this.options.always || !trigger) {
       this.options.callback.call(this, offset, state)
-    } else { /* only callback on changed */
+    } else {
       if (state && this.state !== state) {
         this.state = state
-        this.options.callback.call(this, offset, state)
+
+        if (trigger) {
+          if (state === trigger) {
+            this.options.callback.call(this, offset, state)
+          }
+        } else {
+          this.options.callback.call(this, offset, state)
+        }
       }
     }
   }

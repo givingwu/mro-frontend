@@ -1,6 +1,6 @@
 /* eslint-disable */
 export async function getMapDataSet() {
-  let mapDataSet = (window.config || {}).mapDataSet || []
+  let mapDataSet = (window.pageConfig || {}).mapDataSet || []
 
   if (!mapDataSet || !mapDataSet.length) {
     mapDataSet = await import('./data')
