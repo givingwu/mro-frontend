@@ -28,7 +28,7 @@ module.exports = merge(baseConfig, {
         test: /\.js(\?.*)?$/i,
         warningsFilter: () => true,
         extractComments: false,
-        sourceMap: true,
+        sourceMap: false,
         cache: true,
         cacheKeys: defaultCacheKeys => defaultCacheKeys,
         parallel: true,

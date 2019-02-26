@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "start": "node build/webpack/utils/serve",
-    "build": "webpack-cli --mode production --config build/webpack/webpack.prod.conf",
+    "build": "webpack-cli --mode production --config build/webpack/webpack.prod.conf && npm run copy-resource",
+    "copy-resource": "node build/copyResource.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
