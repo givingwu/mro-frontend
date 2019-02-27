@@ -7,6 +7,8 @@ import templates from './templates'
 
 const defaults = {
   el: '.J_LazyModule',
+  activeCls: 'active',
+  disabledCls: 'yzw-shell',
   relative: '',
   soOpts: {},
   dataKey: '',
@@ -15,9 +17,11 @@ const defaults = {
   callback: noop
 }
 
+var adBanner = require('assets/image/ad-banner.png')
 const config = window.pageConfig || {}
 const geneChildren = (i) => new Array(7).fill(0).map((_, ii) => ({ title: `${i}/${ii}`, desc: `${i}/${ii}` }))
 config.tabDataSet = new Array(3).fill(0).map((_, i) => ({ title: i, children: geneChildren(i) }))
+config.adBanners = [{ img: adBanner, title: '云筑智能仓库', href: './ads/iStorage' }]
 
 /* .J_LazyModule */
 export default class LazyLoadModule {
@@ -37,10 +41,13 @@ export default class LazyLoadModule {
       relative: this.relative,
       callback: this.callLazyInstall.bind(this)
     })
+
+    console.log(this)
   }
 
   callLazyInstall (instance) {
     const { state } = instance
+    const { activeCls, disabledCls, callback } = this.options
 
     if (state > 0) {
       try {
@@ -51,9 +58,9 @@ export default class LazyLoadModule {
         )
 
         if (html) {
-          this.$el.html(html)
-          this.lazyComponent.initialize()
-          this.options.callback(this.$el)
+          this.$el.html(html).removeClass(disabledCls).addClass(activeCls)
+          this.lazyComponent.initialize && this.lazyComponent.initialize()
+          callback(this.$el)
         }
       } catch (e) {
         throw new Error(e)
@@ -121,4 +128,13 @@ export default class LazyLoadModule {
 
     return DOM
   } */
+}
+
+$.fn.initLazyModule = function $initLazyModule (options = {}) {
+  return this.each(function () {
+    return new LazyLoadModule({
+      ...options,
+      el: this
+    })
+  })
 }

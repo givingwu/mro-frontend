@@ -8,29 +8,32 @@
   include ../../mixins/SideBar/index.pug
   +SideBar()
   .container
-    a(href="./ads/iStorage", title="云筑智能仓库").yzw-section.yzw-ad-banner
-      img(src=adBanner, alt="云筑智能仓库")
+    //- .J_LazyModule(data-key="adBanners", data-template="AdBanners", data-relative=".head-top")
+    .yzw-shell.yzw-ad
+      a(href="./ads/iStorage", title="云筑智能仓库").yzw-section.yzw-ad-banner
+        img(src=adBanner, alt="云筑智能仓库")
     .yzw-section.yzw-region
       .yzw-title
         h2 企业智选
           small 精挑细选，为您选购
-      .yzw-tab.J_HomeTab.J_LazyModule(data-key="tabDataSet", data-template="HomeTab", data-relative=".J_HomeContent")
-        .yzw-tab-hd
-          .row.yzw-tab-list
-            a.col.col-8.yzw-tab-item.J_TabItem.active
-              span 房建工程
-            a.col.col-8.yzw-tab-item.J_TabItem
-              span 公路工程
-            a.col.col-8.yzw-tab-item.J_TabItem
-              span 管廊/地铁工程
-        .yzw-tab-bd
-          include TabPanel.pug
-          .yzw-tab-cont.J_TabCont.active
-            +TabPanel()
-          .yzw-tab-cont.J_TabCont
-            +TabPanel()
-          .yzw-tab-cont.J_TabCont
-            +TabPanel()
+      .yzw-shell.yzw-tab.J_LazyModule(data-key="tabDataSet", data-template="HomeTab", data-relative=".head-top")
+        //- .J_HomeTab
+          .yzw-tab-hd
+            .row.yzw-tab-list
+              a.col.col-8.yzw-tab-item.J_TabItem.active
+                span 房建工程
+              a.col.col-8.yzw-tab-item.J_TabItem
+                span 公路工程
+              a.col.col-8.yzw-tab-item.J_TabItem
+                span 管廊/地铁工程
+          .yzw-tab-bd
+            include TabPanel.pug
+            .yzw-tab-cont.J_TabCont.active
+              +TabPanel()
+            .yzw-tab-cont.J_TabCont
+              +TabPanel()
+            .yzw-tab-cont.J_TabCont
+              +TabPanel()
     .yzw-section.yzw-promo
       //- .yzw-promo-conte
         figure.yzw-promo-item
