@@ -1,19 +1,21 @@
-mixin InlinePagination(totalLength, currentPage, pageNum)
+mixin InlinePagination(totalLength, currentPage, pageNum, showPager = true)
   - var lastPageNum = Math.ceil(totalLength / pageNum);
   - pageNum = Math.min(pageNum || 10);
   .inline-pagination&attributes(attributes)
     | 共
     span.inline-pagination-total 89
     span 种商品
-    span.inline-pagination-number
-      span.inline-pagination-current
-        | #{currentPage}
-      span.inline-pagination-separator
-        | /
-      span.inline-pagination-all
-        | #{lastPageNum}
-    span.inline-pagination-trigger.clearfix
-      a(class=`${currentPage === 1 ? 'disabled' : ''}`,href="javascript:void(0);", title="上一页").inline-pagination-trigger-prev
-        i.icon.yzwfont.icon-arrow-left
-      a(class=`${currentPage === lastPageNum ? 'disabled' : ''}`, href="javascript:void(0);", title="下一页").inline-pagination-trigger-next
-        i.icon.yzwfont.icon-arrow-right
+
+    if showPager
+      span.inline-pagination-number
+        span.inline-pagination-current
+          | #{currentPage}
+        span.inline-pagination-separator
+          | /
+        span.inline-pagination-all
+          | #{lastPageNum}
+      span.inline-pagination-trigger.clearfix
+        a(class=`${currentPage === 1 ? 'disabled' : ''}`,href="javascript:void(0);", title="上一页").inline-pagination-trigger-prev
+          i.icon.yzwfont.icon-arrow-left
+        a(class=`${currentPage === lastPageNum ? 'disabled' : ''}`, href="javascript:void(0);", title="下一页").inline-pagination-trigger-next
+          i.icon.yzwfont.icon-arrow-right

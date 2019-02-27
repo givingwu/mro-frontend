@@ -14,10 +14,21 @@
     }
   }
 
+  &-ft {
+    background-color:rgba(239,241,244,1);
+    text-align: right;
+  }
+
   &-item {
     padding: 9px 0;
     box-shadow: 0 1px 0 0 rgba(225,230,236,1);
     @extend .clearfix;
+
+    &s {
+      overflow: auto;
+      max-height: 491px;
+      height: 491px;
+    }
 
     &-cont {
       display: table-cell;
@@ -89,10 +100,13 @@
       &-t,
       &-b {
         text-align: left;
-        margin-top: 5px;
+        margin-top: 4px;
       }
 
       &-t {
+        @include multiple-line-hide-text($lines: 2);
+        margin-top: 0;
+        line-height: 17px;
         color: $font-black-color;
       }
 
@@ -130,5 +144,36 @@
     &-amount {
       width: 190px;
     }
+  }
+
+  &-price {
+    height: 60px;
+    padding: 0 20px;
+    line-height: 60px;
+    color: $font-gray-color;
+
+    strong {
+      color: $font-orange-color;
+      font-size: 18px;
+      font-weight: 600;
+      margin: auto 2px;
+    }
+
+    span,
+    strong {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  &-price,
+  &-count,
+  &-total {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &-count {
+    margin-right: 40px;
   }
 }

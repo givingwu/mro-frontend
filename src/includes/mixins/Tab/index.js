@@ -21,7 +21,10 @@ class Tab {
     this.$ele = $(ele)
     this.$items = this.$ele.find(item)
     this.$contents = this.$ele.find(content)
-    this.$indicator = this.$ele.find(indicator)
+
+    if (indicator) {
+      this.$indicator = this.$ele.find(indicator)
+    }
     this.currentIndex = currentIndex || 0
 
     this.checkState()

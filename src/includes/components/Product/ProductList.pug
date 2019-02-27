@@ -15,7 +15,7 @@
     | 其他渠道
     .product-list-hd-r
       include ../../mixins/InlinePagination.pug
-      +InlinePagination(89, 1, pageNum)
+      +InlinePagination(89, 1, pageNum, false)
   .product-list-bd
     .product-list-head
       each fieldVal, fieldKey in fields
@@ -24,5 +24,15 @@
       include ../../mixins/ProductListItem.pug
       each item in pageItems
         +ProductListItem(item % 2)
+  .product-list-ft
+    .product-list-price
+      .product-list-count
+        span 已选择商品
+        strong.count.J_TotalCount 0
+        span 件
+      .product-list-total
+        span 合计
+        strong.currency ¥
+        strong.total.J_TotalPrice 0.00
 
 

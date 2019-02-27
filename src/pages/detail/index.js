@@ -5,9 +5,21 @@ import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/Tab'
 import '../../includes/mixins/Cascader'
+import '../../utils/ArtTemplate'
+
+window.$ = $
+const API = window.__YZW__API__ || {}
 
 // initialize
 $(() => {
+  $('.J_Tab').initTab({
+    currentIndex: 0,
+    indicator: '.J_TabActiveIndicator',
+    callback: function callback (idx) {
+      $.getJSON(API.SALES_RECORD,)
+    }
+  })
+
   $('.J_Preview').previewSwitcher({
     itemGap: 18,
     callback: function callback (item) {
@@ -20,4 +32,3 @@ $(() => {
     callback: (val, vis) => console.log(val, vis)
   })
 })
-
