@@ -5,18 +5,36 @@ import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/Tab'
 import '../../includes/mixins/Cascader'
-import '../../utils/ArtTemplate'
+import API from '../../utils/api'
+import SaleRecordsList from '../../template/SaleRecordsList'
 
 window.$ = $
-const API = window.__YZW__API__ || {}
 
 // initialize
 $(() => {
   $('.J_Tab').initTab({
     currentIndex: 0,
     indicator: '.J_TabActiveIndicator',
-    callback: function callback (idx) {
-      $.getJSON(API.SALES_RECORD,)
+    callback: function callback (i) {
+      const $current = this.$contents.eq(+i)
+
+      if (+i === 1) {
+        API['getSaleRecords'](JSON.stringify({
+          supplierSkuId: 200,
+          sysStatus: 1
+        }))
+          .done((...args) => {
+            console.log(args)
+            $current.html(SaleRecordsList.install(args[0]))
+          })
+          .fail((...args) => {
+            console.log(args)
+            $current.html(SaleRecordsList.install(...args))
+          })
+          .always(() => {
+            console.log('complete')
+          })
+      }
     }
   })
 

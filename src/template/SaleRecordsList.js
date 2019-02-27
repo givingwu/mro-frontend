@@ -1,7 +1,6 @@
-/* eslint-disable */
-import '../../includes/mixins/Tab'
+import '../utils/ArtTemplate'
 
-export default {
+const SaleRecordsList = {
   template: `
     {{if data && data.length}}
       <div class="yzw-tab J_HomeTab">
@@ -49,14 +48,24 @@ export default {
           {{/each}}
         </div>
       </div>
+    {{else}}
+      <div>暂无数据</div>
     {{/if}}
   `,
-  initialize: function () {
-    $('.J_HomeTab').initTab({
-      currentIndex: 0,
-      callback: function callback (idx) {
-        console.log(idx)
-      }
-    })
+  initialize () {},
+  install (data, $el) {
+    if (!$el) {
+      return window.template && window.template.render(this.template, {
+        data
+      })
+    } else {
+      return $el.html(
+        window.template && window.template.render(this.template, {
+          data
+        })
+      )
+    }
   }
 }
+
+export default SaleRecordsList

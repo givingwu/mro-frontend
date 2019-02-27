@@ -3,7 +3,8 @@ import ScrollObserver from './ScrollObserver'
 // It does not support ES6 module.
 // but it registers a global env variable `template`
 import './ArtTemplate'
-import templates from './templates'
+// import HomeTab from '../template/HomeTab'
+import templates from '../template'
 
 const defaults = {
   el: '.J_LazyModule',

@@ -1,19 +1,7 @@
 /* eslint-disable */
-import '../../includes/mixins/Tab'
+import '../includes/mixins/Tab'
 
-const AdBanners = {
-  template: `
-    {{if data && data.length}}
-      {{each data item index}}
-        <a class="yzw-section yzw-ad-banner href="{{item.href}}" title="{{item.title}}">
-          <img(src="{{item.img}}", alt="{{item.title}}" />
-        </a>
-      {{/each}}
-    {{/if}}
-  `,
-}
-
-const HomeTab = {
+export default {
   template: `
     {{if data && data.length}}
       <div class="yzw-tab J_HomeTab">
@@ -71,9 +59,4 @@ const HomeTab = {
       }
     })
   }
-}
-
-export default {
-  AdBanners,
-  HomeTab
 }

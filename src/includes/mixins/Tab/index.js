@@ -86,7 +86,7 @@ class Tab {
   execute (nextIndex) {
     if (this.currentIndex !== nextIndex) {
       this.currentIndex = nextIndex
-      this.options.callback(nextIndex)
+      this.options.callback.call(this, nextIndex)
     }
   }
 }
