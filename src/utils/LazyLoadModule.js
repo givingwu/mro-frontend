@@ -1,4 +1,4 @@
-import $, { extend, isEmptyObject } from 'jquery'
+import $, { noop, extend, isEmptyObject } from 'jquery'
 import ScrollObserver from './ScrollObserver'
 // It does not support ES6 module.
 // but it registers a global env variable `template`
@@ -10,16 +10,14 @@ const defaults = {
   relative: '',
   soOpts: {},
   dataKey: '',
-  template: ''
+  template: '',
+  dom: false,
+  callback: noop
 }
+
 const config = window.pageConfig || {}
-config.tabDataSet = [{
-  title: '1',
-  children: [{
-    title: 1,
-    desc: 1
-  }]
-}]
+const geneChildren = (i) => new Array(7).fill(0).map((_, ii) => ({ title: `${i}/${ii}`, desc: `${i}/${ii}` }))
+config.tabDataSet = new Array(3).fill(0).map((_, i) => ({ title: i, children: geneChildren(i) }))
 
 /* .J_LazyModule */
 export default class LazyLoadModule {
@@ -29,7 +27,7 @@ export default class LazyLoadModule {
 
     this.$el = $(el)
     this.relative = this.getRelative()
-    this.dom = this.geneTplDOM()
+    this.lazyComponent = templates[this.getTplKey()]
 
     // eslint-disable-next-line
     this.so = new ScrollObserver({
@@ -39,37 +37,36 @@ export default class LazyLoadModule {
       relative: this.relative,
       callback: this.callLazyInstall.bind(this)
     })
-
-    console.log(this)
   }
 
   callLazyInstall (instance) {
     const { state } = instance
-    console.log(state)
 
     if (state > 0) {
       try {
-        this.$el.html(window.template && window.template.render(this.dom, this.getData()))
+        let html = window.template && window.template.render(
+          this.lazyComponent.template, {
+            data: this.getData()
+          }
+        )
+
+        if (html) {
+          this.$el.html(html)
+          this.lazyComponent.initialize()
+          this.options.callback(this.$el)
+        }
       } catch (e) {
-        console.log(e)
+        throw new Error(e)
       } finally {
-        this.so.unobserve()
-        this.dom.remove()
+        // clean memory on JS heap
+        this.so && this.so.unobserve()
+        this.dom && this.dom.remove()
+
+        this.dom = null
+        this.so = null
+        this.data = null
       }
     }
-  }
-
-  geneTplDOM () {
-    const key = this.getTplKey()
-    const tpl = templates[key]
-    const DOM = document.createElement('script')
-
-    DOM.id = key
-    DOM.innerHTML = tpl
-    DOM.setAttribute('type', 'text/html')
-    document.body.appendChild(DOM)
-
-    return DOM
   }
 
   getRelative () {
@@ -111,4 +108,17 @@ export default class LazyLoadModule {
 
     return tpl
   }
+
+  /* geneTplDOM () {
+    const key = this.getTplKey()
+    const tpl = templates[key]
+    const DOM = document.createElement('script')
+
+    DOM.id = key
+    DOM.innerHTML = tpl
+    DOM.setAttribute('type', 'text/html')
+    document.body.appendChild(DOM)
+
+    return DOM
+  } */
 }

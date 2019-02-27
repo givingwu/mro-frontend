@@ -22,7 +22,7 @@
       }));
     ```
  */
-class TemplateEngine {
+export default class TemplateEngine {
   // TODO: Support custom delimiter string
   constructor () {
     this.reg = /<%([^%>]+)?%>/g // default: delimiter => '%'
@@ -61,8 +61,6 @@ class TemplateEngine {
   }
 }
 
-const template = new TemplateEngine()
-module.exports = template;
 // export default new TemplateEngine()
 
 const data = {
@@ -110,43 +108,3 @@ const data = {
     }
   }]
 }
-
-tpl = `
-<div class="yzw-title">
- <h2><% this.title %><small><% this.desc %></small></h2>
- <% if (this.children.length) { %>
-  <ul class="yzw-stage-list">
-    <% for (var i in this.children) { %>
-      <% if (i) { %>
-        <figure class="yzw-stage-figure">
-          <figcaption>
-            <h2><% this.children[i].title %>
-            <small><% this.children[i].desc %></small>
-          </figcaption>
-          <img src="<% this.children[i].src %>" alt="<% this.children[i].title %>">
-        </figure>
-      <% } else { %>
-        <li class="yzw-stage-item">
-          <% if (this.children[i].top) { %>
-            <div class="yzw-stage-item-top">
-              <span> <% this.children[i].top.title + i %> </span>
-              <span> <% this.children[i].top.desc + i %> </span>
-            </div>
-          <% } %>
-
-          <% if (this.children[i].btm) { %>
-            <div class="yzw-stage-item-btm">
-              <span> <% this.children[i].btm.title + i %> </span>
-              <span> <% this.children[i].btm.desc + i %> </span>
-            </div>
-          <% } %>
-        </li>
-      <% } %>
-    <% } %>
-  </ul>
- <% } else { %>
-  <p>no any data</p>
- <% } %>
-`
-// <% var item = this.children[i]; %>
-console.log(template.render(tpl, data));

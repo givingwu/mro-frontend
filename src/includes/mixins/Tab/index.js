@@ -103,14 +103,5 @@ $.fn.initTab = function $tab (options = {}) {
   })
 }
 
-$(() => {
-  return $('.J_Tab').initTab({
-    currentIndex: 0,
-    callback: function callback (idx) {
-      console.log(idx)
-    }
-  })
-})
-
 // Initialize .J_Preview with callback function
 export default Tab
