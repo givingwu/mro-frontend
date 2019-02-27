@@ -18,7 +18,16 @@ module.exports = {
   },
   /* https://webpack.js.org/configuration/dev-server/#devserver */
   devServer: {
-    proxy: {},
+    /* https://www.npmjs.com/package/http-proxy-middleware */
+    proxy: {
+      '/api/*': {
+        target: 'http://172.16.30.225:8015',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '', // rewrite path
+        }
+      }
+    },
   },
 }
 

@@ -16,7 +16,7 @@ const {
   ProgressPlugin
 } = webpack;
 
-console.log(entries, configurations)
+// console.log(entries, configurations)
 
 const DEFAULT_SERVER_CONFIG = {
   host: '0.0.0.0',

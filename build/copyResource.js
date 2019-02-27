@@ -10,7 +10,7 @@ const folders = files.filter(file => !path.extname(file))
 
 folders.forEach(folder => {
   const absoluteCurPath = path.resolve(dist, folder);
-  const absoluteDistPath = path.resolve(javaProjectResourcePath, folder);
+  const absoluteDistPath = path.resolve(javaProjectResourcePath, folder, './frontend');
   const command = ['cp', absoluteCurPath + '/*', absoluteDistPath].join(' ');
 
   exec(command, (error) => {
