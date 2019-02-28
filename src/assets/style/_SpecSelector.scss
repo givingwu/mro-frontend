@@ -16,26 +16,38 @@ $ss-ft-width: 110px;
         border-bottom: 0;
       }
 
-      &.expanded {
+      &.expanded,
+      &.multi-select {
         // margin-top: -1px;
         // border-top: 1px solid $font-gray-color;
         // border-bottom: 1px solid $font-gray-color;
+        .ss-hd {
+          height: auto;
+          white-space: normal;
+          text-overflow: unset;
+        }
 
         .ss-bd {
           height: auto;
+
+          &-btn {
+            display: inline-block;
+          }
+        }
+      }
+
+      &.multi-select {
+        .ss-ft {
+          display: none;
         }
       }
     }
 
-    /* ,
-    &-bd */
     &-hd {
       float: left;
-    }
-
-    &-hd {
-      // @include single-line-hide-text();
+      @include single-line-hide-text($width: 100%);
       width: $ss-hd-width;
+      height: 40px;
       padding: 0 20px;
       color: $font-gray-color;
       line-height: 40px;
@@ -56,10 +68,40 @@ $ss-ft-width: 110px;
       will-change: height;
 
       &-item {
+        position: relative;
         display: inline-block;
-        color: #3f6fbc;
         @include single-line-hide-text($width: 102.5px);
-        line-height: $ss-bd-height;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        margin-left: 20px;
+        padding: 5px;
+        color: #3f6fbc;
+        // height: $ss-bd-height;
+        vertical-align: middle;
+
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .text {
+
+        }
+
+        &.active {
+          color: #fff;
+          background-color: $primary-color;
+        }
+
+        .checkbox {
+          position: relative;
+          top: -2px;
+          margin-right: 5px;
+        }
+      }
+
+      &-btn {
+        display: none;
         margin-left: 20px;
       }
     }

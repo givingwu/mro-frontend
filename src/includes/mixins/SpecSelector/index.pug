@@ -4,13 +4,16 @@
 - var sizes = new Array(25).fill(0)
 
 mixin SpecSelector()
-  .spec-selector.J_Selector
+  form(action="/search.html", target="_top", name="search").spec-selector.J_Selector
+    input(name="type",type="text",value="",hidden).J_InputText
     .ss-item.clearfix.J_SelectorItem
       .ss-hd
         span 品牌
       .ss-bd.J_SelectorMultiWrapper
         each b,i in brands
-          a(href="javascript:void(0);",title=`品牌${i+1}`).ss-bd-item= `品牌${i+1}`
+          a(href="javascript:void(0);",title=`品牌${i+1}`,data-param=`{"key": "brand", "val": "val${i+1}"}`).ss-bd-item
+            span.name= `品牌${i+1}`
+            span.icon.yzwfont.icon-close
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
@@ -23,7 +26,7 @@ mixin SpecSelector()
         span 类型
       .ss-bd.J_SelectorMultiWrapper
         each t,i in types
-          a(href="javascript:void(0);",title=`类型${i+1}`).ss-bd-item= `类型${i+1}`
+          a(href="javascript:void(0);",title=`类型${i+1}`,data-param=`{"key": "type", "val": "val${i+1}"}`).ss-bd-item= `类型${i+1}`
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
@@ -36,7 +39,7 @@ mixin SpecSelector()
         span 颜色
       .ss-bd.J_SelectorMultiWrapper
         each c,i in colors
-          a(href="javascript:void(0);",title=`颜色${i+1}`).ss-bd-item= `颜色${i+1}`
+          a(href="javascript:void(0);",title=`颜色${i+1}`,data-param=`"{"key": "color", "val": "val${i+1}"}`).ss-bd-item= `颜色${i+1}`
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
@@ -49,7 +52,8 @@ mixin SpecSelector()
         span 尺寸
       .ss-bd.J_SelectorMultiWrapper
         each s,i in sizes
-          a(href="javascript:void(0);",title=`尺寸${i+1}`).ss-bd-item= `尺寸${i+1}`
+          //- {"viewport":"large","orientation":"landscape","retina":true}
+          a(href="javascript:void(0);",title=`尺寸${i+1}`,data-param=`{"key": "size", "val": "val${i+1}"}`).ss-bd-item= `尺寸${i+1}`
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus

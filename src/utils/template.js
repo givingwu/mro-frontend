@@ -60,7 +60,7 @@ export default class Template {
     }
   }
 
-  setHost($ele) {
+  setHost ($ele) {
     this.$ele = $ele
   }
 

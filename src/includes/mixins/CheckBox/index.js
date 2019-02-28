@@ -18,7 +18,7 @@ const ACTIONS = {
   CHECKED: 0x04
 }
 
-class CheckBox {
+export default class CheckBox {
   constructor (options) {
     this.options = extend(defaults, options)
     const { ele } = this.options
@@ -27,11 +27,12 @@ class CheckBox {
     if (this.$ele[0]._initialized) return
 
     this.$ele[0]._initialized = true
+    this.$ele.get(0)._checkbox = this
     this.bindEvents()
   }
 
   checkState (state) {
-    const { hoverCls, activeCls, checkedCls, disabledCls } = this.options
+    const { hoverCls, activeCls, checkedCls, disabledCls, callback } = this.options
 
     switch (state) {
       case ACTIONS.ENTER:
@@ -45,12 +46,16 @@ class CheckBox {
         break
       case ACTIONS.CHECKED:
         this.$ele.addClass(checkedCls).removeClass([activeCls, hoverCls, disabledCls].join(' '))
+        // eslint-disable-next-line
+        callback && callback(true)
         break
       case ACTIONS.DISABLED:
         this.$ele.addClass(disabledCls).removeClass([hoverCls, activeCls].join(' '))
         break
       default:
         this.$ele.removeClass([hoverCls, activeCls, disabledCls, checkedCls].join(' '))
+        // eslint-disable-next-line
+        callback && callback(false)
     }
   }
 
@@ -71,15 +76,19 @@ class CheckBox {
     })
 
     this.$ele.on('click', () => {
-      if (this.isDisabled()) return
-      this.state = !this.state
-
-      if (this.state) {
-        this.checkState(ACTIONS.CHECKED)
-      } else {
-        this.checkState(ACTIONS.DEFAULT)
-      }
+      this.toggle()
     })
+  }
+
+  toggle () {
+    if (this.isDisabled()) return
+    this.state = !this.state
+
+    if (this.state) {
+      this.checkState(ACTIONS.CHECKED)
+    } else {
+      this.checkState(ACTIONS.DEFAULT)
+    }
   }
 
   isDisabled () {
@@ -102,7 +111,7 @@ $.fn.checkBox = function $checkBox (options = {}) {
   })
 }
 
-// Initialize
-export default $(() => {
+/* $(() => {
   return $('.checkbox').checkBox()
 })
+ */
