@@ -36,6 +36,6 @@ export default new Template({
       {{/if}}
     `,
     loading: `<div class="loading">加载数据中...</div>`,
-    error: `<div class="error load-error">{{text || '请求异常'}}</div>`,
+    error: `<div class="error load-error">{{text || '请求异常'}}</div>`
   }
 })

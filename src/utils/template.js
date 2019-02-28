@@ -7,11 +7,7 @@ export default class Template {
     const { ele, template: tpl, type, initialize } = this.template
 
     if (ele) {
-      const $ele = $(ele)
-
-      if ($ele && $ele.length) {
-        this.$ele = $ele
-      }
+      this.$ele = $(ele)
     }
 
     if (tpl && typeof tpl === 'object') {

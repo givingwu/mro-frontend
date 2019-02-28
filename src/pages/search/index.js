@@ -1,11 +1,13 @@
-import $ from 'jquery'
 import '../../assets/style/search.scss'
+import $ from 'jquery'
 import '../../common'
 import '../../includes/mixins/CheckBox'
 import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/SpecSelector'
 import '../../includes/mixins/Cascader'
+
+window.$ = $
 
 // initialize
 $(() => {

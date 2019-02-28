@@ -1,5 +1,5 @@
-import $ from 'jquery'
 import '../../assets/style/index.scss'
+import $ from 'jquery'
 import '../../common'
 import '../../utils/LazyLoadModule'
 import '../../includes/mixins/SearchTab'

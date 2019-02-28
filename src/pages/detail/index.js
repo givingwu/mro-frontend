@@ -1,6 +1,6 @@
+import '../../assets/style/detail.scss'
 import $ from 'jquery'
 import '../../common'
-import '../../assets/style/detail.scss'
 import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/Tab'
@@ -11,7 +11,8 @@ import '../../plugins/jquery.pagination'
 
 window.$ = $
 
-console.log(SaleRecordsList);
+console.log(SaleRecordsList)
+console.log(API)
 
 // initialize
 $(() => {
@@ -42,7 +43,7 @@ $(() => {
       $(SaleRecordsList.ele).addClass('loading')
     }
 
-    API['getSaleRecords']({
+    API.getSaleRecords({
       supplierSkuId: 200,
       sysStatus: 1,
       ...data

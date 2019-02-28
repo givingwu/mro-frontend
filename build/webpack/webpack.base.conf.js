@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: paths.dist,
     filename: '[name].js',
-    publicPath: './',
+    publicPath: '/',
     globalObject: 'this'
   },
   resolve: {
@@ -50,7 +50,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'img/[name].[hash:8].[ext]'
+                  name: '/static/img/[name].[hash:8].[ext]'
                 }
               }
             }
@@ -64,7 +64,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'img/[name].[hash:8].[ext]'
+              name: '/static/img/[name].[hash:8].[ext]'
             }
           }
         ]
@@ -81,7 +81,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'media/[name].[hash:8].[ext]'
+                  name: '/static/media/[name].[hash:8].[ext]'
                 }
               }
             }
@@ -100,7 +100,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'fonts/[name].[hash:8].[ext]'
+                  name: '/static/fonts/[name].[hash:8].[ext]'
                 }
               }
             }
