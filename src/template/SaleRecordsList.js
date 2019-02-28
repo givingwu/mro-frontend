@@ -1,71 +1,41 @@
-import '../utils/ArtTemplate'
+import Template from '../utils/Template'
 
-const SaleRecordsList = {
-  template: `
-    {{if data && data.length}}
-      <div class="yzw-tab J_HomeTab">
-        <div class="yzw-tab-hd">
-          <div class="row yzw-tab-list">
-            {{each data item index }}
-              {{if item && item.children && item.children.length}}
-                <a class="col col-8 yzw-tab-item J_TabItem {{ index === 0 ? 'active' : ''}}"><span>{{item.title}}</span></a>
-              {{/if}}
-            {{/each}}
+export default new Template({
+  ele: '.T_SaleRecordsList', /* 指定了特定的模版插槽选择器 */
+  template: {
+    normal: `
+      {{if data && data.length}}
+        <div class="sales-record">
+          <div class="sr-hd clearfix">
+            <div class="sr-b">采购商</div>
+            <div class="sr-n">购买数量</div>
+            <div class="sr-t">购买时间</div>
           </div>
-        </div>
-        <div class="yzw-tab-bd">
-          {{each data item index}}
-            {{if item && item.children && item.children.length}}
-              {{set children = item.children}}
-              <div class="yzw-tab-cont J_TabCont {{ index === 0 ? 'active' : ''}}">
-                <div class="panel">
-                  {{each children child index }}
-                    {{if index === 0 }}
-                      <div class="panel-item panel-first">
-                        <div class="panel-item-l">
-                          <img src="{{child.src}}" alt="{{child.title}}">
-                        </div>
-                        <div class="panel-item-r yzw-small-title">
-                          <h3>{{child.title}}</h3>
-                          <small>{{child.desc}}</small>
-                        </div>
-                      </div>
-                    {{else}}
-                      <div class="panel-item">
-                        <div class="panel-item-t yzw-small-title">
-                          <h4>{{child.title}}</h4>
-                          <small>{{child.desc}}</small>
-                        </div>
-                        <div class="panel-item-b">
-                          <img src={{child.src}} alt="{{child.title}}">
-                        </div>
-                      </div>
-                    {{/if}}
-                  {{/each}}
+          <div class="sr-bd">
+            {{each data item}}
+            <div class="sr-bd-item clearfix">
+              <div class="sr-bd-t sr-b">
+                <div class="sr-bd-tc">
+                  {{item.organizationName}}
+                  {{item.projectName}}
                 </div>
               </div>
-            {{/if}}
-          {{/each}}
+              <div class="sr-bd-t sr-n">
+                <div class="sr-bd-tc">{{item.quantity}}</div>
+              </div>
+              <div class="sr-bd-t sr-t">
+                <div class="sr-bd-tc">{{item.date}}</div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          <div class="sr-ft J_Pagination"></div>
         </div>
-      </div>
-    {{else}}
-      <div>暂无数据</div>
-    {{/if}}
-  `,
-  initialize () {},
-  install (data, $el) {
-    if (!$el) {
-      return window.template && window.template.render(this.template, {
-        data
-      })
-    } else {
-      return $el.html(
-        window.template && window.template.render(this.template, {
-          data
-        })
-      )
-    }
+      {{else}}
+        <div>暂无数据</div>
+      {{/if}}
+    `,
+    loading: `<div class="loading">加载数据中...</div>`,
+    error: `<div class="error load-error">{{text || '请求异常'}}</div>`,
   }
-}
-
-export default SaleRecordsList
+})

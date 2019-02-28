@@ -1,4 +1,4 @@
-import { ajax, isNotEmptyObject } from 'jquery'
+import { ajax } from 'jquery'
 
 /**
  * capitalize
@@ -13,6 +13,31 @@ const camelize = (str) => {
     .split(/-|_/g)
     .map(s => capitalize(s))
     .join('')
+}
+
+export const ERROR_MSG_MAP = {
+  401: () => '抱歉，请登录',
+  403: () => '抱歉，暂无权限',
+  413: () => '抱歉，上传文件内容过大',
+
+  404: () => '服务器迷路了，未寻到这个地址',
+  405: () => '服务器无法理解这个请求方法',
+  500: () => '服务器开小差，这是一个问题',
+  502: () => '网关服务器在跟你开玩笑呢',
+  503: () => '服务器不可用，你在跟我开玩笑',
+  504: () => '服务器过于拥挤，超时空穿越了'
+}
+
+export function getErrorMsg (data, status, statusText) {
+  let msg = ''
+
+  if (typeof data !== 'object') {
+    msg = ERROR_MSG_MAP[status]
+  } else {
+    msg = data.statusText || data.message
+  }
+
+  return msg || statusText || 'Uncaught (in yzw/http)'
 }
 
 /**
@@ -48,7 +73,7 @@ export class API {
   _init () {
     Object.keys(this.API).forEach(key => {
       let value = this.API[key] || ''
-      let config = (this.API_CONFIG && this.API_CONFIG[key]) || {}
+      let globalConfig = (this.API_CONFIG && this.API_CONFIG[key]) || {}
 
       if (!value) return
       if (/:|\s/g.test(value)) {
@@ -59,12 +84,17 @@ export class API {
 
       const [method, url, apiMethodName] = value
 
-      this[`${apiMethodName || this._getValidKey(key, this._checkMethod(method))}`] = data =>
-        this._request(url, {
+      this[`${apiMethodName || this._getValidKey(key, this._checkMethod(method))}`] = (
+        data,
+        config
+      ) => {
+        return this._request(url, {
           type: method,
           data,
+          ...globalConfig,
           ...config
         })
+      }
     })
   }
 
@@ -94,25 +124,25 @@ export class API {
 
   _request (url, config) {
     config = {
-      data: null,
       dataType: 'json',
-      contentType: 'application/json',
+      contentType: 'application/json; charset=utf-8',
       headers: {},
-      dataFilter (data, type) {
-        console.log(data, type)
-      },
       ifModified: false,
+      statusCode: ERROR_MSG_MAP,
       beforeSend () {},
       success () {},
       error () {},
       ...config
     }
 
-    if (config.dataType === 'JSON' && !isNotEmptyObject(config.data)) {
+    if (config.dataType === 'json') {
       config.data = JSON.stringify(config.data)
     }
 
     return ajax(url, config)
+      .done((data) => {
+        return data
+      })
   }
 }
 

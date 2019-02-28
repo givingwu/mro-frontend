@@ -91,3 +91,48 @@
     }
   }
 }
+
+
+.pagination {
+  text-align: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  ul {
+    display: inline-block;
+    vertical-align: middle;
+
+    li {
+      margin-right: 10px;
+    }
+
+    li,
+    span,
+    a {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    span,
+    a {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      color: $font-gray-color;
+      border: 1px solid $gray-color;
+
+      @include active-hover;
+      @include disabled;
+      &.active {
+        color: #fff;
+        background-color: $primary-color;
+      }
+    }
+
+    .prev,
+    .next {
+      width: 48px;
+    }
+  }
+}

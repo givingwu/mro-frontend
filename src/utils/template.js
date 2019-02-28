@@ -1,110 +1,136 @@
-/**
- * @class TemplateEngine
- * @description A simple TemplateEngine implementation
- * @author Vuchan <givingwu@gmail.com>
- * @url
- *  - https://gist.github.com/vuchan/af05daa7d21f37623635ec14f9574e70
- *  - http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line
- * @usage
-    ```js
-      let tpl = 'My skills:' +
-      '<% if(this.showSkills) { %>' +
-        '<%for(var index in this.skills) {%>' +
-        '<a href="#"><%this.skills[index]%></a>' +
-        '<%}%>' +
-      '<% } else { %>' +
-        '<p>none</p>' +
-      '<% } %>';
+import $ from 'jquery'
+import './ArtTemplate'
 
-      console.log(template.render(tpl, {
-        skills: ["js", "html", "css"],
-        showSkills: true
-      }));
-    ```
- */
-export default class TemplateEngine {
-  // TODO: Support custom delimiter string
-  constructor () {
-    this.reg = /<%([^%>]+)?%>/g // default: delimiter => '%'
-    this.regExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g
+export default class Template {
+  constructor (template) {
+    this.template = Object.assign({}, template)
+    const { ele, template: tpl, type, initialize } = this.template
+
+    if (ele) {
+      const $ele = $(ele)
+
+      if ($ele && $ele.length) {
+        this.$ele = $ele
+      }
+    }
+
+    if (tpl && typeof tpl === 'object') {
+      this.normalTpl = tpl.normal
+      this.loadingTpl = tpl.loading
+      this.errorTpl = tpl.error
+    } else {
+      if (!tpl) {
+        throw new ReferenceError('必须实现基础模版 template')
+      } else {
+        this.normalTpl = tpl
+      }
+    }
+
+    if (initialize) {
+      this.initialize = initialize
+      this.initialized = false
+    }
+
+    this.type = type || 'normal'
   }
 
-  // TODO: Support custom compile
-  compile (html) {}
-
-  render (html, data) {
-    if (!html || !data || typeof html !== 'string' || typeof data !== 'object') {
-      throw new Error('Template.render(html: string, data: object) only accept legal params type.')
+  /**
+   * render 的快捷调用
+   *
+   * @param {String|Object} type
+   * @param {Object} state
+   * @param {Function} callback
+   * @memberof Template
+   */
+  setState (type, state, callback) {
+    if (type && typeof type === 'object') {
+      callback = state
+      state = type
+      type = null
+    } else {
+      this.type = type
     }
 
-    const { reg, regExp } = this
-    let match = null
-    let code = 'var r=[];\n'
-    let cursor = 0 // current cursor position flag
-
-    function add (line, js) {
-      js ? (code += line.match(regExp) ? line + '\n' : 'r.push(' + line + ');\n') :
-              (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
-      return add
+    switch (this.type) {
+      case 'loading':
+        this.renderLoading(state, callback)
+        break
+      case 'error':
+        this.renderError(state, callback)
+        break
+      default:
+        this.render(state, callback)
+        break
     }
-
-    /* 递归执行 RegExp.prototype.exec，拿到 match 然后移动 cursor */
-    while(match = reg.exec(html)) {
-      add(html.slice(cursor, match.index))(match[1], true)
-      cursor = match.index + match[0].length
-    }
-
-    add(html.substr(cursor, html.length - cursor))
-    code += 'return r.join("");'
-
-    return new Function(code.replace(/[\r\t\n]/g, '')).apply(data)
   }
-}
 
-// export default new TemplateEngine()
+  setHost($ele) {
+    this.$ele = $ele
+  }
 
-const data = {
-  title: '劳保防护',
-  desc: '安全可靠更放心',
-  children: [{
-    title: '劳保防护',
-    desc: '安全可靠更放心',
-    src: '//img10.360buyimg.com/babel/s340x420_jfs/t1/24337/29/6253/132772/5c4b1fa9Ee0129636/229b6701d116172e.jpg!q90!cc_340x420',
-  }, {
-    top: {
-      title: 'title',
-      desc: 'desc',
-    },
-    btm: {
-      title: 'title',
-      desc: 'desc',
+  render (data, method = 'html', callback) {
+    if (typeof method === 'function') {
+      callback = method
+      method = 'html'
     }
-  }, {
-    top: {
-      title: 'title',
-      desc: 'desc',
-    },
-    btm: {
-      title: 'title',
-      desc: 'desc',
+
+    this.$ele[method](
+      window.template &&
+      window.template.render(
+        this.normalTpl,
+        { data }
+      )
+    )
+
+    callback && callback(this)
+
+    if (this.initialize && !this.initialized) {
+      this.initialize()
+      this.initialized = true
     }
-  }, {
-    top: {
-      title: 'title',
-      desc: 'desc',
-    },
-    btm: {
-      title: 'title',
-      desc: 'desc',
+  }
+
+  renderLoading (data, method = 'html', callback) {
+    if (!this.loadingTpl) {
+      console.log(this)
+      throw new ReferenceError('还未实现当前模版的 loading state template!')
     }
-  }, {
-    top: {
-      title: 'title',
-      desc: 'desc',
-    },
-    btm: {
-      title: 'title',
-      desc: 'desc',
+
+    if (typeof method === 'function') {
+      callback = method
+      method = 'html'
     }
-  }]
+
+    this.$ele[method](
+      window.template &&
+      window.template.render(
+        this.loadingTpl,
+        { data }
+      )
+    )
+
+    callback && callback(this)
+  }
+
+  renderError (data, method = 'html', callback) {
+    if (!this.errorTpl) {
+      console.log(this)
+      throw new ReferenceError('还未实现当前模版的 error state template!')
+    }
+
+    if (typeof method === 'function') {
+      callback = method
+      method = 'html'
+    }
+
+    this.$ele[method](
+      window.template &&
+      window.template.render(
+        this.errorTpl,
+        { data }
+      )
+    )
+
+    callback && callback(this)
+  }
 }
