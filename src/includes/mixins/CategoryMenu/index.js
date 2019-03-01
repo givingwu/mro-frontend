@@ -223,11 +223,11 @@ $.fn.initCategoryMenu = function $CategoryMenu (options = {}) {
 }
 
 if (!menuDataSet || !menuDataSet.length) {
-  /* import('./menu').then(({ default: data }) => {
+  import('./menu').then(({ default: data }) => {
     initCategoryMenu(data)
   }).catch(() => {
     console.error('Lazy load menuDataSet data failed!')
-  }) */
+  })
 } else {
   initCategoryMenu()
 }

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import { parse } from 'querystring'
+import { parse, stringify } from 'querystring'
 import '../CheckBox'
 
 const isArray = $.isArray
@@ -39,7 +39,9 @@ class Selector {
     const self = this
     const { selectCls } = this.options
 
-    this.$selector.children('a').click(function () {
+    this.$selector.children('a').click(function (e) {
+      e.stopPropagation()
+
       const $anchor = $(this)
       if ($anchor.hasClass('active')) {
         $anchor.children('.icon').click(function (e) {
@@ -167,14 +169,18 @@ class Selector {
 
       if (qsKeys.includes(key)) {
         let qsVal = qsData[key]
-        qsVal = qsVal.split(':')
+        const qsHasArrVal = qsVal.includes(':')
+        qsVal = qsHasArrVal ? qsVal.split(':') : qsVal
 
-        if (qsVal.length > 1) {
+        if (qsHasArrVal && qsVal.length > 1) {
           val = qsVal.filter(v => v !== val).join(':')
         } else {
-          delete qsData[key]
-          val = ''
-          qsVal = null
+          if (val !== qsVal) return
+          else {
+            delete qsData[key]
+            val = ''
+            qsVal = null
+          }
         }
       }
 
@@ -282,12 +288,17 @@ class Selector {
       val = value.val
     }
 
-    if (key && val) {
-      // const qsData = parse(location.search.replace(/\?/g, '')) || {}
-      // const qsKeys = Object.keys(qsData)
+    if (key) {
+      const qsData = parse(location.search.replace(/\?/g, '')) || {}
+      const qsKeys = Object.keys(qsData)
 
-      $field && $field.attr('name', key).attr('value', val)
-      $form && $form.submit()
+      if (qsKeys.length === 1) {
+        $field && $field.attr('name', key).attr('value', val)
+        $form && $form.submit()
+      } else {
+        qsData[key] = val
+        location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
+      }
     }
   }
 }
@@ -309,7 +320,5 @@ $.fn.selector = function $selector (options = {}) {
 
 // Initialize .J_Selector with callback function
 export default $(() => {
-  return $('.J_Selector').selector(function callback (value) {
-
-  })
+  return $('.J_Selector').selector()
 })
