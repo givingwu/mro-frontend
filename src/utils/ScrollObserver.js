@@ -116,8 +116,7 @@ export default class ScrollObserver {
     let x = 0, y = 0
 
     if (!isEmptyObject(pos)) {
-      x = pos.x
-      y = pos.y
+      return pos
     }
 
     if (!isNumeric(x) || !x) {
