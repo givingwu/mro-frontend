@@ -50,7 +50,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: '/static/img/[name].[hash:8].[ext]'
+                  name: 'img/[name].[hash:8].[ext]'
                 }
               }
             }
@@ -64,7 +64,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '/static/img/[name].[hash:8].[ext]'
+              name: 'img/[name].[hash:8].[ext]'
             }
           }
         ]
@@ -81,7 +81,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: '/static/media/[name].[hash:8].[ext]'
+                  name: 'media/[name].[hash:8].[ext]'
                 }
               }
             }
@@ -100,7 +100,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: '/static/fonts/[name].[hash:8].[ext]'
+                  name: 'fonts/[name].[hash:8].[ext]'
                 }
               }
             }
