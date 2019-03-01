@@ -33,6 +33,12 @@ $ss-ft-width: 110px;
           &-btn {
             display: inline-block;
           }
+
+          &-item.active {
+            .icon {
+              display: none;
+            }
+          }
         }
       }
 
@@ -70,33 +76,53 @@ $ss-ft-width: 110px;
       &-item {
         position: relative;
         display: inline-block;
+        height: 24px;
+        line-height: 24px;
         @include single-line-hide-text($width: 102.5px);
-        margin-top: 6px;
-        margin-bottom: 6px;
+        margin-top: 8px;
+        margin-bottom: 8px;
         margin-left: 20px;
-        padding: 5px;
         color: #3f6fbc;
         // height: $ss-bd-height;
         vertical-align: middle;
+        @extend .clearfix;
 
         span {
+          // float: left;
           display: inline-block;
-          vertical-align: middle;
+          // vertical-align: middle;
         }
 
-        .text {
+        .icon.icon-close {
+          display: none;
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 24px;
+          height: 24px;
+          text-align: center;
 
+          @include active-hover;
+        }
+
+        .checkbox {
+          position: relative;
+          top: -1px;
+          margin-right: 5px;
         }
 
         &.active {
           color: #fff;
           background-color: $primary-color;
-        }
 
-        .checkbox {
-          position: relative;
-          top: -2px;
-          margin-right: 5px;
+          .icon {
+            display: inline-block;
+          }
+
+          .name {
+            @include single-line-hide-text($width: 80px);
+            padding-left: 5px;
+          }
         }
       }
 
@@ -111,11 +137,18 @@ $ss-ft-width: 110px;
       top: 8px;
       right: 0;
 
+      .text {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
       .tag + .tag {
-        margin-left: 10px;
+        margin-left: 6px;
       }
 
       .tag {
+        padding: 0.223em .645em;
+
         .icon {
           font-size: 0.8em;
           margin-right: 5px;
@@ -124,10 +157,6 @@ $ss-ft-width: 110px;
           &-arrow-down {
             position: relative;
             top: -1px;
-          }
-
-          &-arrow-up {
-            top: 1px;
           }
         }
       }

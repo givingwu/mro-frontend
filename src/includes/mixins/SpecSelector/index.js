@@ -1,6 +1,6 @@
-import $, { extend, noop, isFunction } from 'jquery'
-import '../CheckBox/index'
-import { stringify, parse } from 'querystring'
+import $, { isArray, extend, noop, isFunction, isEmptyObject } from 'jquery'
+import { parse } from 'querystring'
+import '../CheckBox'
 
 const defaults = {
   ele: '.J_Selector',
@@ -21,41 +21,48 @@ class Selector {
     this.$ele = $(ele)
     this.$selectBtn = this.$ele.find(selectBtn)
     this.$expandBtn = this.$ele.find(expandBtn)
-    this.expanded = false
+    this.$selector = this.$ele.find('.J_SelectorMultiWrapper')
+
     this.prevMultiSelectIdx = -1
+    this.expandState = {}
     this.cachedElements = []
+
     this.bindEvents()
   }
 
   bindEvents () {
     const self = this
-    const { item, geneStatusText, expandCls, callback, selectCls } = this.options
+    const { selectCls } = this.options
+
+    this.$selector.children('a').click(function () {
+      const $anchor = $(this)
+      if ($anchor.hasClass('active')) {
+        $anchor.children('.icon').click(function (e) {
+          e.stopPropagation()
+          $anchor.removeClass('active')
+          self.filterLinkData($anchor)
+        })
+      }
+    })
 
     this.$expandBtn.click(function handleExpandClick (e) {
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
       let isAnchor = tagName === 'A'
-      let isIcon = tagName === 'I'
-      const $icon = isIcon ? $target : isAnchor ? $target.children('.icon') : $target.siblings('.icon')
+      // let isIcon = tagName === 'I'
+      // const $icon = isIcon ? $target : isAnchor ? $target.children('.icon') : $target.siblings('.icon')
 
       if (!isAnchor) {
         $target = $target.parent()
       }
 
-      self.expanded = !self.expanded
-
       const $item = $target.parent().parent()
+      const index = $item.index()
 
-      self.toggleClass($icon, 'icon-arrow-up', self.expanded)
-      self.toggleClass($item, expandCls, self.expanded)
-      $target.children('span').text(geneStatusText(self.expanded))
-
-      callback(self.expanded)
+      self.toggleExpandStatus($item, self.expandState[index] = !self.expandState[index])
     })
 
-    const $selectBtn = this.$selectBtn
-
-    $selectBtn.click(function handleSelect (e) {
+    this.$selectBtn.click(function handleSelect (e) {
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
       let isAnchor = tagName === 'A'
@@ -65,13 +72,16 @@ class Selector {
 
       const $item = $target.parent().parent()
       const index = $item.index()
+
+      if (self.expandState[index]) {
+        self.toggleExpandStatus($item, false)
+      }
+
       const $ele = self.getCachedElement(index)
 
-      $item
-        .toggleClass(selectCls, self.prevMultiSelectIdx !== index)
-        .siblings()
-        .removeClass(selectCls)
+      $item.addClass(selectCls).siblings().removeClass(selectCls)
 
+      // 遍历已缓存的同级元素，隐藏它们
       self.cachedElements.forEach((children, currIndex) => {
         currIndex !== index && children && children.length && children.each(function () {
           $(this).children('.checkbox').hide()
@@ -79,6 +89,7 @@ class Selector {
       })
 
       // 如果此前已经被缓存过，即已生成过DOM
+      // 无需再 insert DOM，直接显示即可
       if ($ele) {
         const children = self.getCachedElement(index)
 
@@ -87,80 +98,110 @@ class Selector {
         })
       } else {
         // 未缓存过元素，需要生成 DOM，且 push 到集合中
-        const $buttons = $(`
-          <div class="ss-bd-btn">
-            <a href="javascript:void(0)" class="tag tag-primary">确定</a>
-            <a href="javascript:void(0)" class="tag tag-default">取消</a>
-          </div>
-        `)
-
-        self.bindBtnEvents($item, $buttons)
-        self.setCachedElement(
-          index,
-          $item
-            .children('.J_SelectorMultiWrapper')
-            .append($buttons)
-            .children('a')
-            .prepend('<i class="icon yzwfont checkbox"></i>')
-            .children('.checkbox')
-            .checkBox()
-            .parent()
-            .click(function () {
-              const $checkBox = $(this).children('.checkbox')
-              const checkbox = $checkBox.get(0)._checkbox
-
-              checkbox.toggle()
-            })
-        )
+        self.insertDOMElements($item, index)
       }
 
       self.prevMultiSelectIdx = index
     })
   }
 
-  bindBtnEvents ($item, $buttons) {
-    const { selectCls, expandCls } = this
+  toggleExpandStatus ($item, state) {
+    const { expandCls, expandBtn, geneStatusText } = this.options
+
+    $item
+      .toggleClass(expandCls, state)
+      .find(expandBtn)
+      .children('.icon')
+      .toggleClass('icon-arrow-up', state)
+      .parent()
+      .children('.text')
+      .text(geneStatusText(state))
+  }
+
+  insertDOMElements ($item, id) {
+    const $buttons = $(`
+      <div class="ss-bd-btn">
+        <a href="javascript:void(0)" class="tag tag-primary confirm">确定</a>
+        <a href="javascript:void(0)" class="tag tag-default cancel">取消</a>
+      </div>
+    `)
+
+    this.bindBtnEvents($item, $buttons)
+    this.setCachedElement(
+      id,
+      $item
+        .children('.J_SelectorMultiWrapper')
+        .append($buttons)
+        .children('a')
+        .prepend('<i class="icon yzwfont checkbox"></i>')
+        .children('.checkbox')
+        .checkBox({
+          stopPropagation: true
+        })
+        .parent()
+        .click(function () {
+          const $checkBox = $(this).children('.checkbox')
+          const checkbox = $checkBox.get(0)._checkbox
+
+          checkbox.toggle()
+        })
+    )
+  }
+
+  filterLinkData ($anchor) {
     const self = this
+    const data = self.getItemData($anchor) || {}
+    const qsData = parse(location.search.replace(/\?/g, '')) || {}
+    const qsKeys = Object.keys(qsData)
+    let key = ''
+    let val = ''
 
-    $buttons
-      .first()
-      .click(() => {
-        const values = []
+    if (!isEmptyObject(data) && !isEmptyObject(qsData)) {
+      key = data.key
+      val = data.val
 
-        $item
-          .find('.checkbox')
-          .each(function () {
-            const $item = $(this)
+      if (qsKeys.includes(key)) {
+        let qsVal = qsData[key]
+        qsVal = qsVal.split(':')
 
-            if ($item.hasClass('checked')) {
-              let param = ''
-              try {
-                param = $item.parent('a').attr('data-param')
-                param = JSON.parse(param)
-              } catch (e) {
-                console.log(e);
-              }
-
-              values.push(param)
-            }
-          })
-
-        if (values.length) {
-          if (values.length > 1) {
-          } else {
-            const { key, val } = values[0]
-            $('.J_InputText').attr('name', key).attr('value', val)
-          }
+        if (qsVal.length > 1) {
+          val = qsVal.filter(v => v !== val).join(':')
+        } else {
+          delete qsData[key]
+          val = ''
+          qsVal = null
         }
+      }
 
-        self.$ele.submit()
+      key && self.setFieldAndRefresh({
+        key,
+        val
       })
-      .last()
-      .click(() => {
-        $item
-          .toggleClass(selectCls)
-          .toggleClass(expandCls)
-          .find('.checkbox').toggle()
+    }
+  }
+
+  bindBtnEvents ($item, $buttons) {
+    const self = this
+    const { selectCls, expandCls } = this.options
+    const $confirm = $buttons.children('.confirm')
+    const $cancel = $buttons.children('.cancel')
+
+    $confirm.click(() => {
+      const values = self.getSelectedValues($item)
+
+      if (values && values.length) {
+        self.setFieldAndRefresh(values)
+      } else {
+        $cancel.click()
+      }
+    })
+
+    $cancel.click(() => {
+      $item
+        .removeClass(selectCls)
+        .removeClass(expandCls)
+        .find('.checkbox:visible')
+        .hide()
     })
   }
 
@@ -173,9 +214,76 @@ class Selector {
     return this.cachedElements[index]
   }
 
-  toggleClass ($ele, cls, state) {
-    $ele.toggleClass(cls, state)
-    return $ele
+  getSelectedValues ($item) {
+    const self = this
+    const values = []
+
+    $item
+      .find('.checkbox')
+      .each(function () {
+        const value = $(this).hasClass('checked') && self.getItemData(this)
+        value && values.push(value)
+      })
+
+    return values
+  }
+
+  getItemData ($ele) {
+    $ele = $($ele)
+    const isCheckbox = $ele.hasClass('checkbox')
+    let $anchor = !isCheckbox && $ele.prop('tagName') === 'A' && $ele
+
+    if (isCheckbox) {
+      $anchor = $ele.parent('a')
+    }
+
+    let param = ''
+
+    try {
+      param = $anchor.data('param')
+
+      /* 先取 $.data 后取 attr */
+      if (
+        !param ||
+        isEmptyObject(param)
+      ) {
+        param = JSON.parse($anchor.attr('data-param'))
+      }
+    } catch (e) {
+
+    }
+
+    return param
+  }
+
+  setFieldAndRefresh (value) {
+    const $form = this.$ele
+    const $field = $('.J_InputText')
+    let key = ''
+    let val = ''
+
+    if (isArray(value) && value.length) {
+      if (value.length === 1) {
+        key = value[0] && value[0].key
+        val = value[0] && value[0].val
+      } else {
+        key = value[0] && value[0].key
+        val = value.map(v => v && v.val).filter(Boolean).join(':')
+      }
+    } else if (
+      value && typeof value === 'object'
+    ) {
+      key = value.key
+      val = value.val
+    }
+
+    if (key && val) {
+      // const qsData = parse(location.search.replace(/\?/g, '')) || {}
+      // const qsKeys = Object.keys(qsData)
+
+      $field && $field.attr('name', key).attr('value', val)
+      $form && $form.submit()
+    }
   }
 }
 
@@ -194,9 +302,9 @@ $.fn.selector = function $selector (options = {}) {
   })
 }
 
-// Initialize .J_InputNumber with callback function
+// Initialize .J_Selector with callback function
 export default $(() => {
   return $('.J_Selector').selector(function callback (value) {
-    console.log(value)
+
   })
 })

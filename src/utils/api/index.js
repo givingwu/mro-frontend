@@ -150,5 +150,6 @@ export class API {
  * 默认将全局变量 __YZW__API__ 作为 API 对象生成方法
  * 默认将全局变量 __YZW__API__CONFIG__ 作为 API 的配置对象
  * 将控制权交给页面，更灵活
+ * 将 __YZW__API__ 组装完成之后暴露给全局变量 __YZW__API__ 自身
  */
-export default new API(window.__YZW__API__, window.__YZW__API__CONFIG__)
+export default window.__YZW__API__ = new API(window.__YZW__API__, window.__YZW__API__CONFIG__)

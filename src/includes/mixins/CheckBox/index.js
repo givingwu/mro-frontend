@@ -6,6 +6,7 @@ const defaults = {
   activeCls: 'active',
   checkedCls: 'checked',
   disabledCls: 'disabled',
+  stopPropagation: false,
   callback: noop
 }
 
@@ -60,6 +61,8 @@ export default class CheckBox {
   }
 
   bindEvents () {
+    const { stopPropagation } = this.options
+
     this.$ele.on('mousedown', () => {
       if (this.isDisabled()) return
       this.checkState(ACTIONS.PRESS)
@@ -75,7 +78,9 @@ export default class CheckBox {
       this.checkState(ACTIONS.LEAVE)
     })
 
-    this.$ele.on('click', () => {
+    this.$ele.on('click', (e) => {
+      stopPropagation && e.stopPropagation()
+
       this.toggle()
     })
   }

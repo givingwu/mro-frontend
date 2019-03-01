@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "jquery": "^3.3.1",
+    "querystring": "^0.2.0",
     "throttle-debounce": "^2.1.0"
   },
   "devDependencies": {

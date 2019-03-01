@@ -11,9 +11,9 @@ mixin SpecSelector()
         span 品牌
       .ss-bd.J_SelectorMultiWrapper
         each b,i in brands
-          a(href="javascript:void(0);",title=`品牌${i+1}`,data-param=`{"key": "brand", "val": "val${i+1}"}`).ss-bd-item
+          a(class=`${i % 2 === 0 ? 'active' : ''}`,href="javascript:void(0);",title=`品牌${i+1}`,data-param=`{"key": "brand", "val": "brand${i+1}"}`).ss-bd-item
             span.name= `品牌${i+1}`
-            span.icon.yzwfont.icon-close
+            span.icon.yzwfont.icon-close(title="删除该项")
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
@@ -26,7 +26,9 @@ mixin SpecSelector()
         span 类型
       .ss-bd.J_SelectorMultiWrapper
         each t,i in types
-          a(href="javascript:void(0);",title=`类型${i+1}`,data-param=`{"key": "type", "val": "val${i+1}"}`).ss-bd-item= `类型${i+1}`
+          a(href="javascript:void(0);",title=`类型${i+1}`,data-param=`{"key": "type", "val": "type${i+1}"}`).ss-bd-item
+            span.name= `类型${i+1}`
+            span.icon.yzwfont.icon-close(title="删除该项")
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
@@ -39,7 +41,9 @@ mixin SpecSelector()
         span 颜色
       .ss-bd.J_SelectorMultiWrapper
         each c,i in colors
-          a(href="javascript:void(0);",title=`颜色${i+1}`,data-param=`"{"key": "color", "val": "val${i+1}"}`).ss-bd-item= `颜色${i+1}`
+          a(href="javascript:void(0);",title=`颜色${i+1}`,data-param=`"{"key": "color", "val": "color${i+1}"}`).ss-bd-item
+            span.name= `颜色${i+1}`
+            span.icon.yzwfont.icon-close(title="删除该项")
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
@@ -53,7 +57,9 @@ mixin SpecSelector()
       .ss-bd.J_SelectorMultiWrapper
         each s,i in sizes
           //- {"viewport":"large","orientation":"landscape","retina":true}
-          a(href="javascript:void(0);",title=`尺寸${i+1}`,data-param=`{"key": "size", "val": "val${i+1}"}`).ss-bd-item= `尺寸${i+1}`
+          a(href="javascript:void(0);",title=`尺寸${i+1}`,data-param=`{"key": "size", "val": "size${i+1}"}`).ss-bd-item
+            span.name= `尺寸${i+1}`
+            span.icon.yzwfont.icon-close(title="删除该项")
       .ss-ft
         a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
           i.icon.yzwfont.icon-plus
