@@ -1,7 +1,12 @@
-import $, { isArray, extend, noop, isFunction, isEmptyObject } from 'jquery'
+import $ from 'jquery'
 import { parse } from 'querystring'
 import '../CheckBox'
 
+const isArray = $.isArray
+const extend = $.extend
+const noop = $.noop
+const isFunction = $.isFunction
+const isEmptyObject = $.isEmptyObject
 const defaults = {
   ele: '.J_Selector',
   selectBtn: '.J_MultiSelectBtn',

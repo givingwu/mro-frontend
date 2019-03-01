@@ -1,8 +1,13 @@
-import $, { extend, isArray, isFunction, isEmptyObject, noop } from 'jquery'
+import $ from 'jquery'
 // import menuDataSet from './menu'
 
 const config = window.pageConfig = window.pageConfig || {}
 const menuDataSet = config.menuDataSet
+const noop = $.noop
+const extend = $.extend
+const isArray = $.isArray
+const isFunction = $.isFunction
+const isEmptyObject = $.isEmptyObject
 const defaults = {
   el: '.J_CategoryMenu',
   list: '.J_CategoryList',
@@ -218,11 +223,11 @@ $.fn.initCategoryMenu = function $CategoryMenu (options = {}) {
 }
 
 if (!menuDataSet || !menuDataSet.length) {
-  import('./menu').then(({ default: data }) => {
+  /* import('./menu').then(({ default: data }) => {
     initCategoryMenu(data)
   }).catch(() => {
     console.error('Lazy load menuDataSet data failed!')
-  })
+  }) */
 } else {
   initCategoryMenu()
 }

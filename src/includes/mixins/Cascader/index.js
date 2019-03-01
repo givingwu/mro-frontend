@@ -1,7 +1,12 @@
-import $, { extend, /* isString,  */isArray,/*  isNumeric, */ isFunction, isEmptyObject, noop } from 'jquery'
+import $ from 'jquery'
 import { getMapDataSet, getValByStr } from './utils'
 import Tab from '../Tab'
 
+const noop = $.noop
+const extend = $.extend
+const isArray = $.isArray
+const isFunction = $.isFunction
+const isEmptyObject = $.isEmptyObject
 const defaults = {
   el: '.J_Cascader',
   parentItem: '.J_TabItem',

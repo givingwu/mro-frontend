@@ -1,5 +1,8 @@
-import $, { extend, isFunction, noop } from 'jquery'
+import $ from 'jquery'
 
+const noop = $.noop
+const extend = $.extend
+const isFunction = $.isFunction
 const defaults = {
   ele: '.checkbox',
   hoverCls: 'hover',

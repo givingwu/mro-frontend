@@ -1,4 +1,4 @@
-import { ajax } from 'jquery'
+import $ from 'jquery'
 
 /**
  * capitalize
@@ -139,7 +139,7 @@ export class API {
       config.data = JSON.stringify(config.data)
     }
 
-    return ajax(url, config)
+    return $.ajax(url, config)
       .done((data) => {
         return data
       })

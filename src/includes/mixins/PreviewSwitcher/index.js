@@ -1,8 +1,11 @@
-import $, { extend, isFunction, noop } from 'jquery'
+import $ from 'jquery'
 
 window.pageConfig = window.pageConfig || {}
 window.pageConfig.images = window.pageConfig.images || []
 
+const noop = $.noop
+const extend = $.extend
+const isFunction = $.isFunction
 const defaults = {
   ele: '.J_Preview',
   item: '.J_PreviewItem',

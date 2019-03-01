@@ -1,7 +1,10 @@
-import $, { extend } from 'jquery'
+import $ from 'jquery'
 import { debounce } from 'throttle-debounce'
 import ScrollObserver from '../../../utils/ScrollObserver'
 
+// const noop = $.noop
+const extend = $.extend
+// const isFunction = $.isFunction
 const defaults = {
   el: '.J_SideBar',
   gap: 30,

@@ -3,7 +3,7 @@ export async function getMapDataSet() {
   let mapDataSet = (window.pageConfig || {}).mapDataSet || []
 
   if (!mapDataSet || !mapDataSet.length) {
-    mapDataSet = await import('./data')
+    // mapDataSet = await import('./data')
     return mapDataSet
   } else {
     return {
