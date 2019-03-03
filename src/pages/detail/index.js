@@ -4,10 +4,11 @@ import '../../common'
 import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/Tab'
-import '../../includes/mixins/Cascader'
-import API from '../../utils/api'
+// import '../../includes/mixins/Cascader'
+import '../../includes/mixins/Cascader/interface/Cascader'
 import SaleRecordsList from '../../template/SaleRecordsList'
 import '../../plugins/jquery.pagination'
+import API from '../../utils/api'
 
 window.$ = $
 
@@ -31,9 +32,14 @@ $(() => {
     }
   })
 
-  $('.J_Cascader').initAddressCascader({
-    data: ['四川', '成都', '高新区', '华阳镇街道'],
+  /* $('.J_Cascader').initAddressCascader({
+    data: ['四川', '成都', '高新区', '华阳镇街道'], // id: 510199
     callback: (val, vis) => console.log(val, vis)
+  }) */
+
+  $('.J_Cascader').initCascader({
+    value: '510199', // id: 510199
+    callback: (ele) => console.log(ele)
   })
 
   function updateTabView (data, showLoading = true) {

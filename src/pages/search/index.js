@@ -5,7 +5,7 @@ import '../../includes/mixins/CheckBox'
 import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/SpecSelector'
-import '../../includes/mixins/Cascader'
+import '../../includes/mixins/Cascader/interface/Cascader'
 
 window.$ = $
 

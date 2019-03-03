@@ -1,17 +1,44 @@
 /* eslint-disable */
-export async function getMapDataSet() {
-  let mapDataSet = (window.pageConfig || {}).mapDataSet || []
+let dataSet = []
+export async function queryAddress (id, index, compareKey = 'value') {
+  if (!id) return
+  if (!dataSet.length) {
+    const lazy = await import('./data')
+    dataSet = lazy.default
+  }
 
-  if (!mapDataSet || !mapDataSet.length) {
-    // mapDataSet = await import('./data')
-    return mapDataSet
-  } else {
-    return {
-      default: mapDataSet
+  const vals = []
+  let data = [ ...dataSet ]
+  let i = 0
+  let isSame = false
+
+  while (data && data.length && i < data.length && !isSame) {
+    const item = (data[i] || {})
+    const { label, value, children = [] } = item
+    const similar = String(id).startsWith(item[compareKey])
+    isSame = +id === +(item[compareKey])
+
+    if (similar) {
+      vals.push({
+        data: [ ...data.map(item => ({
+          ...item,
+          children: null
+        }))],
+        label,
+        value,
+        index: i
+      })
+
+      data = children
+      i = 0
+    } else {
+      i++
     }
   }
-}
 
+  console.log('vals: ', vals, 'index: ', index)
+  return vals
+}
 
 /**
  * filterRegionsByStr

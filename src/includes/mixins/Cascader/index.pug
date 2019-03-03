@@ -12,29 +12,29 @@ mixin Cascader(address = [])
       .cascader-panel.J_CascaderTab
         //- address text
         .cascader-panel-hd
-          each addr, index in address
-            if index <= 2
-              if index === 0
-                a(title=addr).active.J_TabItem= addr
-              else
-                a(title=addr).J_TabItem= addr
+          //- each addr, index in address
+          //-   if index <= 2
+          //-     if index === 0
+          //-       a(title=addr).active.J_TabItem= addr
+          //-     else
+          //-       a(title=addr).J_TabItem= addr
         //- address options panel
         .cascader-panel-bd
-          div.cascader-panel-item.active.J_TabCont
-            .panel
-              a.active 012
-              a 012
-              a.disabled 012
-          div.cascader-panel-item.J_TabCont
-            .panel
-              a.active 234
-              a 234
-              a.disabled 234
-          div.cascader-panel-item.J_TabCont
-            .panel
-              a.active 456
-              a 456
-              a.disabled 456
-              a 456
-              a 456
-              a 456
+          //- div.cascader-panel-item.active.J_TabCont
+          //-   .panel
+          //-     a.active 012
+          //-     a 012
+          //-     a.disabled 012
+          //- div.cascader-panel-item.J_TabCont
+          //-   .panel
+          //-     a.active 234
+          //-     a 234
+          //-     a.disabled 234
+          //- div.cascader-panel-item.J_TabCont
+          //-   .panel
+          //-     a.active 456
+          //-     a 456
+          //-     a.disabled 456
+          //-     a 456
+          //-     a 456
+          //-     a 456

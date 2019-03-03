@@ -28,6 +28,7 @@ export default class Template {
     }
 
     this.type = type || 'normal'
+    this.dom = null
   }
 
   /**
@@ -71,19 +72,22 @@ export default class Template {
     }
 
     this.$ele[method](
-      window.template &&
+      this.dom = window.template &&
       window.template.render(
         this.normalTpl,
         { data }
       )
     )
 
+    // eslint-disable-next-line
     callback && callback(this)
 
     if (this.initialize && !this.initialized) {
       this.initialize()
       this.initialized = true
     }
+
+    return $(this.dom)
   }
 
   renderLoading (data, method = 'html', callback) {
@@ -98,14 +102,17 @@ export default class Template {
     }
 
     this.$ele[method](
-      window.template &&
+      this.dom = window.template &&
       window.template.render(
         this.loadingTpl,
         { data }
       )
     )
 
+    // eslint-disable-next-line
     callback && callback(this)
+
+    return $(this.dom)
   }
 
   renderError (data, method = 'html', callback) {
@@ -120,13 +127,16 @@ export default class Template {
     }
 
     this.$ele[method](
-      window.template &&
+      this.dom = window.template &&
       window.template.render(
         this.errorTpl,
         { data }
       )
     )
 
+    // eslint-disable-next-line
     callback && callback(this)
+
+    return $(this.dom)
   }
 }
