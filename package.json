@@ -33,7 +33,6 @@
     "autoprefixer": "^9.4.7",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
-    "babel-preset-es2015-rollup": "^3.0.0",
     "cache-loader": "^2.0.1",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "chalk": "^2.4.2",
