@@ -1,29 +1,30 @@
 .yzwsale {
-  background-image: url('../../image/sprite-sale.png');
+  display: inline-block;
+  background-image: url('../image/sprite-sale.png');
   background-repeat: no-repeat;
-  display: block;
+  background-size: 200px 55px;
 }
 
 .yzwsale-brand {
-  width: 100px;
-  height: 100px;
-  background-position: -5px -5px;
+  width: 50px;
+  height: 50px;
+  background-position: -2.5px -2.5px;
 }
 
 .yzwsale-discount {
-  width: 100px;
-  height: 100px;
-  background-position: -115px -5px;
+  width: 50px;
+  height: 50px;
+  background-position: -57.5px -2.5px;
 }
 
 .yzwsale-hotsale {
-  width: 100px;
-  height: 100px;
-  background-position: -225px -5px;
+  width: 50px;
+  height: 50px;
+  background-position: -112.5px -2.5px;
 }
 
 .yzwsale-star {
-  width: 60px;
-  height: 88px;
-  background-position: -335px -5px;
+  width: 30px;
+  height: 44px;
+  background-position: -167.5px -2.5px;
 }

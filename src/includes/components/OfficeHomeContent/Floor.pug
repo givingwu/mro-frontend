@@ -1,0 +1,14 @@
+mixin Floor(title = '热卖榜' , desc = '精挑细选，为您选购', type)
+  .office-floor
+    case type
+      when 1
+        .yzwsale.yzwsale-hotsale
+      when 2
+        .yzwsale.yzwsale-discount
+      when 3
+        .yzwsale.yzwsale-brand
+    h3.title= title
+      small.desc= desc
+    .office-page
+      span.yzwfont.icon-arrow-left
+      span.yzwfont.icon-arrow-left.arrow-right.active

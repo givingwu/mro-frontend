@@ -1,0 +1,10 @@
+mixin GoodsCard(num,type)
+  .goods-card&attributes(attributes)
+    - var goodsCard = new Array(num).fill(0).map((_, i) => ++i)
+    - var title = '飞兹特氟龙剪刀'
+    - var desc = '专注成就安全'
+    - var price = '10.0'
+    - var count = '1000'
+    include GoodsCardItem.pug
+    each good in goodsCard
+      +GoodsCardItem(`${good}`,`${title}${good}`,desc,price,count,type)

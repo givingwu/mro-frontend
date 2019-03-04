@@ -1,0 +1,40 @@
+mixin GoodsCardItemCommon(id,title,desc,price,count,type)
+  - var img = '//img20.360buyimg.com/babel/s260x260_jfs/t4405/342/2380866378/211572/e0f4968/591bc165N4201973f.jpg'
+  a(href=`/detail.html?id=${id}`, title=title, target="_blank")
+    case type
+      when 1
+        span(class=`top-info top-info-${id}`)= `TOP${id}`
+        .sales-count
+          span.sales-title= '狂销'
+          span.sales-data= '20000件'
+      when 2
+        span(class=`top-info top-info-${id}`)= `TOP${id}`
+        span.goods-sale= '5折'
+      when 3
+        span.yzwsale.yzwsale-star
+    .goods-img
+      img(src=img, alt=title)
+    p.goods-name=title
+    p.goods-desc=desc
+    p.goods-price
+      span(class='price')= `${price} 元`
+      case type
+        when 2
+          span(class='price price-old')= `${price} 元`
+    p.goods-count= `已销售 ${count} 件`
+
+mixin GoodsCardItem(id,title,desc,price,count,type)
+  case type
+    when 1
+      .goods-card-item.gray
+        +GoodsCardItemCommon(id,title,desc,price,count,type)
+    when 2
+      .goods-card-item.gray
+        +GoodsCardItemCommon(id,title,desc,price,count,type)
+    when 3
+      .goods-card-item
+        +GoodsCardItemCommon(id,title,desc,price,count,type)
+    when 4
+      .goods-card-item
+        +GoodsCardItemCommon(id,title,desc,price,count,type)
+

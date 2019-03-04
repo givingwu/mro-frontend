@@ -1,0 +1,72 @@
+@import 'common.scss';
+@import 'components/Banner';
+@import 'mixin/HomeTabPanel';
+@import 'components/SideBar';
+@import 'components/FloatBar';
+
+@import "GoodsCard";
+.office-section{
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+}
+.office-floor{
+  width: 100%;
+  height: 50px;
+  padding-top: 6px;
+  padding-left: 60px;
+  padding-right: 56px;
+  position: relative;
+  margin-bottom: 8px;
+  .yzwsale{
+    position: absolute;
+    left: 0;
+    top:0;
+  }
+  .office-page{
+    position: absolute;
+    right: 0;
+    width: 56px;
+    height: 20px;
+    line-height: 18px;
+    bottom: 5px;
+    border: 1px solid $gray-color;
+    font-size: 0;
+    &:before{
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 100%;
+      background-color: $gray-color;
+      top:0;
+      left: 50%;
+    }
+    .yzwfont{
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+      font-size: 12px;
+      text-align: center;
+      color: #BABDC2;
+      &.arrow-right{
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+      }
+      &.active{
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
+  }
+  .title{
+    text-align: left;
+    font-size: 28px;
+    font-weight: 400;
+    color: $font-black-color;
+    .desc{
+      font-size: 14px;
+      color: $font-gray-color-1;
+      margin-left: 10px;
+    }
+  }
+}

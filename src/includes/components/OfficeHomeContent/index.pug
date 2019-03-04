@@ -1,0 +1,22 @@
+include Floor.pug
+include ../../mixins/GoodsCard/index.pug
+
+.yzw-content.J_HomeContent
+  include ../../mixins/OpacityBanner/index.pug
+  +OpacityBanner()
+  include ../../mixins/SideBar/index.pug
+  +SideBar()
+.container
+  .office-section
+    +Floor('热卖榜', '精挑细选，为您选购', 1)
+    +GoodsCard(5, 1)
+  .office-section
+    +Floor('折扣榜', '精挑细选，为您选购', 2)
+    +GoodsCard(5, 2)
+  .office-section
+    +Floor('热卖榜', '精挑细选，为您选购', 3)
+    +GoodsCard(5, 3)
+  //.office-section
+  //  +Floor('热卖榜', '精挑细选，为您选购')
+  //  +GoodsCard(5, 4)
+
