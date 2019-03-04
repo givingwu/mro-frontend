@@ -94,6 +94,7 @@ class InputNumber {
           }
         }
       } else {
+        // ([^0-9])|(\.)$
         nextValue = +nextValue.replace(/[^0-9]/g, '')
       }
 

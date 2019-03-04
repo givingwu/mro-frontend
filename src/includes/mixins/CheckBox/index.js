@@ -25,9 +25,10 @@ const ACTIONS = {
 export default class CheckBox {
   constructor (options) {
     this.options = extend(defaults, options)
-    const { ele, activeCls } = this.options
+    const { ele, value, activeCls } = this.options
 
     this.$ele = $(ele)
+    this.value = value
 
     if (
       this.$ele &&
@@ -98,7 +99,6 @@ export default class CheckBox {
 
     this.$ele.on('click', (e) => {
       stopPropagation && e.stopPropagation()
-
       this.toggle()
     })
   }

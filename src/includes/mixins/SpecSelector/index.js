@@ -44,7 +44,7 @@ export default class Selector {
 
       const $anchor = $(this)
       if ($anchor.hasClass('active')) {
-        $anchor.children('.icon').click(function (e) {
+        $anchor.children('.icon-close').click(function (e) {
           e.stopPropagation()
           $anchor.removeClass('active')
           /* self. */
@@ -57,8 +57,6 @@ export default class Selector {
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
       let isAnchor = tagName === 'A'
-      // let isIcon = tagName === 'I'
-      // const $icon = isIcon ? $target : isAnchor ? $target.children('.icon') : $target.siblings('.icon')
 
       if (!isAnchor) {
         $target = $target.parent()
@@ -144,7 +142,8 @@ export default class Selector {
         .prepend('<i class="icon yzwfont checkbox"></i>')
         .children('.checkbox')
         .checkBox({
-          stopPropagation: true
+          stopPropagation: true,
+          callback: noop
         })
         .parent()
         .click(function () {
@@ -155,42 +154,6 @@ export default class Selector {
         })
     )
   }
-
-  /* filterLinkData ($anchor) {
-    const self = this
-    const data = getItemData.call(self, $anchor) || {}
-    const qsData = parse(location.search.replace(/\?/g, '')) || {}
-    const qsKeys = Object.keys(qsData)
-    let key = ''
-    let val = ''
-
-    if (!isEmptyObject(data) && !isEmptyObject(qsData)) {
-      key = data.key
-      val = data.val
-
-      if (qsKeys.includes(key)) {
-        let qsVal = qsData[key]
-        const qsHasArrVal = qsVal.includes(':')
-        qsVal = qsHasArrVal ? qsVal.split(':') : qsVal
-
-        if (qsHasArrVal && qsVal.length > 1) {
-          val = qsVal.filter(v => v !== val).join(':')
-        } else {
-          if (val !== qsVal) return
-          else {
-            delete qsData[key]
-            val = ''
-            qsVal = null
-          }
-        }
-      }
-
-      key && self.setFieldAndRefresh({
-        key,
-        val
-      })
-    }
-  } */
 
   bindBtnEvents ($item, $buttons) {
     const self = this
@@ -238,68 +201,6 @@ export default class Selector {
 
     return values
   }
-
-  /* getItemData ($ele) {
-    $ele = $($ele)
-    const isCheckbox = $ele.hasClass('checkbox')
-    let $anchor = !isCheckbox && $ele.prop('tagName') === 'A' && $ele
-
-    if (isCheckbox) {
-      $anchor = $ele.parent('a')
-    }
-
-    let param = ''
-
-    try {
-      param = $anchor.data('param')
-
-      if (
-        !param ||
-        isEmptyObject(param)
-      ) {
-        param = JSON.parse($anchor.attr('data-param'))
-      }
-    } catch (e) {
-      console.error(e)
-    }
-
-    return param
-  } */
-
-  /* setFieldAndRefresh (value) {
-    const $form = this.$ele
-    const $field = $('.J_InputText')
-    let key = ''
-    let val = ''
-
-    if (isArray(value) && value.length) {
-      if (value.length === 1) {
-        key = value[0] && value[0].key
-        val = value[0] && value[0].val
-      } else {
-        key = value[0] && value[0].key
-        val = value.map(v => v && v.val).filter(Boolean).join(':')
-      }
-    } else if (
-      value && typeof value === 'object'
-    ) {
-      key = value.key
-      val = value.val
-    }
-
-    if (key) {
-      const qsData = parse(location.search.replace(/\?/g, '')) || {}
-      const qsKeys = Object.keys(qsData)
-
-      if (qsKeys.length === 1 && $field.length) {
-        $field && $field.attr('name', key).attr('value', val)
-        $form && $form.submit()
-      } else {
-        qsData[key] = val
-        location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
-      }
-    }
-  } */
 }
 
 $.fn.initSelector = function $selector (options = {}) {
@@ -320,42 +221,92 @@ $.fn.initSelector = function $selector (options = {}) {
 export function filterLinkData ($anchor) {
   const self = this
   const data = getItemData($anchor) || {}
+  const dataKeys = Object.keys(data)
   const qsData = parse(location.search.replace(/\?/g, '')) || {}
   const qsKeys = Object.keys(qsData)
-  let key = ''
-  let val = ''
 
   if (!isEmptyObject(data) && !isEmptyObject(qsData)) {
-    key = data.key
-    val = data.val
+    let modified = false
 
-    if (qsKeys.includes(key)) {
-      let qsVal = qsData[key]
-      const qsHasArrVal = qsVal.includes(':')
-      qsVal = qsHasArrVal ? qsVal.split(':') : qsVal
+    /* compare per key between link data and QueryString data */
+    dataKeys.forEach(function (key) {
+      if (qsKeys.includes(key)) {
+        const val = data[key]
+        let qsVal = qsData[key]
 
-      if (qsHasArrVal && qsVal.length > 1) {
-        val = qsVal.filter(v => v !== val).join(':')
-      } else {
-        if (val !== qsVal) return
-        else {
-          delete qsData[key]
-          val = ''
-          qsVal = null
+        qsVal = qsVal.includes(',') ? qsVal.split(',') : qsVal
+
+        if (isArray(qsVal) && qsVal.length > 1) {
+          qsData[key] = qsVal.filter(v => {
+            if (v === val) {
+              modified = true
+              return false
+            }
+
+            return true
+          }).join(',')
+        } else {
+          if (val !== qsVal) return
+          else {
+            modified = true
+            delete qsData[key]
+          }
         }
       }
-    }
-
-    key && setFieldAndRefresh.call(self, {
-      key,
-      val
     })
+
+    modified && setFieldAndRefresh.call(self, qsData)
+  }
+}
+
+export function setFieldAndRefresh (value) {
+  let qsData = parse(location.search.replace(/\?/g, '')) || {}
+
+  if (isArray(value) && value.length) {
+    value = value.reduce((accu, curr) => {
+      const keys = Object.keys(curr)
+
+      keys.forEach(key => {
+        const val = curr[key]
+        const prevVal = accu[key]
+
+        if (val) {
+          if (!isArray(val)) {
+            if (!prevVal) {
+              accu[key] = val
+            } else {
+              accu[key] = [prevVal, val].join(',')
+            }
+          } else {
+            if (!prevVal) {
+              accu[key] = prevVal.join(',')
+            } else {
+              accu[key] = [prevVal, ...val].join(',')
+            }
+          }
+        }
+      })
+
+      return accu
+    }, {})
+  }
+
+  if (
+    value && typeof value === 'object'
+  ) {
+    qsData = {
+      ...qsData,
+      ...value
+    }
+  }
+
+  if (!isEmptyObject(qsData)) {
+    location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
   }
 }
 
 export function getItemData ($ele) {
   $ele = $($ele)
-  console.log('$ele: ', $ele);
   const isCheckbox = $ele.hasClass('checkbox')
   let $anchor = !isCheckbox && $ele.prop('tagName') === 'A' && $ele
 
@@ -368,7 +319,6 @@ export function getItemData ($ele) {
   try {
     param = $anchor.data('param')
 
-    /* 先取 $.data 后取 attr */
     if (
       !param ||
       isEmptyObject(param)
@@ -380,39 +330,4 @@ export function getItemData ($ele) {
   }
 
   return param
-}
-
-export function  setFieldAndRefresh (value) {
-  const $form = this && this.$ele
-  const $field = $('.J_InputText')
-  let key = ''
-  let val = ''
-
-  if (isArray(value) && value.length) {
-    if (value.length === 1) {
-      key = value[0] && value[0].key
-      val = value[0] && value[0].val
-    } else {
-      key = value[0] && value[0].key
-      val = value.map(v => v && v.val).filter(Boolean).join(':')
-    }
-  } else if (
-    value && typeof value === 'object'
-  ) {
-    key = value.key
-    val = value.val
-  }
-
-  if (key) {
-    const qsData = parse(location.search.replace(/\?/g, '')) || {}
-    const qsKeys = Object.keys(qsData)
-
-    if (qsKeys.length === 1 && $field.length) {
-      $field && $field.attr('name', key).attr('value', val)
-      $form && $form.submit()
-    } else {
-      qsData[key] = val
-      location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
-    }
-  }
 }

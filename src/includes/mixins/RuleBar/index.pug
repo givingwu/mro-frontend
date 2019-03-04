@@ -1,7 +1,7 @@
 mixin RuleBar(totalLength, currentPage, pageNum)
   .rule-bar.J_RuleBar
     .sort.clearfix
-      ul.sort-list.clearfix.J_SortList
+      ul.sort-list.clearfix
         li.sort-item.active
           span 综合
         li.sort-item
@@ -11,9 +11,10 @@ mixin RuleBar(totalLength, currentPage, pageNum)
           span 销量
           i.icon.yzwfont.icon-sort
       .sort-price
-        input(type="number", placeholder="最低价")
+        input(type="number", value="", placeholder="最低价", aria-label="价格最小值", data-field="reserveStart").J_MinPriceInput
         span -
-        input(type="number", placeholder="最高价")
+        input(type="number", value="", placeholder="最高价", aria-label="价格最大值", data-field="reserveEnd").J_MaxPriceInput
+        a.btn.btn-primary.J_PriceConfirm 确定
       ul.type
         li.type-item.type-gird.active
           i.icon.yzwfont.icon-gird
@@ -34,19 +35,19 @@ mixin RuleBar(totalLength, currentPage, pageNum)
 
       include ../CheckBox/index.pug
       .rule-item.bid
-        a(data-param=`{"key": "bid", "val": true}`)
+        a(data-param=`{"bid": true}`)
           +Checkbox().checked
           span 中标商品
       .rule-item.d
-        a(data-param=`{"key": "oneDay", "val": true}`)
+        a(data-param=`{"tag": 0}`)
           +Checkbox()
           span 次日达
       .rule-item.d
-        a(data-param=`{"key": "twoDays", "val": true}`)
+        a(data-param=`{"tag": 1}`)
           +Checkbox()
           span 2日达
       .rule-item.d
-        a(data-param=`{"key": "threeDays", "val": true}`)
+        a(data-param=`{"tag": 2}`)
           +Checkbox()
           span 3日达
 

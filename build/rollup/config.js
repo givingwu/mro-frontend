@@ -10,9 +10,8 @@ const { mixins, cwd, theme, src } = paths
 
 const resolve = (currPath) => path.resolve(cwd, currPath)
 const components = [
-  'SearchTab',
-  'CategoryMenu',
-  'Cascader',
+  // 'SearchTab',
+  // 'Cascader',
   'CategoryMenu',
   'CheckBox',
   'InputNumber',
@@ -32,7 +31,7 @@ const resolveConfig = (entry, name) => {
   return {
     entry,
     dest: resolve(`rollup/${name}-runtime.js`),
-    format: 'umd',
+    format: 'iife',
     env: 'production',
     moduleName: name,
     banner
@@ -76,7 +75,7 @@ function genConfig (name) {
         browser: true
       }),
       babel({
-        presets: [['es2015', { modules: false }]],
+        presets: [['env', { modules: false }]],
         runtimeHelpers: true,
         sourceMap: false,
         include: src,

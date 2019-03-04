@@ -1,0 +1,29 @@
+.yzwsale {
+  background-image: url('../../image/sprite-sale.png');
+  background-repeat: no-repeat;
+  display: block;
+}
+
+.yzwsale-brand {
+  width: 100px;
+  height: 100px;
+  background-position: -5px -5px;
+}
+
+.yzwsale-discount {
+  width: 100px;
+  height: 100px;
+  background-position: -115px -5px;
+}
+
+.yzwsale-hotsale {
+  width: 100px;
+  height: 100px;
+  background-position: -225px -5px;
+}
+
+.yzwsale-star {
+  width: 60px;
+  height: 88px;
+  background-position: -335px -5px;
+}
