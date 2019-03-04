@@ -45,7 +45,7 @@ $.fn.initRuleBar = function $ruleBar (options = {}) {
 
       dataKeys.forEach(key => {
         const val = isUndefined(data[key]) ? '' : '' + data[key]
-        const qsVal = qsData[key].split(',')
+        const qsVal = isUndefined(qsData[key]) ? '' : qsData[key].split(',')
         if (qsKeys.includes(key)) {
           if (state) {
             if (!qsVal.includes(val)) {

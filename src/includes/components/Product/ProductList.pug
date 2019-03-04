@@ -20,7 +20,7 @@
     .product-list-head
       each fieldVal, fieldKey in fields
         div.product-list-head-title(class="product-list-head-" + fieldKey)= fieldVal
-    .product-list-items
+    .product-list-items.J_ScrollbarOuter
       include ../../mixins/ProductListItem.pug
       each item in pageItems
         +ProductListItem(item % 2)

@@ -201,7 +201,7 @@ class PreviewSwitcher {
     if (updateEle) {
       const $currentImage = $currentItem.children('img')
       const { getOriginUrl, fallbackUrl } = this.options
-      const originUrl = getOriginUrl($currentImage) || fallbackUrl
+      const originUrl = getOriginUrl($currentImage) || $currentImage.attr('src') || fallbackUrl
 
       this.$activeEle.attr('src', originUrl)
       this.execute(nextIndex, originUrl)

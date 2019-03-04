@@ -25,7 +25,7 @@ const ACTIONS = {
 export default class CheckBox {
   constructor (options) {
     this.options = extend(defaults, options)
-    const { ele, value, activeCls } = this.options
+    const { ele, value, checkedCls } = this.options
 
     this.$ele = $(ele)
     this.value = value
@@ -42,7 +42,7 @@ export default class CheckBox {
       }
     }
 
-    if (this.$ele.hasClass(activeCls)) {
+    if (this.$ele.hasClass(checkedCls)) {
       this.state = true
     } else {
       this.state = false

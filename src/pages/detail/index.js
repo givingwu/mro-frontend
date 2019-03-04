@@ -8,6 +8,7 @@ import '../../includes/mixins/Tab'
 import '../../includes/mixins/Cascader/interface/Cascader'
 import SaleRecordsList from '../../template/SaleRecordsList'
 import '../../plugins/jquery.pagination'
+import '../../plugins/jquery.scrollbar'
 import API from '../../utils/api'
 
 window.$ = $
@@ -24,6 +25,8 @@ $(() => {
       +i === 1 && updateTabView()
     }
   })
+
+  $('.J_ScrollbarOuter').scrollbar()
 
   $('.J_Preview').previewSwitcher({
     itemGap: 18,

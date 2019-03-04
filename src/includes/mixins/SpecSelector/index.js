@@ -39,10 +39,9 @@ export default class Selector {
     const self = this
     const { selectCls } = this.options
 
-    this.$selector.children('a').click(function (e) {
-      e.stopPropagation()
-
+    this.$selector.children('a').each(function () {
       const $anchor = $(this)
+
       if ($anchor.hasClass('active')) {
         $anchor.children('.icon-close').click(function (e) {
           e.stopPropagation()
@@ -218,7 +217,7 @@ $.fn.initSelector = function $selector (options = {}) {
   })
 }
 
-export function filterLinkData ($anchor) {
+export function filterLinkData ($anchor, forceUpdate) {
   const self = this
   const data = getItemData($anchor) || {}
   const dataKeys = Object.keys(data)
@@ -231,7 +230,7 @@ export function filterLinkData ($anchor) {
     /* compare per key between link data and QueryString data */
     dataKeys.forEach(function (key) {
       if (qsKeys.includes(key)) {
-        const val = isUndefined(data[key]) ? '' : data[key]
+        const val = isUndefined(data[key]) ? '' : '' + data[key]
         let qsVal = qsData[key]
 
         qsVal = qsVal.includes(',') ? qsVal.split(',') : qsVal
@@ -259,7 +258,7 @@ export function filterLinkData ($anchor) {
   }
 }
 
-export function setFieldAndRefresh (value) {
+export function setFieldAndRefresh (value, forceUpdate) {
   let qsData = parse(location.search.replace(/\?/g, '')) || {}
 
   if (isArray(value) && value.length) {
@@ -294,11 +293,17 @@ export function setFieldAndRefresh (value) {
   if (
     value && typeof value === 'object'
   ) {
-    qsData = {
-      ...qsData,
-      ...value
+    if (forceUpdate) {
+      qsData = value
+    } else {
+      qsData = {
+        ...qsData,
+        ...value,
+      }
     }
   }
+
+  console.log('qsData: ', qsData)
 
   if (!isEmptyObject(qsData)) {
     location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
@@ -334,4 +339,12 @@ export function getItemData ($ele) {
 
 export function isUndefined(val) {
   return val === undefined || val === null || typeof val === 'undefined'
+}
+
+export function omit(target, ...objects) {
+  const keys = Object.keys(target)
+
+  objects.forEach(function (obj) {
+    if (keys.includes(obj)) {}
+  })
 }
