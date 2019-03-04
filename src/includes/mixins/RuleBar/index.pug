@@ -1,5 +1,5 @@
 mixin RuleBar(totalLength, currentPage, pageNum)
-  .rule-bar
+  .rule-bar.J_RuleBar
     .sort.clearfix
       ul.sort-list.clearfix.J_SortList
         li.sort-item.active
@@ -34,15 +34,19 @@ mixin RuleBar(totalLength, currentPage, pageNum)
 
       include ../CheckBox/index.pug
       .rule-item.bid
-        +Checkbox()
-        span 中标商品
+        a(data-param=`{"key": "bid", "val": true}`)
+          +Checkbox()
+          span 中标商品
       .rule-item.d
-        +Checkbox()
-        span 次日达
+        a(data-param=`{"key": "oneDay", "val": true}`)
+          +Checkbox()
+          span 次日达
       .rule-item.d
-        +Checkbox()
-        span 2日达
+        a(data-param=`{"key": "twoDays", "val": true}`)
+          +Checkbox()
+          span 2日达
       .rule-item.d
-        +Checkbox()
-        span 2日达
+        a(data-param=`{"key": "threeDays", "val": true}`)
+          +Checkbox()
+          span 3日达
 

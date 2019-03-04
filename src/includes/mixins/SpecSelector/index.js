@@ -18,7 +18,7 @@ const defaults = {
   geneStatusText: (expanded) => expanded ? '收起' : '展开'
 }
 
-class Selector {
+export default class Selector {
   constructor (options) {
     this.options = extend(defaults, options)
     const { ele, selectBtn, expandBtn } = this.options
@@ -47,7 +47,8 @@ class Selector {
         $anchor.children('.icon').click(function (e) {
           e.stopPropagation()
           $anchor.removeClass('active')
-          self.filterLinkData($anchor)
+          /* self. */
+          filterLinkData.call(self, $anchor)
         })
       }
     })
@@ -155,9 +156,9 @@ class Selector {
     )
   }
 
-  filterLinkData ($anchor) {
+  /* filterLinkData ($anchor) {
     const self = this
-    const data = self.getItemData($anchor) || {}
+    const data = getItemData.call(self, $anchor) || {}
     const qsData = parse(location.search.replace(/\?/g, '')) || {}
     const qsKeys = Object.keys(qsData)
     let key = ''
@@ -189,7 +190,7 @@ class Selector {
         val
       })
     }
-  }
+  } */
 
   bindBtnEvents ($item, $buttons) {
     const self = this
@@ -201,7 +202,7 @@ class Selector {
       const values = self.getSelectedValues($item)
 
       if (values && values.length) {
-        self.setFieldAndRefresh(values)
+        setFieldAndRefresh.call(self, values)
       } else {
         $cancel.click()
       }
@@ -226,20 +227,19 @@ class Selector {
   }
 
   getSelectedValues ($item) {
-    const self = this
     const values = []
 
     $item
       .find('.checkbox')
       .each(function () {
-        const value = $(this).hasClass('checked') && self.getItemData(this)
+        const value = $(this).hasClass('checked') && getItemData(this)
         value && values.push(value)
       })
 
     return values
   }
 
-  getItemData ($ele) {
+  /* getItemData ($ele) {
     $ele = $($ele)
     const isCheckbox = $ele.hasClass('checkbox')
     let $anchor = !isCheckbox && $ele.prop('tagName') === 'A' && $ele
@@ -253,7 +253,6 @@ class Selector {
     try {
       param = $anchor.data('param')
 
-      /* 先取 $.data 后取 attr */
       if (
         !param ||
         isEmptyObject(param)
@@ -261,13 +260,13 @@ class Selector {
         param = JSON.parse($anchor.attr('data-param'))
       }
     } catch (e) {
-
+      console.error(e)
     }
 
     return param
-  }
+  } */
 
-  setFieldAndRefresh (value) {
+  /* setFieldAndRefresh (value) {
     const $form = this.$ele
     const $field = $('.J_InputText')
     let key = ''
@@ -292,7 +291,7 @@ class Selector {
       const qsData = parse(location.search.replace(/\?/g, '')) || {}
       const qsKeys = Object.keys(qsData)
 
-      if (qsKeys.length === 1) {
+      if (qsKeys.length === 1 && $field.length) {
         $field && $field.attr('name', key).attr('value', val)
         $form && $form.submit()
       } else {
@@ -300,10 +299,10 @@ class Selector {
         location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
       }
     }
-  }
+  } */
 }
 
-$.fn.selector = function $selector (options = {}) {
+$.fn.initSelector = function $selector (options = {}) {
   return this.each(function () {
     return new Selector(
       isFunction(options) ? {
@@ -318,7 +317,101 @@ $.fn.selector = function $selector (options = {}) {
   })
 }
 
-// Initialize .J_Selector with callback function
-export default $(() => {
-  return $('.J_Selector').selector()
-})
+export function filterLinkData ($anchor) {
+  const self = this
+  const data = getItemData.call(this, $anchor) || {}
+  const qsData = parse(location.search.replace(/\?/g, '')) || {}
+  const qsKeys = Object.keys(qsData)
+  let key = ''
+  let val = ''
+
+  if (!isEmptyObject(data) && !isEmptyObject(qsData)) {
+    key = data.key
+    val = data.val
+
+    if (qsKeys.includes(key)) {
+      let qsVal = qsData[key]
+      const qsHasArrVal = qsVal.includes(':')
+      qsVal = qsHasArrVal ? qsVal.split(':') : qsVal
+
+      if (qsHasArrVal && qsVal.length > 1) {
+        val = qsVal.filter(v => v !== val).join(':')
+      } else {
+        if (val !== qsVal) return
+        else {
+          delete qsData[key]
+          val = ''
+          qsVal = null
+        }
+      }
+    }
+
+    key && setFieldAndRefresh.call(self, {
+      key,
+      val
+    })
+  }
+}
+
+export function getItemData ($ele) {
+  $ele = $($ele)
+  const isCheckbox = $ele.hasClass('checkbox')
+  let $anchor = !isCheckbox && $ele.prop('tagName') === 'A' && $ele
+
+  if (isCheckbox) {
+    $anchor = $ele.parent('a')
+  }
+
+  let param = ''
+
+  try {
+    param = $anchor.data('param')
+
+    /* 先取 $.data 后取 attr */
+    if (
+      !param ||
+      isEmptyObject(param)
+    ) {
+      param = JSON.parse($anchor.attr('data-param'))
+    }
+  } catch (e) {
+    console.error(e)
+  }
+
+  return param
+}
+
+export function  setFieldAndRefresh (value) {
+  const $form = this.$ele
+  const $field = $('.J_InputText')
+  let key = ''
+  let val = ''
+
+  if (isArray(value) && value.length) {
+    if (value.length === 1) {
+      key = value[0] && value[0].key
+      val = value[0] && value[0].val
+    } else {
+      key = value[0] && value[0].key
+      val = value.map(v => v && v.val).filter(Boolean).join(':')
+    }
+  } else if (
+    value && typeof value === 'object'
+  ) {
+    key = value.key
+    val = value.val
+  }
+
+  if (key) {
+    const qsData = parse(location.search.replace(/\?/g, '')) || {}
+    const qsKeys = Object.keys(qsData)
+
+    if (qsKeys.length === 1 && $field.length) {
+      $field && $field.attr('name', key).attr('value', val)
+      $form && $form.submit()
+    } else {
+      qsData[key] = val
+      location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
+    }
+  }
+}
