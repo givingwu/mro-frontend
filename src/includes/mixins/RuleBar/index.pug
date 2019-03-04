@@ -35,7 +35,7 @@ mixin RuleBar(totalLength, currentPage, pageNum)
       include ../CheckBox/index.pug
       .rule-item.bid
         a(data-param=`{"key": "bid", "val": true}`)
-          +Checkbox()
+          +Checkbox().checked
           span 中标商品
       .rule-item.d
         a(data-param=`{"key": "oneDay", "val": true}`)

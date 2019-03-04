@@ -319,7 +319,7 @@ $.fn.initSelector = function $selector (options = {}) {
 
 export function filterLinkData ($anchor) {
   const self = this
-  const data = getItemData.call(this, $anchor) || {}
+  const data = getItemData($anchor) || {}
   const qsData = parse(location.search.replace(/\?/g, '')) || {}
   const qsKeys = Object.keys(qsData)
   let key = ''
@@ -355,6 +355,7 @@ export function filterLinkData ($anchor) {
 
 export function getItemData ($ele) {
   $ele = $($ele)
+  console.log('$ele: ', $ele);
   const isCheckbox = $ele.hasClass('checkbox')
   let $anchor = !isCheckbox && $ele.prop('tagName') === 'A' && $ele
 
@@ -382,7 +383,7 @@ export function getItemData ($ele) {
 }
 
 export function  setFieldAndRefresh (value) {
-  const $form = this.$ele
+  const $form = this && this.$ele
   const $field = $('.J_InputText')
   let key = ''
   let val = ''

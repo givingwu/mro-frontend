@@ -25,13 +25,28 @@ const ACTIONS = {
 export default class CheckBox {
   constructor (options) {
     this.options = extend(defaults, options)
-    const { ele } = this.options
+    const { ele, activeCls } = this.options
 
     this.$ele = $(ele)
-    if (this.$ele[0]._initialized) return
 
-    this.$ele[0]._initialized = true
-    this.$ele.get(0)._checkbox = this
+    if (
+      this.$ele &&
+      this.$ele[0]
+    ) {
+      if (this.$ele[0]._initialized) {
+        return
+      } else {
+        this.$ele[0]._initialized = true
+        this.$ele.get(0)._checkbox = this
+      }
+    }
+
+    if (this.$ele.hasClass(activeCls)) {
+      this.state = true
+    } else {
+      this.state = false
+    }
+
     this.bindEvents()
   }
 
@@ -51,7 +66,7 @@ export default class CheckBox {
       case ACTIONS.CHECKED:
         this.$ele.addClass(checkedCls).removeClass([activeCls, hoverCls, disabledCls].join(' '))
         // eslint-disable-next-line
-        callback && callback(true)
+        callback && callback(true, this)
         break
       case ACTIONS.DISABLED:
         this.$ele.addClass(disabledCls).removeClass([hoverCls, activeCls].join(' '))
@@ -59,7 +74,7 @@ export default class CheckBox {
       default:
         this.$ele.removeClass([hoverCls, activeCls, disabledCls, checkedCls].join(' '))
         // eslint-disable-next-line
-        callback && callback(false)
+        callback && callback(false, this)
     }
   }
 

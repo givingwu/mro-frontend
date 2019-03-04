@@ -5,7 +5,7 @@ import '../../includes/mixins/CheckBox'
 import '../../includes/mixins/InputNumber'
 import '../../includes/mixins/PreviewSwitcher'
 import '../../includes/mixins/SpecSelector'
-// import '../../includes/mixins/RuleBar'
+import '../../includes/mixins/RuleBar'
 import '../../includes/mixins/Cascader/interface/Cascader'
 
 window.$ = $
@@ -13,7 +13,7 @@ window.$ = $
 // initialize
 $(() => {
   $('.J_Selector').initSelector()
-  // $('.J_RuleBar').initRuleBar()
+  $('.J_RuleBar').initRuleBar()
 
   $('.J_Preview').previewSwitcher({
     itemGap: 6,
