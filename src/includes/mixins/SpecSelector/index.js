@@ -231,7 +231,7 @@ export function filterLinkData ($anchor) {
     /* compare per key between link data and QueryString data */
     dataKeys.forEach(function (key) {
       if (qsKeys.includes(key)) {
-        const val = data[key]
+        const val = isUndefined(data[key]) ? '' : data[key]
         let qsVal = qsData[key]
 
         qsVal = qsVal.includes(',') ? qsVal.split(',') : qsVal
@@ -330,4 +330,8 @@ export function getItemData ($ele) {
   }
 
   return param
+}
+
+export function isUndefined(val) {
+  return val === undefined || val === null || typeof val === 'undefined'
 }

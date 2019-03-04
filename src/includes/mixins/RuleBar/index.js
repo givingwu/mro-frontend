@@ -1,6 +1,8 @@
 import $ from 'jquery'
-import { getItemData, filterLinkData, setFieldAndRefresh } from '../SpecSelector'
+import { parse } from 'querystring'
+import { getItemData, isUndefined, filterLinkData, setFieldAndRefresh } from '../SpecSelector'
 import '../CheckBox'
+
 
 // const noop = $.noop
 const extend = $.extend
@@ -37,12 +39,27 @@ $.fn.initRuleBar = function $ruleBar (options = {}) {
     $checkbox.checkBox(function (state, instance) {
       const $anchor = instance.$ele.parent('a')
       const data = getItemData($anchor)
+      const dataKeys = Object.keys(data)
+      const qsData = parse(location.search.replace(/\?/g, '')) || {}
+      const qsKeys = Object.keys(qsData)
 
-      if (state) {
-        setFieldAndRefresh.call(self, data)
-      } else {
-        filterLinkData($anchor)
-      }
+      dataKeys.forEach(key => {
+        const val = isUndefined(data[key]) ? '' : '' + data[key]
+        const qsVal = qsData[key].split(',')
+        if (qsKeys.includes(key)) {
+          if (state) {
+            if (!qsVal.includes(val)) {
+              qsData[key] = [...qsVal, val].join(',')
+            }
+          } else {
+            if (qsVal.includes(val)) {
+              qsData[key] = qsVal.filter(v => v !== val).join(',')
+            }
+          }
+        }
+      })
+
+      setFieldAndRefresh(qsData)
     })
   })
 
@@ -70,16 +87,18 @@ $.fn.initRuleBar = function $ruleBar (options = {}) {
     if (min || max) {
       if (min > 0) {
         query[minField] = min
+      } else {
+        query[minField] = ''
       }
 
       if (max > 0) {
         query[maxField] = max
+      } else {
+        query[maxField] = ''
       }
     }
 
-    if (query[minField] || query[maxField]) {
-      setFieldAndRefresh.call(self, query)
-    }
+    setFieldAndRefresh.call(self, query)
   })
 }
 
