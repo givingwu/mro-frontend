@@ -1,0 +1,33 @@
+- var totalLength = 90, currentPage = 1, pageNum = 10
+- var jdLogo = require('assets/image/office-jd-logo.png')
+- var jdInfoText = '京东JD.COM-专业的综合网上购物商城，销售超数万品牌、4020万种商品，囊括家电、手机、电脑、母婴、服装等13大品类。秉承客户为先的理念，京东所售商品为正品行货、全国联保、机打发票。'
+- var jdInfoText2 = '2013年5月6日，京东商城在完成内测后，正式与消费者见面，用户可在京东上购买食品饮料、调味品等日用品。此次京东将超市搬到线上，也是京东在“一站式购物平台”战略布局上的又一次发力。让消费者足不出户，就能轻松实现“打酱油”、“买啤酒”等日常生活购物需求。'
+- var jdInfoText3 = '京东商城首次上线的商品逾5,000种，涉及休闲特产、纯净水、粮油、调味品、啤酒饮料、等多个产品品类；这些品类都与消费者日常生活息息相关。与以往打包出售所不同，如今在京东商城中一罐可乐、一瓶酱油，消费者都可零买，京东送货到家。加上支持货到付款等服务，真正能帮用户实现购物的“多、快、好、省”。'
+
+.yzw-content.J_HomeContent
+  include ../../mixins/SideBar/index.pug
+  +SideBar()
+.container
+  .office-jd-box
+    .jd-box-logo
+      img(src=jdLogo)
+    .jd-box-info
+      p.info= jdInfoText
+      p.info= jdInfoText2
+      p.info= jdInfoText3
+  .row.mt20
+    //- RuleBar
+    include ../../mixins/RuleBar/index.pug
+    +RuleBar(totalLength, currentPage, pageNum)
+
+    //- Goods Grid Layout
+    include ../../mixins/GoodsGrid/index.pug
+    +GoodsGrid(pageNum)
+
+    //- Goods List Layout
+    include ../../mixins/GoodsList/index.pug
+    +GoodsList(pageNum)
+
+    include ../../mixins/BlockPagination.pug
+    +BlockPagination(totalLength, currentPage, pageNum).gap20.gap-b-40
+

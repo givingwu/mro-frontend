@@ -2,7 +2,7 @@
 @import 'components/Banner';
 @import 'mixin/HomeTabPanel';
 @import 'components/SideBar';
-@import 'components/FloatBar';
+@import 'components/Brand';
 
 @import "GoodsCard";
 .office-section{
@@ -22,6 +22,35 @@
     position: absolute;
     left: 0;
     top:0;
+  }
+  .floor-sign{
+    width: 50px;
+    height: 50px;
+    background-color: #1C65ED;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    color: #FFFFFF;
+    line-height: 50px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    &.floor-sign-1{
+      background-color: #1C65ED;
+    }
+    &.floor-sign-2{
+      background-color: #ED6B1C;
+    }
+    &.floor-sign-3{
+      background-color: #63BA2A;
+    }
+    &.floor-sign-4{
+      background-color: #7C1CED;
+    }
+    &.floor-sign-5{
+      background-color: #F0386C;
+    }
   }
   .office-page{
     position: absolute;
@@ -67,6 +96,78 @@
       font-size: 14px;
       color: $font-gray-color-1;
       margin-left: 10px;
+    }
+  }
+}
+
+.office-tab-container{
+  width: 100%;
+  height: auto;
+  margin-top: 45px;
+  background-color: #F6F7F8;
+  padding-bottom: 40px;
+  padding-top: 76px;
+  position: relative;
+  .office-tab-bar{
+    position: absolute;
+    left: 0;
+    top:0;
+    right: 0;
+    z-index: 2;
+    width: 100%;
+    height: 76px;
+    background-color: $default-disabled-color;
+    .office-tab-nav{
+      width: 1200px;
+      height: 100%;
+      margin: 0 auto;
+      ul{
+        width: 100%;
+        height: 100%;
+        font-size: 0;
+        white-space: nowrap;
+        .tab-item{
+          display: inline-block;
+          vertical-align: top;
+          width: 240px;
+          height: 100%;
+          background-color: $default-disabled-color;
+          a{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 76px;
+            font-size: 18px;
+            color: $font-black-color;
+          }
+          &.current{
+            background-color: $primary-active-color;
+            a{
+              color: #FFFFFF;
+            }
+            &:hover{
+              a{
+                color: #FFFFFF;
+              }
+            }
+          }
+          &:hover{
+            a{
+              color: $primary-active-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  .office-tab-content{
+    width: 100%;
+    height: auto;
+    .tab-content{
+      width: 100%;
+      height: auto;
+      margin-top: 40px;
     }
   }
 }

@@ -1,0 +1,50 @@
+@import "common.scss";
+@import "components/Grid";
+@import "components/Button";
+@import "components/Breadcrumb";
+@import "components/CheckBox";
+@import "components/Tag";
+@import "components/InputNumber";
+@import "components/ShoppingCartIcon";
+@import "components/PreviewSwitcher";
+@import "components/Cascader";
+@import "components/PaginationInline";
+@import "components/PaginationBlock";
+@import 'components/SideBar';
+
+@import "SpecSelector";
+@import "RuleBar";
+@import "GoodsGrid";
+@import "GoodsList";
+
+.office-jd-box{
+  width: 100%;
+  height: 200px;
+  padding-left: 200px;
+  margin-top: 20px;
+  position: relative;
+  .jd-box-logo{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .jd-box-info{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: url("../image/office-jd-bg.png") no-repeat;
+    background-size: cover;
+    .info{
+      line-height: 26px;
+      color: $font-black-color;
+      font-size: 13px;
+      text-align: justify;
+    }
+  }
+}
