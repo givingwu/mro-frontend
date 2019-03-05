@@ -20,6 +20,11 @@ $item-left-size: 92px;
 $item-left-gap: 12px;
 $item-right-width: $item-width - $item-left-gap - $item-left-size - $item-padding-horizontal * 2;
 
+$ad-height: 100px;
+$tab-height: 400px;
+$promo-height: 427px;
+$brands-height: 160px;
+
 small {
   color: $font-gray-color-1;
 }
@@ -36,10 +41,10 @@ small {
   }
 
   &-ad {
-    min-height: 100px;
+    min-height: $ad-height;
 
     &-banner {
-      height: 100px;
+      height: $ad-height;
       margin: 40px auto;
       background-image: linear-gradient(135deg, rgba(255, 133, 47, 1) 0%, rgba(255, 104, 15, 1) 100%);
 
@@ -101,9 +106,6 @@ small {
     }
   }
 
-  $tab-height: 400px;
-  $promo-height: 427px;
-
   &-shell {
     color: #ededee;
     font-size: 4em;
@@ -114,6 +116,10 @@ small {
     // background-image: url($placeholder);
     // background-position: center;
 
+    &.yzw-ad {
+      line-height: $ad-height;
+    }
+
     &.yzw-tab {
       font-size: 12em;
       line-height: $tab-height;
@@ -122,6 +128,10 @@ small {
     &.yzw-promo {
       font-size: 12em;
       line-height: $promo-height;
+    }
+
+    &.yzw-brands {
+      line-height: $brands-height;
     }
   }
 
@@ -175,11 +185,13 @@ small {
   }
 
   &-promo {
-    height: $promo-height;
+    min-height: $promo-height;
     border-radius: 3px;
   }
 
-  &-brands {}
+  &-brands {
+    min-height: $brands-height;
+  }
 
   &-floors {
     position: relative;

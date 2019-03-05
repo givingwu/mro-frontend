@@ -1,0 +1,3 @@
+.placeholder {
+  @include placeholder-box($height: 400px);
+}

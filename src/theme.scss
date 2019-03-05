@@ -19,15 +19,75 @@ $font-gray-color: #696D75;
 $font-gray-color-1: #979EA9;
 $font-black-color: #33363C;
 
-
 // assets
-$placeholder: "~@/assets/image/placeholder.png";
+$placeholder: "~@/assets/image/placeholder_box.png";
+$placeholder2x: "~@/assets/image/placeholder_box@2x.png";
+
 $sprite: "~@/assets/image/sprite.png";
 $logo-file: "~@/assets/image/logo.png";
 
-
 // dimensions
 $container-width: 1200px;
+
+/**
+ * 商业转载请联系作者获得授权,非商业转载请注明出处。
+ * 著作权归作者所有。
+ * 原文: https://www.w3cplus.com/preprocessor/sass-for-web-designers-chapter-4.html
+ * © w3cplus.com
+ */
+@mixin retinize(
+  $file, /* 文件名 */
+  $type, /*  图片类型（JPG，GIF，PNG） */
+  $width, /* 图片在屏幕上的宽度 */
+  $height /* 图片在屏幕上的高度 */
+) {
+  background-image: url('~@/assets/image/' + $file + '.' + $type);
+  @media (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx)
+  {
+    & {
+      width: $width;
+      height: $height;
+      background-image: url('~@/assets/image/' + $file + '@2x.' + $type);
+      -webkit-background-size: $width $height;
+      -moz-background-size: $width $height;
+      background-size: $width $height;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+@mixin placeholder-box ($height, $width: 100%) {
+  display: table;
+  width: $width;
+  height: $height;
+  min-height: $height;
+
+  &-bd {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+    &-box {
+      display: inline-block;
+      @include retinize(
+        $file: 'placeholder_box',
+        $type: 'png',
+        $width: 186px,
+        $height: 95px
+      );
+      background-position: center;
+    }
+
+    &-txt {
+      color: $font-gray-color;
+      margin-top: 10px;
+    }
+  }
+}
 
 
 // mixins

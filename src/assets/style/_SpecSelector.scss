@@ -155,12 +155,7 @@ $ss-ft-width: 110px;
         .icon {
           font-size: 0.8em;
           margin-right: 5px;
-
-          &-plus,
-          &-arrow-down {
-            position: relative;
-            top: -1px;
-          }
+          vertical-align: middle;
         }
       }
     }

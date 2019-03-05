@@ -135,7 +135,9 @@
     height: 100%;
     border: 0;
     color: #fff;
-    background: linear-gradient(90deg, rgba(0,134,255,1) 0%, rgba(0,52,236,1) 100%);
+    background-image: linear-gradient(90deg, rgba(0,134,255,1) 0%, rgba(0,52,236,1) 100%);
+    background-color: $primary-color;
+    cursor: pointer;
 
     &-wrap {
       position: absolute;
