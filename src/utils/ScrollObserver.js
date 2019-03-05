@@ -26,7 +26,7 @@ const TRIGGERS = {
 export default class ScrollObserver {
   constructor (options) {
     this.options = extend({}, defaults, options)
-    const { el, pos, base, relative, manual, init } = this.options
+    const { el, pos = {}, base, relative, manual, init } = this.options
 
     if (!el) {
       throw new ReferenceError(`options.el cannot be ${el}!`)
@@ -45,12 +45,17 @@ export default class ScrollObserver {
     }
 
     this.state = TRIGGERS.DEFAULT // default state: 0
-    this.pos = this._geneEleBounding(relative ? this.$relative : this.$el, pos)
+    this.pos = this._geneEleBounding(relative ? this.$relative : this.$el, pos) || {}
 
-    // 初始化节点就开始坚持滚动状态
+    let offsetReady = false
+    if (this.pos.x || this.pos.y) {
+      offsetReady = true
+    }
+
+    // 初始化节点就开始监听滚动状态
     init && this.checkState(relative ? this.$relative : this.$base)
     // 是否自行手动开启 $base 元素的 scroll 监听
-    !manual && this.observe()
+    !manual && offsetReady && this.observe()
   }
 
   checkState ($target) {
@@ -86,6 +91,12 @@ export default class ScrollObserver {
     }
   }
 
+  /**
+   * 注册 Observer 的 Listener
+   * @param {JQuery!} $el
+   * @param {Function!}
+   * @param {Object<{x: 0, y: 0}> | Number}?> pos
+   */
   observe () {
     const { debounce: debounceTime, throttle: throttleTime } = this.options
     let handleScroll = this._handleScroll.bind(this)
@@ -105,26 +116,22 @@ export default class ScrollObserver {
     }
   }
 
-  /**
-   * 注册 Observer 的 Listener
-   * @param {JQuery!} $el
-   * @param {Function!}
-   * @param {Object<{x: 0, y: 0}> | Number}?> pos
-   */
   _geneEleBounding ($el, pos) {
     /* eslint-disable-next-line */
     let x = 0, y = 0
 
-    if (!isEmptyObject(pos)) {
+    if (!isEmptyObject(pos) && (pos.x || pos.y)) {
       return pos
     }
 
-    if (!isNumeric(x) || !x) {
-      x = $el.offset().left
-    }
+    if ($el && $el.length) {
+      if (!isNumeric(x) || !x) {
+        x = $el.offset().left
+      }
 
-    if (!isNumeric(y) || !y) {
-      y = $el.offset().top
+      if (!isNumeric(y) || !y) {
+        y = $el.offset().top
+      }
     }
 
     return { x, y }

@@ -41,25 +41,30 @@ $.fn.initRuleBar = function $ruleBar (options = {}) {
       const data = getItemData($anchor)
       const dataKeys = Object.keys(data)
       const qsData = parse(location.search.replace(/\?/g, '')) || {}
-      const qsKeys = Object.keys(qsData)
+      // const qsKeys = Object.keys(qsData)
 
       dataKeys.forEach(key => {
         const val = isUndefined(data[key]) ? '' : '' + data[key]
-        const qsVal = isUndefined(qsData[key]) ? '' : qsData[key].split(',')
-        if (qsKeys.includes(key)) {
-          if (state) {
-            if (!qsVal.includes(val)) {
+        const qsVal = isUndefined(qsData[key]) ? '' : String(qsData[key]).split(',')
+
+        // 如果当前 QS 中包含了该 key
+        if (state) {
+          if (!qsVal.includes(val)) {
+            if (qsVal && qsVal.length) {
               qsData[key] = [...qsVal, val].join(',')
+            } else {
+              qsData[key] = val
             }
-          } else {
-            if (qsVal.includes(val)) {
-              qsData[key] = qsVal.filter(v => v !== val).join(',')
-            }
+          }
+        } else {
+          if (qsVal.includes(val)) {
+            qsData[key] = qsVal.filter(v => v !== val).join(',')
           }
         }
       })
 
-      setFieldAndRefresh(qsData)
+      setFieldAndRefresh(qsData, true)
+      return false
     })
   })
 

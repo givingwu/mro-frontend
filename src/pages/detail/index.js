@@ -58,7 +58,9 @@ $(() => {
       ...data
     }).done((data) => {
       const { datas: list, ...pagination } = data
+
       SaleRecordsList.render(list, () => renderPagination(pagination))
+      $('.J_SaleRecordsListTotal').text(pagination.total)
     }).fail((cfg, status, statusText) => {
       console.log(cfg, status, statusText)
       SaleRecordsList.renderError(statusText)

@@ -123,6 +123,7 @@ $ss-ft-width: 110px;
           .name {
             @include single-line-hide-text($width: 80px);
             padding-left: 5px;
+            vertical-align: top;
           }
         }
       }

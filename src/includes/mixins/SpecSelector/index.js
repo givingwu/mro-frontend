@@ -46,8 +46,13 @@ export default class Selector {
         $anchor.children('.icon-close').click(function (e) {
           e.stopPropagation()
           $anchor.removeClass('active')
-          /* self. */
           filterLinkData.call(self, $anchor)
+
+          /*
+           * Do not delete following code pls, learn more within following link:
+           * https://stackoverflow.com/questions/18300674/window-location-href-not-working
+           */
+          return false
         })
       }
     })
@@ -217,7 +222,7 @@ $.fn.initSelector = function $selector (options = {}) {
   })
 }
 
-export function filterLinkData ($anchor, forceUpdate) {
+export function filterLinkData ($anchor, forceUpdate = true) {
   const self = this
   const data = getItemData($anchor) || {}
   const dataKeys = Object.keys(data)
@@ -245,8 +250,7 @@ export function filterLinkData ($anchor, forceUpdate) {
             return true
           }).join(',')
         } else {
-          if (val !== qsVal) return
-          else {
+          if (val === qsVal) {
             modified = true
             delete qsData[key]
           }
@@ -254,7 +258,7 @@ export function filterLinkData ($anchor, forceUpdate) {
       }
     })
 
-    modified && setFieldAndRefresh.call(self, qsData)
+    modified && setFieldAndRefresh.call(self, qsData, forceUpdate)
   }
 }
 
@@ -298,15 +302,20 @@ export function setFieldAndRefresh (value, forceUpdate) {
     } else {
       qsData = {
         ...qsData,
-        ...value,
+        ...value
       }
     }
   }
 
-  console.log('qsData: ', qsData)
+  const qsKeys = Object.keys(qsData)
+  qsKeys.forEach(key => {
+    if (isUndefined(qsData[key]) || qsData[key] === '') {
+      delete qsData[key]
+    }
+  })
 
   if (!isEmptyObject(qsData)) {
-    location.href = [location.origin, location.pathname, '?', stringify(qsData)].join('')
+    window.location.href = location.origin + location.pathname + '?' + stringify(qsData)
   }
 }
 
@@ -337,14 +346,14 @@ export function getItemData ($ele) {
   return param
 }
 
-export function isUndefined(val) {
+export function isUndefined (val) {
   return val === undefined || val === null || typeof val === 'undefined'
 }
 
-export function omit(target, ...objects) {
+/* export function omit(target, ...objects) {
   const keys = Object.keys(target)
 
   objects.forEach(function (obj) {
     if (keys.includes(obj)) {}
   })
-}
+} */
