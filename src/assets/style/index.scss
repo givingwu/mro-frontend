@@ -3,6 +3,7 @@
 @import 'mixin/HomeTabPanel';
 @import 'components/SideBar';
 @import 'components/FloatBar';
+@import 'components/Brand';
 
 .home-section {
   margin-top: 40px;
@@ -279,89 +280,6 @@ small {
     &-t,
     &-b {
       background-color: rgba(0, 0, 0, 0.02);
-    }
-  }
-}
-
-.brand {
-  &s {
-    margin-right: -1px;
-    border-top: 1px solid #eff1f4;
-    border-left: 1px solid #eff1f4;
-    background-color: #eff1f4;
-  }
-
-  &-item {
-    position: relative;
-    width: ($container-width / 8) - 1;
-    height: 80px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-
-    &:hover {
-      .brand-item-mask {
-        opacity: 1;
-        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(opacity=100)';
-      }
-    }
-
-    &-img {
-      margin: 0 auto;
-      display: block;
-      text-align: center;
-      line-height: 80px;
-      background-color: #fff;
-
-      img {
-        height: 40px;
-        max-height: 40px;
-        vertical-align: middle;
-      }
-    }
-
-    &-mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      background-color: #333;
-      background-color: rgba(0, 0, 0, 0.8);
-      transition: all 0.3s ease-out;
-      opacity: 0;
-      filter: alpha(opacity=0);
-      z-index: 1;
-    }
-
-    &-tit {
-      color: #fff;
-      height: 50px;
-      line-height: 65px;
-
-      span {
-        display: block;
-        padding: 0 5px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-
-    &-btn {
-      text-align: center;
-      height: 30px;
-
-      span {
-        display: inline-block;
-        color: #fff;
-        width: 60px;
-        height: 18px;
-        line-height: 18px;
-        font-size: 12px;
-        background-color: $primary-color;
-        border-radius: 9px;
-      }
     }
   }
 }
