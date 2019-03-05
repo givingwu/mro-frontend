@@ -1,8 +1,7 @@
 import $ from 'jquery'
 import { parse } from 'querystring'
-import { getItemData, isUndefined, filterLinkData, setFieldAndRefresh } from '../SpecSelector'
+import { getItemData, isUndefined, setFieldAndRefresh } from '../SpecSelector'
 import '../CheckBox'
-
 
 // const noop = $.noop
 const extend = $.extend
@@ -11,7 +10,7 @@ const defaults = {
   min: '.J_MinPriceInput',
   max: '.J_MaxPriceInput',
   button: '.J_PriceConfirm',
-  activeCls: 'active',
+  activeCls: 'active'
 }
 
 /* const SORTS_STAUS = {
@@ -86,35 +85,34 @@ $.fn.initRuleBar = function $ruleBar (options = {}) {
     const query = {}
     const minField = $minInput.data('field') || 'minPrice'
     const maxField = $maxInput.data('field') || 'maxPrice'
-    const min = $minInput.val()
-    const max = $maxInput.val()
+    const val1 = +$minInput.val()
+    const val2 = +$maxInput.val()
 
-    if (min || max) {
-      if (min > 0) {
-        query[minField] = min
-      } else {
-        query[minField] = ''
-      }
+    if (val1 && val2) {
+      let min = Math.min(val1, val2)
+      let max = Math.max(val1, val2)
 
-      if (max > 0) {
-        query[maxField] = max
-      } else {
-        query[maxField] = ''
-      }
+      query[minField] = min
+      query[maxField] = max
+    } else if (val1 && !val2) {
+      query[minField] = val1
+    } else if (val2 && !val1) {
+      query[maxField] = val2
     }
 
     setFieldAndRefresh.call(self, query)
+    return false
   })
 }
 
+// eslint-disable-next-line
 const onlyKeepNumberReg = /([^0-9|^\.])|$/g
 const onlyMoneyNumberReg = /^(([1-9]\d*)|0)(\.\d{1,2})?$/
 
 function covert2number (value) {
   value = value.replace(onlyKeepNumberReg, '')
 
-  if (!onlyMoneyNumberReg.test(value)) return
-  else {
+  if (onlyMoneyNumberReg.test(value)) {
     return +value
   }
 }

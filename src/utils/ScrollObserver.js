@@ -116,6 +116,8 @@ export default class ScrollObserver {
     }
   }
 
+  _inView ($el) {}
+
   _geneEleBounding ($el, pos) {
     /* eslint-disable-next-line */
     let x = 0, y = 0

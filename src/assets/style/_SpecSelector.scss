@@ -86,6 +86,7 @@ $ss-ft-width: 110px;
         // height: $ss-bd-height;
         vertical-align: middle;
         @extend .clearfix;
+        @include active-hover;
 
         span {
           // float: left;

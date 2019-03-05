@@ -23,9 +23,9 @@ body {
     &-r {
       float: right;
 
-      /* .site-nav-menu-hd a {
-        margin-right: $site-nav-gap-r;
-      } */
+      .site-nav-menu {
+        margin-left: 8px;
+      }
     }
 
     &-l,
@@ -50,7 +50,6 @@ body {
 
   &-menu {
     float: left;
-    margin-left: 8px;
 
     &-hd {
       z-index: 10002;

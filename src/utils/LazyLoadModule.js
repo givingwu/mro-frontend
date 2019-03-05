@@ -1,4 +1,5 @@
 import $, { noop, extend, isEmptyObject } from 'jquery'
+import '../plugins/jquery.inview'
 import ScrollObserver from './ScrollObserver'
 // It does not support ES6 module.
 // but it registers a global env variable `template`
@@ -33,6 +34,7 @@ export default class LazyLoadModule {
     this.$el = $(el)
     this.relative = this.getRelative()
     this.lazyComponent = templates[this.getTplKey()]
+    this.lazyLoaded = false
 
     // eslint-disable-next-line
     this.so = new ScrollObserver({
@@ -66,13 +68,15 @@ export default class LazyLoadModule {
       } catch (e) {
         throw new Error(e)
       } finally {
-        // clean memory on JS heap
-        this.so && this.so.unobserve()
-        this.dom && this.dom.remove()
+        if (this.lazyLoaded) {
+          // clean memory on JS heap
+          this.so && this.so.unobserve()
+          this.dom && this.dom.remove()
 
-        this.dom = null
-        this.so = null
-        this.data = null
+          this.dom = null
+          this.so = null
+          this.data = null
+        }
       }
     }
   }

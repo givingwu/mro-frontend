@@ -2,11 +2,14 @@ mixin BlockPagination(totalLength, currentPage, pageNum)
   - var pageNumOptions = [10, 20, 30, 50, 100]
   - var pages = new Array(pageNum).fill(0).map((_, i) => (++i))
 
-  .block-pagination&attributes(attributes)
+  .J_BlockPager.block-pagination&attributes(attributes)
     .bp-ops
-      select.bp-select
-        for num in pageNumOptions
-          option(value=num, title=`每页${num}条`)= `每页${num}条`
+      select(data-field="pageSize").bp-select.J_PagerSelect
+        each num, index in pageNumOptions
+          if num === pageNum
+            option(selected, value=num, title=`每页${num}条`)= `每页${num}条`
+          else
+            option(value=num, title=`每页${num}条`)= `每页${num}条`
       span.bp-ops-icon
         i.icon.yzwfont.icon-arrow-down
     a(href="javascript:void(0);").bp-item.bp-1st 首页
@@ -22,5 +25,5 @@ mixin BlockPagination(totalLength, currentPage, pageNum)
     a(href="javascript:void(0);").bp-item.bp-last 尾页
     .bp-jump
       span 跳至
-      input(type="number").bp-input
+      input(data-field="pageNumber", type="number").bp-input.J_PagerInput
       span 页

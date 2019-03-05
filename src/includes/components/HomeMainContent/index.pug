@@ -51,6 +51,15 @@
                   span= brand.title
                 .brand-item-btn
                   span 点击查看
+          each brand, index in brands
+            .col.col-3.brand-item
+              .brand-item-img
+                img(src=brand.href, alt=brand.title)
+              a(href=`/brands/${++index}`).brand-item-mask.brand-item-link
+                .brand-item-tit
+                  span= brand.title
+                .brand-item-btn
+                  span 点击查看
 
   .yzw-floors.J_Floors
     include ../../mixins/FloatBar/index.pug

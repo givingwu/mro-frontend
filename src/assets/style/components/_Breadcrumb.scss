@@ -30,6 +30,7 @@
 
     &--text {
       margin-right: 10px;
+      @include active-hover;
     }
 
     &--icon {
@@ -42,6 +43,7 @@
       font-size: .9em;
       line-height: 24px;
       text-align: center;
+      cursor: pointer;
     }
 
     &:hover {

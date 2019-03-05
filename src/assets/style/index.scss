@@ -100,15 +100,33 @@ small {
     }
   }
 
+  $tab-height: 400px;
+  $promo-height: 427px;
+
   &-shell {
-    background-color: #eff1f4;
-    background-image: url($placeholder);
-    background-position: center;
+    color: #ededee;
+    font-size: 4em;
+    text-align: center;
+    @extend .yzwfont;
+    @extend .icon-placeholder;
+    background-color: rgba(0, 0, 0, 0.02);
+    // background-image: url($placeholder);
+    // background-position: center;
+
+    &.yzw-tab {
+      font-size: 12em;
+      line-height: $tab-height;
+    }
+
+    &.yzw-promo {
+      font-size: 12em;
+      line-height: $promo-height;
+    }
   }
 
   &-tab {
     position: relative;
-    min-height: 400px;
+    min-height: $tab-height;
 
     &-hd {
       height: 64px;
@@ -156,10 +174,8 @@ small {
   }
 
   &-promo {
-    height: 427px;
-    // background: rgba(0, 0, 0, 1);
+    height: $promo-height;
     border-radius: 3px;
-    opacity: 0.49670000000000003;
   }
 
   &-brands {}
@@ -281,7 +297,6 @@ small {
     height: 80px;
     margin-right: 1px;
     margin-bottom: 1px;
-    opacity: 0;
 
     &:hover {
       .brand-item-mask {

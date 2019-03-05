@@ -51,6 +51,7 @@ $base-index: 10;
     font-size: 14px;
     padding-left: 20px;
     padding-right: 20px;
+    @include single-line-hide-text($width: 100%);
 
     &.active {
       color: $primary-color;

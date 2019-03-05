@@ -72,7 +72,7 @@ class CategoryMenu {
         this.$doc.on('mouseover.hd.contained', e => {
           const t = e.target
           let contained = [this.$el].some($el => $el.is(t) || $el.has(t).length)
-          // console.log('mouseover.hd.contained contained: ', contained, t)
+          //
 
           if (!contained) {
             this.$doc.off('mouseover.hd.contained')
@@ -111,7 +111,7 @@ class CategoryMenu {
     this.$doc.on('mouseover.cm.contained', e => {
       const t = e.target
       let contained = [$item, $panel].some($el => $el.is(t) || $el.has(t).length)
-      // console.log('mouseover.cm.contained: ', contained)
+      //
 
       if (!contained) {
         this.offEvents()
@@ -226,7 +226,7 @@ if (!menuDataSet || !menuDataSet.length) {
   import('./menu').then(({ default: data }) => {
     initCategoryMenu(data)
   }).catch(() => {
-    console.error('Lazy load menuDataSet data failed!')
+    console.error('Lazy load menuData failed')
   })
 } else {
   initCategoryMenu()
@@ -236,8 +236,7 @@ function initCategoryMenu (data) {
   $(() => {
     // initialize CategoryMenu plugin with callback function
     $('.J_CategoryMenu').initCategoryMenu({
-      menuDataSet: data || [],
-      callback: (val, vis) => console.log(val, vis)
+      menuDataSet: data || []
     })
   })
 }

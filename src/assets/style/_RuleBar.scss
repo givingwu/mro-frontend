@@ -75,9 +75,12 @@
         width: 40px;
         height: 28px;
         padding: 0;
-        line-height: 28px;
         margin-left: 20px;
+        line-height: 28px;
+        color: #fff;
         vertical-align: top;
+
+        @include active-hover;
       }
     }
 
