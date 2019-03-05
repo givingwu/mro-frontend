@@ -24,7 +24,7 @@ module.exports = merge(baseConfig, {
   },
   optimization: {
     minimizer: [
-      new TerserPlugin({
+      /* new TerserPlugin({
         test: /\.js(\?.*)?$/i,
         warningsFilter: () => true,
         extractComments: false,
@@ -68,7 +68,7 @@ module.exports = merge(baseConfig, {
             safari10: true
           }
         }
-      }),
+      }), */
       /* https://github.com/webpack-contrib/mini-css-extract-plugin */
       new OptimizeCSSAssetsPlugin({
         assetNameRegExp: /\.css$/g,
