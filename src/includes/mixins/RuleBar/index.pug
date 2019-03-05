@@ -3,13 +3,16 @@ mixin RuleBar(totalLength, currentPage, pageNum)
     .sort.clearfix
       ul.sort-list.clearfix
         li.sort-item.active
-          span 综合
+          a(href="")
+            span 综合
         li.sort-item
-          span 价格
-          i.icon.yzwfont.icon-sort
+          a(href="")
+            span 价格
+            i.icon.yzwfont.icon-sort
         li.sort-item
-          span 销量
-          i.icon.yzwfont.icon-sort
+          a(href="")
+            span 销量
+            i.icon.yzwfont.icon-sort
       .sort-price
         input(type="number", value="", placeholder="最低价", aria-label="价格最小值", data-field="reserveStart").J_MinPriceInput
         span -
@@ -17,11 +20,13 @@ mixin RuleBar(totalLength, currentPage, pageNum)
         a.btn.btn-primary.J_PriceConfirm 确定
       ul.type
         li.type-item.type-gird.active
-          i.icon.yzwfont.icon-gird
-          span 大图
+          a(href="")
+            i.icon.yzwfont.icon-gird
+            span 大图
         li.type-item.type-list
-          i.icon.yzwfont.icon-list
-          span 列表
+          a(href="")
+            i.icon.yzwfont.icon-list
+            span 列表
         include ../../mixins/InlinePagination.pug
         li.type-item.pager
           +InlinePagination(totalLength, currentPage, pageNum).black

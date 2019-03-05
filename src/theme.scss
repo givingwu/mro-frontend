@@ -81,8 +81,8 @@ $container-width: 1200px;
 @mixin multiple-line-hide-text($lines: 3) {
   display: -webkit-box;
   word-wrap: normal;
-  box-orient: vertical;
-  line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
   overflow: hidden;
 }
 

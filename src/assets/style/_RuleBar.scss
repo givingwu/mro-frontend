@@ -6,6 +6,13 @@
     height: 50px;
   }
 
+  .sort,
+  .type {
+    a {
+      color: inherit;
+    }
+  }
+
   .sort {
     background-color: $gray-color;
     border-top: 1px solid $default-disabled-color;
