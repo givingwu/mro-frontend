@@ -11,10 +11,13 @@ include ../../mixins/GoodsCard/index.pug
       span.yzwfont.icon-arrow-down
     h3.project-title
       span.title= '工程项目'
-    .project-list
+    .project-list.row-3.J_ShowProjectInfo
       ul
         each project , index in projectList
-          li(class=`${index === 0 ? 'active':''}` data-id=`${index+1}`, title=project)= project
+          li(class=`${index === 0 ? 'active':''}` data-id=`${index+1}`, title=project)
+            p
+              span= project
+            // .project-info= project
 .yzw-store-list
   .container
     .list-top-bar

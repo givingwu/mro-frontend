@@ -1,6 +1,7 @@
 @import "common.scss";
 @import "components/Grid";
 @import 'components/SideBar';
+@import 'GoodsCard';
 
 .yzw-store-banner{
   width: 100%;
@@ -17,11 +18,9 @@
   text-align: center;
   border-bottom: 1px solid $gray-color;
   position: relative;
-  &.open{
+  &.close{
     .project-list{
-      height: auto;
-      overflow: visible;
-      transition: height 0.3s ease;
+      height: 170px !important;
     }
   }
   .yzw-more-project{
@@ -30,8 +29,6 @@
     height: 18px;
     line-height: 18px;
     text-align: center;
-    font-size: 18px;
-    color: #696D75;
     background-color: #FFFFFF;
     bottom: -18px;
     left: 50%;
@@ -40,6 +37,17 @@
     border-top: none;
     z-index: 1;
     cursor: pointer;
+    &.on{
+      .yzwfont{
+        transform: rotate(180deg);
+      }
+    }
+    .yzwfont{
+      display: inline-block;
+      vertical-align: top;
+      font-size: 18px;
+      color: #696D75;
+    }
   }
   .project-title{
     display: inline-block;
@@ -91,8 +99,36 @@
   .project-list{
     width: 1220px;
     height: 170px;
-    overflow: hidden;
     margin-left: -20px;
+    overflow: hidden;
+    -moz-transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    &.row-3{
+      ul{
+        li{
+          width: 386px;
+          background-color: $default-disabled-color;
+          text-align: center;
+          position: relative;
+          &:hover{
+            background-color: #FFFFFF;
+          }
+          &.active{
+            &:hover{
+              background-color: $primary-active-color;
+            }
+          }
+          p{
+            display: inline-block;
+            vertical-align: top;
+            @include single-line-hide-text(100%);
+          }
+        }
+      }
+    }
     ul{
       width: 100%;
       height: auto;
@@ -109,13 +145,16 @@
         margin-top: 20px;
         padding: 0 11px;
         border: 1px solid $gray-color;
-        font-size: 12px;
+        font-size: 14px;
         color: #3F6FBC;
         cursor: pointer;
         border-radius: 2px;
-        &.active,&:hover{
+        &.active{
           background-color: $primary-active-color;
           color: #FFFFFF;
+          border-color: $primary-active-color;
+        }
+        &:hover{
           border-color: $primary-active-color;
         }
       }
@@ -127,4 +166,29 @@
   height: auto;
   padding: 33px 0 40px 0;
   background-color: #F6F7F8;
+  .list-top-bar{
+    width: 100%;
+    height: 48px;
+    background-color: #FFFFFF;
+  }
+}
+
+.project-info-box{
+  position: fixed;
+  opacity: 0;
+  width: 386px;
+  height: auto;
+  text-align: left;
+  background-color: #FFFFFF;
+  padding: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  color: $font-black-color;
+  z-index: 99;
+  border: 1px solid $gray-color;
+  transition: all 0.5s;
+  &.show{
+    opacity: 1;
+    transform: translate3d(0, 10px, 0);
+  }
 }

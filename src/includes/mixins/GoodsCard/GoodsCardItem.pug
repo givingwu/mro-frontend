@@ -14,14 +14,22 @@ mixin GoodsCardItemCommon(id,title,desc,price,count,type)
         span.yzwsale.yzwsale-star
     .goods-img
       img(src=img, alt=title)
-    p.goods-name=title
-    p.goods-desc=desc
+    case type
+      when 5
+        p.goods-name=title
+      default
+        p.goods-name=title
+        p.goods-desc=desc
     p.goods-price
       span(class='price')= `${price} 元`
       case type
         when 2
           span(class='price price-old')= `${price} 元`
-    p.goods-count= `已销售 ${count} 件`
+    case type
+      when 5
+        p.goods-count 实时库存 <span>1000</span> 件
+      default
+        p.goods-count= `已销售 ${count} 件`
 
 mixin GoodsCardItem(id,title,desc,price,count,type)
   case type
@@ -36,5 +44,8 @@ mixin GoodsCardItem(id,title,desc,price,count,type)
         +GoodsCardItemCommon(id,title,desc,price,count,type)
     when 4
       .goods-card-item
+        +GoodsCardItemCommon(id,title,desc,price,count,type)
+    when 5
+      .goods-card-item.list-type
         +GoodsCardItemCommon(id,title,desc,price,count,type)
 

@@ -1,5 +1,6 @@
 .goods-card{
-  width: 100%;
+  width: 1220px;
+  margin-left: -20px;
   height: auto;
   line-height: 1.4166666666666667;
   @extend .clearfix;
@@ -9,11 +10,26 @@
     float: left;
     margin-left: 20px;
     background-color: #FFFFFF;
-    &:first-child{
-      margin-left: 0;
+    transition: all .2s;
+    &:hover{
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      transform: translate3d(0, -2px, 0);
     }
     &.gray{
       background-color: #EFF1F4;
+    }
+    &.list-type{
+      margin-top: 20px;
+      a{
+        .goods-price,.goods-count{
+          margin-top: 8px;
+        }
+        .goods-count{
+          span{
+            color: $primary-active-color;
+          }
+        }
+      }
     }
     a{
       display: inline-block;

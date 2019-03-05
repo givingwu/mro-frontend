@@ -201,7 +201,6 @@
 
 		scrollTo: function(target, callback) {
       var paddingTop = this.config.paddingTop ? this.config.paddingTop : '0'
-      console.log('top', paddingTop)
 			var offset = $(target).offset().top - paddingTop;
 
 			$('html, body').animate({
