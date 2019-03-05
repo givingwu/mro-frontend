@@ -53,8 +53,6 @@ class OpacityBanner {
       let $target = $(e.target)
       let isNav = $target.hasClass(navCls)
 
-      console.log("$currentItem.children('div').on('mouseleave'), isNav: ", isNav, 'index: ', this.getIndex($target))
-
       if (isNav) {
         this.updateActiveByIndex(this.getIndex($target), true)
       }
@@ -63,7 +61,6 @@ class OpacityBanner {
 
   updateActiveByIndex (nextIndex, forceUpdate) {
     if (isNaN(+nextIndex) || nextIndex < 0 || nextIndex === this.currentIndex) return
-    console.trace('updateActiveByIndex', nextIndex)
 
     nextIndex = nextIndex >= this.$items.length ? 0 : nextIndex
 

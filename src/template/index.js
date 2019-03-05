@@ -1,8 +1,10 @@
 /* eslint-disable */
-import AdBanners from './AdBanners'
+import AdBanner from './AdBanner'
 import HomeTab from './HomeTab'
+import BrandList from './BrandList'
 
 export default {
-  AdBanners,
+  AdBanner,
+  BrandList,
   HomeTab
 }

@@ -13,7 +13,8 @@ mixin SearchTab()
           .search-panel-fields
             .search-combobox
               input(
-                name="q",
+                id="q",
+                name="key",
                 type="text",
                 placeholder="请搜索商品名称、品牌型号、商品属性、副标题"
                 aria-label="请输入搜索文字",
@@ -24,9 +25,9 @@ mixin SearchTab()
                 role="combobox",
                 tabindex="0"
               )
-          input(type="hidden" name="t" value="1")
+          input(id="type", type="hidden" name="t" value="1")
     .search-ft
       .search-hots
-        .search-hots-word
+        .search-hots-word.J_HotWordsList
           for word in hotWords
             a(href="javascript:void(0);;") 搜索词#{word}

@@ -8,15 +8,15 @@
   include ../../mixins/SideBar/index.pug
   +SideBar()
   .container
-    //- .J_LazyModule(data-key="adBanners", data-template="AdBanners", data-relative=".head-top")
-    .yzw-ad
+    .yzw-section.yzw-ad.yzw-shell.J_LazyModule(data-key="adBanner", data-template="AdBanner")
+    //- .yzw-ad
       a(href="./ads/iStorage", title="云筑智能仓库").yzw-section.yzw-ad-banner
         img(src=adBanner, alt="云筑智能仓库")
     .yzw-section.yzw-region
       .yzw-title
         h2 企业智选
           small 精挑细选，为您选购
-      .yzw-shell.yzw-tab.J_LazyModule(data-key="tabDataSet", data-template="HomeTab", data-relative=".head-top")
+      .yzw-tab.yzw-shell.J_LazyModule(data-key="tabDataSet", data-template="HomeTab")
         //- .J_HomeTab
           .yzw-tab-hd
             .row.yzw-tab-list
@@ -34,13 +34,13 @@
               +TabPanel()
             .yzw-tab-cont.J_TabCont
               +TabPanel()
-    .yzw-shell.yzw-section.yzw-promo
+    .yzw-section.yzw-promo.yzw-shell
       //- .yzw-promo-cont
         figure.yzw-promo-item
         figure.yzw-promo-item
         figure.yzw-promo-item
-    .yzw-section.yzw-brands
-      .brands
+    .yzw-section.yzw-brands.yzw-shell.J_LazyModule(data-key="brands", data-template="BrandList")
+      //- .brands
         .row.brand-list
           each brand, index in brands
             .col.col-3.brand-item
@@ -51,16 +51,6 @@
                   span= brand.title
                 .brand-item-btn
                   span 点击查看
-          each brand, index in brands
-            .col.col-3.brand-item
-              .brand-item-img
-                img(src=brand.href, alt=brand.title)
-              a(href=`/brands/${++index}`).brand-item-mask.brand-item-link
-                .brand-item-tit
-                  span= brand.title
-                .brand-item-btn
-                  span 点击查看
-
   .yzw-floors.J_Floors
     include ../../mixins/FloatBar/index.pug
     +FloatBar()

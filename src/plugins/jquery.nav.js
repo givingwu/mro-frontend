@@ -16,6 +16,7 @@
  *   scrollSpeed: 750
  * });
  */
+/* eslint-disable */
 ;(function($, window, document, undefined){
 
 	// our plugin constructor
