@@ -5,64 +5,65 @@
 
 mixin SpecSelector()
   .spec-selector.J_Selector
-    .ss-item.clearfix.J_SelectorItem
-      .ss-hd
-        span 品牌
-      .ss-bd.J_SelectorMultiWrapper
-        each b,i in brands
-          a(class=`${i % 2 === 0 ? 'active' : ''}`,href="javascript:void(0);",title=`品牌${i+1}`,data-param=`{"brand": "brand${i+1}", "brandIds": "brandIDs${i+1}"}`).ss-bd-item
-            span.name= `品牌${i+1}`
-            span.icon.yzwfont.icon-close(title="删除该项")
-      .ss-ft
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
-          i.icon.yzwfont.icon-plus
-          span.text 多选
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
-          i.icon.yzwfont.icon-arrow-down
-          span.text 更多
-    .ss-item.clearfix.J_SelectorItem
-      .ss-hd
-        span 类型
-      .ss-bd.J_SelectorMultiWrapper
-        each t,i in types
-          a(href="javascript:void(0);",title=`类型${i+1}`,data-param=`{"type": "type${i+1}"}`).ss-bd-item
-            span.name= `类型${i+1}`
-            span.icon.yzwfont.icon-close(title="删除该项")
-      .ss-ft
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
-          i.icon.yzwfont.icon-plus
-          span.text 多选
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
-          i.icon.yzwfont.icon-arrow-down
-          span.text 更多
-    .ss-item.clearfix.J_SelectorItem
-      .ss-hd
-        span 颜色
-      .ss-bd.J_SelectorMultiWrapper
-        each c,i in colors
-          a(href="javascript:void(0);",title=`颜色${i+1}`,data-param=`{"color": "color${i+1}"}`).ss-bd-item
-            span.name= `颜色${i+1}`
-            span.icon.yzwfont.icon-close(title="删除该项")
-      .ss-ft
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
-          i.icon.yzwfont.icon-plus
-          span.text 多选
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
-          i.icon.yzwfont.icon-arrow-down
-          span.text 更多
-    .ss-item.clearfix.J_SelectorItem
-      .ss-hd
-        span 尺寸
-      .ss-bd.J_SelectorMultiWrapper
-        each s,i in sizes
-          //- {"viewport":"large","orientation":"landscape","retina":true}
-          a(href="javascript:void(0);",title=`尺寸${i+1}`,data-param=`{"size": "size${i+1}"}`).ss-bd-item
-            span.name= `尺寸${i+1}`
-            span.icon.yzwfont.icon-close(title="删除该项")
-      .ss-ft
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
-          i.icon.yzwfont.icon-plus
-          span.text 多选
-        a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
-          i.icon.yzwfont.icon-arrow-down
-          span.text 更多
+    .ss-wrapper.J_SlideWrapper
+      .ss-item.clearfix.J_SelectorItem
+        .ss-hd
+          span 品牌
+        .ss-bd.J_SelectorMultiWrapper
+          each b,i in brands
+            a(class=`${i % 2 === 0 ? 'active' : ''}`,href="javascript:void(0);",title=`品牌${i+1}`,data-param=`{"brand": "brand${i+1}", "brandIds": "brandIDs${i+1}"}`).ss-bd-item
+              span.name= `品牌${i+1}`
+              span.icon.yzwfont.icon-close(title="删除该项")
+        .ss-ft
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
+            i.icon.yzwfont.icon-plus
+            span.text 多选
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
+            i.icon.yzwfont.icon-arrow-down
+            span.text 更多
+      .ss-item.clearfix.J_SelectorItem
+        .ss-hd
+          span 类型
+        .ss-bd.J_SelectorMultiWrapper
+          each t,i in types
+            a(href="javascript:void(0);",title=`类型${i+1}`,data-param=`{"type": "type${i+1}"}`).ss-bd-item
+              span.name= `类型${i+1}`
+              span.icon.yzwfont.icon-close(title="删除该项")
+        .ss-ft
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
+            i.icon.yzwfont.icon-plus
+            span.text 多选
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
+            i.icon.yzwfont.icon-arrow-down
+            span.text 更多
+      .ss-item.clearfix.J_SelectorItem
+        .ss-hd
+          span 颜色
+        .ss-bd.J_SelectorMultiWrapper
+          each c,i in colors
+            a(href="javascript:void(0);",title=`颜色${i+1}`,data-param=`{"color": "color${i+1}"}`).ss-bd-item
+              span.name= `颜色${i+1}`
+              span.icon.yzwfont.icon-close(title="删除该项")
+        .ss-ft
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
+            i.icon.yzwfont.icon-plus
+            span.text 多选
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
+            i.icon.yzwfont.icon-arrow-down
+            span.text 更多
+      .ss-item.clearfix.J_SelectorItem
+        .ss-hd
+          span 尺寸
+        .ss-bd.J_SelectorMultiWrapper
+          each s,i in sizes
+            //- {"viewport":"large","orientation":"landscape","retina":true}
+            a(href="javascript:void(0);",title=`尺寸${i+1}`,data-param=`{"size": "size${i+1}"}`).ss-bd-item
+              span.name= `尺寸${i+1}`
+              span.icon.yzwfont.icon-close(title="删除该项")
+        .ss-ft
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_MultiSelectBtn
+            i.icon.yzwfont.icon-plus
+            span.text 多选
+          a(href="javascript:void(0)").tag.tag-default.tag-ghost.J_ShowMoreBtn
+            i.icon.yzwfont.icon-arrow-down
+            span.text 更多

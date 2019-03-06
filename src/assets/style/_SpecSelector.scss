@@ -3,18 +3,25 @@ $ss-bd-height: 40px;
 $ss-ft-width: 110px;
 
 .spec-selector {
+  position: relative;
   margin: 20px auto;
-  box-shadow: 0px 1px 0px 0px rgba(225, 230, 236, 1), 0px -1px 0px 0px rgba(225, 230, 236, 1);
+  // box-shadow: 0px 1px 0px 0px rgba(225, 230, 236, 1), 0px -1px 0px 0px rgba(225, 230, 236, 1);
+  border-top: 1px solid #EFF1F4;
 
   .ss {
+    &-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
     &-item {
       position: relative;
-      border-bottom: 1px solid #e2e4e6;
+      border-bottom: 1px solid #EFF1F4;
       background-color: #eff1f4;
 
-      &:last-child {
-        border-bottom: 0;
-      }
+      /* &:last-child {
+        border-bottom: none;
+      } */
 
       &.expanded,
       &.multi-select {
