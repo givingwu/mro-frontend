@@ -1,0 +1,21 @@
+include ../../mixins/GoodsCard/index.pug
+.yzw-store-list
+  .container
+    .tab.tab-large.J_Tab
+      .tab-hd.list-top-bar
+        div.tab-active-bar.J_TabActiveIndicator
+        a(href="javascript:void(0)", data-index=0).tab-item.tab-item-large.active.J_TabItem
+          span.yzwfont.icon-wurenhuogui
+          span 无人货柜
+        a(href="javascript:void(0)", data-index=1).tab-item.tab-item-large.J_TabItem
+          span.yzwfont.icon-zhinengcangku
+          span 智能仓库
+        .top-bar-search
+          .input-search
+            input(type='text', placeholder='在结果中搜索')
+          a.search-btn(href='javascript:;') 搜索
+      .tab-bd.list-box
+        div.tab-cont.J_TabCont.active
+          +GoodsCard(20, 5)
+        div.tab-cont.J_TabCont
+          +GoodsCard(20, 5)

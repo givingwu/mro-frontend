@@ -80,7 +80,7 @@ class Tab {
     const left = $item.position().left
     const width = $item.outerWidth()
 
-    this.$indicator && this.$indicator.animate({
+    this.$indicator && this.$indicator.stop(true, true).animate({
       left,
       width
     }, 'fast')

@@ -1,6 +1,7 @@
 import '../../assets/style/store.scss'
 import $ from 'jquery'
 import '../../common'
+import '../../includes/mixins/Tab'
 import '../../includes/mixins/SpecSelector'
 import '../../includes/mixins/SideBar'
 
@@ -35,5 +36,10 @@ $(function () {
     $listDom.css('height', listHeight + 'px')
     self.parent().toggleClass('close')
     self.toggleClass('on')
+  })
+  $('.J_Tab').initTab({
+    currentIndex: 0,
+    indicator: '.J_TabActiveIndicator',
+    callback (i) {}
   })
 })

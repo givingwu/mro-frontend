@@ -1,24 +1,11 @@
-- var projectList = ['贵阳老百货大楼及周边地块棚户区改造项目（贵阳一号）','南宁凤岭综合枢纽项目','航空安全实验基地工程','丰台科技园区36#地项目','丰台科技园区36#地项目','通州运河核心区Ⅳ-05建设项','通州运河核心区Ⅳ-05建设项目','通州运河核心区Ⅳ-05建设项目','延庆南三村棚改项目','贵阳老百货大楼及周边地块棚户区改造项目（贵阳一号）贵阳老百货大楼及周边地块棚户区改造项目（贵阳一号）','航空安全实验基地工程','通州运河核心区Ⅳ-05建设项目','通州运河核心区Ⅳ-05建设项目通州运河核心区Ⅳ-05建设项目','丰台科技园区36#地项目','丰台科技园区36#地项目','贵阳老百货大楼及周边地块棚户区改造项目（贵阳一号）','南宁凤岭综合枢纽项目','航空安全实验基地工程','丰台科技园区36#地项目','丰台科技园区36#地项目','通州运河核心区Ⅳ-05建设项','通州运河核心区Ⅳ-05建设项目','通州运河核心区Ⅳ-05建设项目','延庆南三村棚改项目','贵阳老百货大楼及周边地块棚户区改造项目（贵阳一号）贵阳老百货大楼及周边地块棚户区改造项目（贵阳一号）','航空安全实验基地工程','通州运河核心区Ⅳ-05建设项目','通州运河核心区Ⅳ-05建设项目通州运河核心区Ⅳ-05建设项目','丰台科技园区36#地项目','丰台科技园区36#地项目']
-include ../../mixins/GoodsCard/index.pug
-
 .yzw-content.J_HomeContent
   include ../../mixins/SideBar/index.pug
   +SideBar()
 .yzw-store-banner
 .container
-  .yzw-store-project.close
-    .yzw-more-project.J_ShowMore
-      span.yzwfont.icon-arrow-down
-    h3.project-title
-      span.title= '工程项目'
-    .project-list
-      ul
-        each project , index in projectList
-          li(class=`${index === 0 ? 'active':''}` data-id=`${index+1}`, title=project)= project
-.yzw-store-list
-  .container
-    .list-top-bar
-    .list-box
-      +GoodsCard(20, 5)
+  include StoreProjectList.pug
+  +StoreProjectList(1)
+include StoreTabList.pug
+
 
 
