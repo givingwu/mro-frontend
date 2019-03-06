@@ -33,6 +33,7 @@ export default class ShowMore {
     this.$ele = $(ele)
     this.$wrapper = this.$ele.find(wrapper)
 
+    if (!this.$wrapper.length) return {}
     const visible = this.$wrapper.is(':visible')
     const mode = this.checkMode(visible)
 

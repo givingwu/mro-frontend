@@ -52,8 +52,10 @@
                 .brand-item-btn
                   span 点击查看
   .yzw-floors.J_Floors
-    include ../../mixins/FloatBar/index.pug
-    +FloatBar()
+    //- include ../../mixins/FloatBar/index.pug
+    //- +FloatBar()
+    .J_LazyModule(data-key="stagesData", data-template="FloorBar")
+    //- .yzw-shell.J_LazyModule(data-key="stagesData", data-template="FloorStage")
     .container
       include Floor.pug
       +Floor('劳保防护', '安全可靠更放心')

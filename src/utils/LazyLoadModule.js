@@ -3,16 +3,20 @@ import '../plugins/jquery.inview'
 import './ArtTemplate'
 import Templates from '../template'
 
-var adBanner = require('assets/image/ad-banner.png')
+const adBanner = require('assets/image/ad-banner.png')
 const config = window.pageConfig || {}
 const geneChildren = i =>
   new Array(7)
     .fill(0)
-    .map((_, ii) => ({ title: `${i}/${ii}`, desc: `${i}/${ii}` }))
+    .map((_, ii) => ({ title: `title for /${i}/${ii}`, desc: `description for /${i}/${ii}` }))
 
 config.tabDataSet = new Array(3)
   .fill(0)
-  .map((_, i) => ({ title: i, children: geneChildren(i) }))
+  .map((_, i) => ({
+    title: i,
+    img: `/img/${++i}`,
+    children: geneChildren(i)
+  }))
 config.adBanner = [
   { img: adBanner, title: '云筑智能仓库', href: './ads/iStorage' }
 ]
@@ -97,6 +101,32 @@ config.brands = [
       '//img.alicdn.com/i2/2/TB1FgqknYGYBuNjy0FoXXciBFXa?abtest=&pos=16&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.56634.100200300000000_165x5000q100.jpg_.webp'
   }
 ]
+config.stagesData = [{
+  id: 1,
+  ...geneChildren(1),
+  title: '劳保防护',
+  desc: '安全可靠更放心'
+}, {
+  id: 2,
+  title: '水暖管件',
+  top: geneChildren(4),
+  btm: geneChildren(4)
+}, {
+  id: 3,
+  title: '电气照明',
+  top: geneChildren(4),
+  btm: geneChildren(4)
+}, {
+  id: 4,
+  title: '五金工具',
+  top: geneChildren(4),
+  btm: geneChildren(4)
+}, {
+  id: 5,
+  title: '消防器材',
+  top: geneChildren(4),
+  btm: geneChildren(4)
+}]
 
 const defaults = {
   el: '.J_LazyModule',

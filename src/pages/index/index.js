@@ -5,14 +5,13 @@ import '../../utils/LazyLoadModule'
 import '../../includes/mixins/SearchTab'
 import '../../includes/mixins/CategoryMenu'
 import '../../includes/mixins/OpacityBanner'
-// import '../../includes/mixins/Tab'
 import '../../includes/mixins/SideBar'
-import '../../includes/mixins/FloatBar'
+// import '../../includes/mixins/FloatBar'
 
 window.$ = $
 
-$(function () {
-  $('.J_LazyModule').initLazyModule()
-  $('.J_SideBar').initSideBar()
-  $('.J_FloatBar').initFloatBar()
-})
+// $(function () {
+$('.J_LazyModule').initLazyModule()
+$('.J_SideBar').initSideBar()
+// $('.J_FloatBar').initFloatBar()
+// })
