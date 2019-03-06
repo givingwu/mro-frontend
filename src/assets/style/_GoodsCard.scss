@@ -31,6 +31,14 @@
         }
       }
     }
+    &.special-type{
+      margin-left: 10px;
+      a{
+        .goods-price{
+          margin-top: 20px;
+        }
+      }
+    }
     a{
       display: inline-block;
       vertical-align: top;

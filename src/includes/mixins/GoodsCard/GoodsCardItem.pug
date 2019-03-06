@@ -28,6 +28,8 @@ mixin GoodsCardItemCommon(id,title,desc,price,count,type)
     case type
       when 5
         p.goods-count 实时库存 <span>1000</span> 件
+      when 6
+        -break
       default
         p.goods-count= `已销售 ${count} 件`
 
@@ -47,5 +49,8 @@ mixin GoodsCardItem(id,title,desc,price,count,type)
         +GoodsCardItemCommon(id,title,desc,price,count,type)
     when 5
       .goods-card-item.list-type
+        +GoodsCardItemCommon(id,title,desc,price,count,type)
+    when 6
+      .goods-card-item.special-type
         +GoodsCardItemCommon(id,title,desc,price,count,type)
 
