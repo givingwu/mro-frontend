@@ -18,7 +18,7 @@ export default class FloatBar {
 
     this.initLayout()
     this.bindEvents()
-    console.log(this);
+    console.log(this)
   }
 
   initLayout () {
@@ -39,7 +39,6 @@ export default class FloatBar {
     this.$win.on('resize', debounce(this.options.debounce, this.initLayout).bind(this))
   }
 }
-
 
 $.fn.initFloatBar = function $initFloatBar (options = {}) {
   return this.each(function () {
