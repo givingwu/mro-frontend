@@ -15,11 +15,15 @@
       p.info= jdInfoText
       p.info= jdInfoText2
       p.info= jdInfoText3
+  .office-jd-toolBar.mt20
+    .toolBar-showType
+      a.active(href='javascript:;',title='大图') <span class='yzwfont icon-gird'></span>大图
+      a(href='javascript:;',title='列表') <span class='yzwfont icon-list'></span>列表
+    .toolBar-search
+      .input-search
+        input(type='text', placeholder='在结果中搜索')
+      a.search-btn(href='javascript:;') 搜索
   .row.mt20
-    //- RuleBar
-    include ../../mixins/RuleBar/index.pug
-    +RuleBar(totalLength, currentPage, pageNum)
-
     //- Goods Grid Layout
     include ../../mixins/GoodsGrid/index.pug
     +GoodsGrid(pageNum)
