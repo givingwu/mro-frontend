@@ -88,19 +88,22 @@ $.fn.initRuleBar = function $ruleBar (options = {}) {
     const val1 = +$minInput.val()
     const val2 = +$maxInput.val()
 
-    if (val1 && val2) {
-      let min = Math.min(val1, val2)
-      let max = Math.max(val1, val2)
+    if (val1 || val2) {
+      if (val1 && val2) {
+        let min = Math.min(val1, val2)
+        let max = Math.max(val1, val2)
 
-      query[minField] = min
-      query[maxField] = max
-    } else if (val1 && !val2) {
-      query[minField] = val1
-    } else if (val2 && !val1) {
-      query[maxField] = val2
+        query[minField] = min
+        query[maxField] = max
+      } else if (val1 && !val2) {
+        query[minField] = val1
+      } else if (val2 && !val1) {
+        query[maxField] = val2
+      }
+
+      return setFieldAndRefresh.call(self, query)
     }
 
-    setFieldAndRefresh.call(self, query)
     return false
   })
 }
