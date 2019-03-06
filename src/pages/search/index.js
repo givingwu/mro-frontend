@@ -14,7 +14,9 @@ window.$ = $
 
 $('.J_Selector')
   .initSelector()
-  .initShowMore()
+  .initShowMore({
+    animate: false
+  })
 
 $('.J_Preview').previewSwitcher({
   itemGap: 6,

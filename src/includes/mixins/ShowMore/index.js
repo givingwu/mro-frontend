@@ -5,7 +5,7 @@ const extend = $.extend
 const defaults = {
   ele: '.J_More',
   wrapper: '.J_MoreCont',
-  wrapperChild: '.J_MoreContItem',
+  // wrapperChild: '.J_MoreContItem',
   maxHeight: 0,
   iconHeight: 18,
   animate: true, /* 对于内部存在展开情况的元素无法使用动画，因为内部展开后高度变化。 */
@@ -90,6 +90,8 @@ export default class ShowMore {
   }
 
   bindEvents (mode) {
+    const { animate } = this.options
+
     if (mode === MODE.HEIGHT) {
       this.$showMore && this.$showMore.click(() => {
         this.state = !this.state
@@ -125,19 +127,24 @@ export default class ShowMore {
         this.state = !this.state
 
         $.when(
-          this.state && this.$wrapper.show().css({
-            // height: 0
-          })
-        ).done(
-          () => !this.state && this.$wrapper.hide()
-          /* this.$wrapper.animate({
-            height: `${this.state ? '+' : '-'}=${this.gap}`
-          }, () => {
-            if (!this.state) {
-              this.$wrapper.hide()
-            }
-          }) */
-        ).done(() => this.toggleIconClass())
+          this.state && this.$wrapper.show().css(
+            animate ? { height: 0 } : {}
+          )
+        ).done(() => {
+          if (animate) {
+            this.$wrapper.animate({
+              height: `${this.state ? '+' : '-'}=${this.gap}`
+            }, () => {
+              if (!this.state) {
+                this.$wrapper.hide()
+              }
+            })
+          } else {
+            !this.state && this.$wrapper.hide()
+          }
+        }).done(
+          () => this.toggleIconClass()
+        )
       })
     }
   }
