@@ -9,9 +9,10 @@ $ss-ft-width: 110px;
   border-top: 1px solid #EFF1F4;
 
   .ss {
-    &-wrapper {
-      position: relative;
+    &-more-wrapper {
       overflow: hidden;
+      position: relative;
+      display: none;
     }
 
     &-item {

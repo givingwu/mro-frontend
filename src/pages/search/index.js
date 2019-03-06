@@ -14,10 +14,7 @@ window.$ = $
 
 $('.J_Selector')
   .initSelector()
-  .initShowMore({
-    maxHeight: $('.J_SelectorItem').outerHeight() * 3,
-    wrapper: '.J_SlideWrapper'
-  })
+  .initShowMore()
 
 $('.J_Preview').previewSwitcher({
   itemGap: 6,
