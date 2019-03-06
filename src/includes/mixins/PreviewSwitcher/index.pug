@@ -23,10 +23,11 @@ mixin PreviewSwitcher(length, nav = true)
   - images = length ? images.splice(0, length) : images
   .preview.J_Preview#J_Preview
     .preview-bd.J_PreviewCurrent
-      if images
-        img.preview-image(src=images[0].l, alt=images[0].t, title=images[0].t)
-      else
-        img.preview-image(src=placeholder, alt="placeholder", title="加载中...")
+      a(href=images[0].l, title="高清图片")
+        if images
+          img.preview-image(src=images[0].l, alt=images[0].t, title=images[0].t)
+        else
+          img.preview-image(src=placeholder, alt="placeholder", title="加载中...")
     .preview-ft.J_PreviewNav
       if nav
         a.preview-switcher.preview-prev.J_PreviewPrev(href="javascript:void(0);", title="上一张")

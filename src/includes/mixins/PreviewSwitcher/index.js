@@ -15,7 +15,7 @@ const defaults = {
   nav: '.J_PreviewNav',
   prevBtn: '.J_PreviewPrev',
   nextBtn: '.J_PreviewNext',
-  activeEle: '.J_PreviewCurrent > img',
+  activeEle: '.J_PreviewCurrent img',
   activeCls: 'active',
   disabledCls: 'disabled',
   triggerEvents: 'mouseover',
@@ -199,7 +199,7 @@ class PreviewSwitcher {
     $currentItem.addClass(activeCls).siblings().removeClass(activeCls)
 
     if (updateEle) {
-      const $currentImage = $currentItem.children('img')
+      const $currentImage = $currentItem.find('img')
       const { getOriginUrl, fallbackUrl } = this.options
       const originUrl = getOriginUrl($currentImage) || $currentImage.attr('src') || fallbackUrl
 
