@@ -4,43 +4,44 @@
 - var goodsList = [{'type':'装修','goods':[{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'},{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'},{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'}]},{'type':'家具','goods':[{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'},{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'},{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'}]},{'type':'生活用品','goods':[{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'},{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'},{'title':'地板','desc':'圣象 地板 三层实木复合木地板贝丝白蜡木','price':'20.1 元/个'}]}]
 - var floorList = ['电线电缆','管件管材','灯具照明']
 .yzw-special-nav
-  .special-nav-box
+  .special-nav-box.J_SpecialTab
     ul
       each nav , index in navs
         li(class=`${index === 0 ? 'active':''}`)
           a(href='javascript:;',title=nav)= nav
-.yzw-special-main
-  .container
-    each item , index in goodsList
-      .yzw-special-goods
-        .special-goods-type
-          .type-img
-            img(src=typeImg)
-          a.type-box(href='javascript:;', title=item.type)
-            span.type= item.type
-        .special-goods-list
-          ul
-            each goods in item.goods
-              li
-                .small-box
-                  a(href='javascript:;',title=goods.title)
-                    span= goods.title
-                    .img-box
-                      img(src=goodsImg)
-                .large-box
-                  a(href='javascrip:;',title=goods.desc)
-                    .img-box
-                      img(src=goodsImg)
-                    .goods-info
-                      p.goods-desc= goods.desc
-                      p.goods-price= goods.price
-    each floor in floorList
-      .yzw-special-floor
-        .floor-title
-          h3.title
-            span= floor
-        .floor-box
-          include ../../mixins/GoodsCard/index.pug
-          +GoodsCard(5,6)
-        p.floor-more
-          a(href='javascript:;',title='查看更多') 查看更多<span class='yzwfont icon-gengduo'></span>
+.yzw-special-main.J_SpecialContent
+  each nav , navIndex in navs
+    .container.J_SpecialContentList
+      each item , index in goodsList
+        .yzw-special-goods
+          .special-goods-type
+            .type-img
+              img(src=typeImg)
+            a.type-box(href='javascript:;', title=item.type)
+              span.type= item.type + navIndex
+          .special-goods-list
+            ul
+              each goods in item.goods
+                li
+                  .small-box
+                    a(href='javascript:;',title=goods.title)
+                      span= goods.title
+                      .img-box
+                        img(src=goodsImg)
+                  .large-box
+                    a(href='javascrip:;',title=goods.desc)
+                      .img-box
+                        img(src=goodsImg)
+                      .goods-info
+                        p.goods-desc= goods.desc
+                        p.goods-price= goods.price
+      each floor in floorList
+        .yzw-special-floor
+          .floor-title
+            h3.title
+              span= floor
+          .floor-box
+            include ../../mixins/GoodsCard/index.pug
+            +GoodsCard(5,6)
+          p.floor-more
+            a(href='javascript:;',title='查看更多') 查看更多<span class='yzwfont icon-gengduo'></span>
