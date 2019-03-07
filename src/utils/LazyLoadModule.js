@@ -2,7 +2,7 @@ import $, { noop, extend, isEmptyObject } from 'jquery'
 import '../plugins/jquery.inview'
 import './ArtTemplate'
 import Templates from '../template'
-import { getData } from './DataUtil'
+import { getData, DATA_KEY_MAP } from './DataUtil'
 
 const defaults = {
   el: '.J_LazyModule',
@@ -70,8 +70,7 @@ export default class LazyLoadModule {
   }
 
   getData () {
-    const DATA = getData('PAGE')
-    console.log('DATA: ', DATA)
+    const DATA = getData(DATA_KEY_MAP.PAGE)
     const index = this.options.index ||
       this.$el.data('index') ||
       this.$el.attr('data-index')

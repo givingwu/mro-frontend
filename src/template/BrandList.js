@@ -5,9 +5,9 @@ export default `
           {{each data brand index}}
             <div class="col col-3 brand-item">
               <div class="brand-item-img">
-                <img src="{{brand.href}}" alt="{{brand.title}}"/>
+                <img src="{{brand.image}}" alt="{{brand.title}}"/>
               </div>
-              <a href="{{brand.href}}" class="brand-item-mask brand-item-link">
+              <a target="_blank" href="{{brand.link}}" class="brand-item-mask brand-item-link">
                 <div class="brand-item-tit">
                   <span>{{brand.title}}</span>
                 </div>

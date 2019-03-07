@@ -9,11 +9,11 @@ export default {
           {{if item.title}}
             <div class="yzw-floor">
               <div class="yzw-title">
-                <h2>{{item.title}}<small>{{item.desc}}</small></h2>
+                <h2>{{item.title}}<small>{{item.description}}</small></h2>
               </div>
               <div
                 class="yzw-shell yzw-stage-wrapper J_LazyModule J_LazyStage"
-                data-key="stagesData"
+                data-key="categoryRegion"
                 data-index="{{index}}"
                 data-template="FloorStage"
               ></div>

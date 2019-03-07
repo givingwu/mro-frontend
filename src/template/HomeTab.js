@@ -30,14 +30,14 @@ export default {
                         </div>
                         <div class="panel-item-r yzw-small-title">
                           <h3>{{child.title}}</h3>
-                          <small>{{child.desc}}</small>
+                          <small>{{child.description}}</small>
                         </div>
                       </div>
                     {{else}}
                       <div class="panel-item">
                         <div class="panel-item-t yzw-small-title">
                           <h4>{{child.title}}</h4>
-                          <small>{{child.desc}}</small>
+                          <small>{{child.description}}</small>
                         </div>
                         <div class="panel-item-b">
                           <img src={{child.image}} alt="{{child.title}}">

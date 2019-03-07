@@ -1,8 +1,6 @@
 import $ from 'jquery'
-// import menuDataSet from './menu'
+import { getData, DATA_KEY_MAP } from '../../../utils/DataUtil'
 
-const config = window.pageConfig = window.pageConfig || {}
-const menuDataSet = config.menuDataSet
 const noop = $.noop
 const extend = $.extend
 const isArray = $.isArray
@@ -35,8 +33,8 @@ const defaults = {
     </div>
   `,
 
-  menuDataSet: menuDataSet && menuDataSet.length ? menuDataSet : [],
   callback: noop,
+  dataSet: [],
   triggerEvents: 'mouseenter'
 }
 
@@ -111,7 +109,6 @@ class CategoryMenu {
     this.$doc.on('mouseover.cm.contained', e => {
       const t = e.target
       let contained = [$item, $panel].some($el => $el.is(t) || $el.has(t).length)
-      //
 
       if (!contained) {
         this.offEvents()
@@ -170,31 +167,33 @@ class CategoryMenu {
   }
 
   installPanel (index) {
-    const { panelWrapTpl, panelTitle, panelList, panelItemTpl, menuDataSet } = this.options
-    const data = menuDataSet[index]
+    const { panelWrapTpl, panelTitle, panelList, panelItemTpl, dataSet } = this.options
+    const data = dataSet[index]
+
     if (!isArray(data) || !data.length) return
+
     const $panelWrap = $(panelWrapTpl)
 
     for (let i = 0, l = data.length; i < l; i++) {
       const item = data[i]
-      if (isEmptyObject(item)) break
+      if (item && isEmptyObject(item)) break
 
       const { title, children } = item
-      if (!children || !children.length) break
-
       const $panelItem = $(panelItemTpl)
       const $panelTitle = $panelItem.children(panelTitle)
       const $panelList = $panelItem.children(panelList)
 
       title && $panelTitle.html(`<span>${title}</span>`)
 
-      for (let j = 0, k = children.length; j < k; j++) {
-        const child = children[j]
-        if (isEmptyObject(child)) break
+      if (children && children.length) {
+        for (let j = 0, k = children.length; j < k; j++) {
+          const child = children[j]
+          if (isEmptyObject(child)) break
 
-        $panelList.append(
-          `<a href="${child.href}" title="${child.title}">${child.title}</a>`
-        )
+          $panelList.append(
+            `<a href="${child.link}" title="${child.title}">${child.title}</a>`
+          )
+        }
       }
 
       $panelWrap.append($panelItem)
@@ -222,21 +221,14 @@ $.fn.initCategoryMenu = function $CategoryMenu (options = {}) {
   })
 }
 
-if (!menuDataSet || !menuDataSet.length) {
-  import('./menu').then(({ default: data }) => {
-    initCategoryMenu(data)
-  }).catch(() => {
-    console.error('Lazy load menuData failed')
-  })
-} else {
-  initCategoryMenu()
-}
+const data = getData(DATA_KEY_MAP.HEAD)/* .map(item => item && item.children && item.children.length ? item.children : []) */
+console.log('data: ', data)
 
-function initCategoryMenu (data) {
+if (isArray(data) && data.length) {
   $(() => {
     // initialize CategoryMenu plugin with callback function
     $('.J_CategoryMenu').initCategoryMenu({
-      menuDataSet: data || []
+      dataSet: (data || []).map(t => t && t.children && t.children.length && t.children)
     })
   })
 }

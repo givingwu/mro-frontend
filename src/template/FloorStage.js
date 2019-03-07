@@ -13,7 +13,7 @@ export default {
                     <img src="{{item.image}}" alt="{{item.title}}">
                     <figcaption>
                       <h4>{{item.title}}</h4>
-                      <small>{{item.desc}}</small>
+                      <small>{{item.description}}</small>
                     </figcaption>
                   </figure>
                 </li>
@@ -24,7 +24,7 @@ export default {
                   </div
                   ><div class="yzw-stage-t-info yzw-small-title">
                     <h4>{{item.title}}</h4>
-                    <small>{{item.desc}}</small>
+                    <small>{{item.description}}</small>
                   </div>
                 </li>
               {{else if (index > 4  && index < lastIndex)}}
@@ -34,7 +34,7 @@ export default {
                   </div><div class="yzw-stage-b-r">
                     <div class="yzw-stage-t-info yzw-small-title">
                       <h4>{{item.title}}</h4>
-                      <small>{{item.desc}}</small>
+                      <small>{{item.description}}</small>
                     </div>
                   </div>
                 </li>
@@ -43,7 +43,7 @@ export default {
                   <div class="yzw-stage-b-r"></div>
                     <div class="yzw-stage-t-info yzw-small-title">
                       <h4>{{item.title || '查看更多'}}</h4>
-                      <small>{{item.desc || '热销商品'}}</small>
+                      <small>{{item.description || '热销商品'}}</small>
                     </div>
                   </div
                   ><div class="yzw-stage-b-l">

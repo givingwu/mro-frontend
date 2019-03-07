@@ -29,7 +29,7 @@ $.fn.initBlockPagination = function $BlockPagination (options) {
     })
   })
   $input.on('input change', e => {
-    value = +e.target.value.replace(/([^0-9|\-])|$/g, '')
+    value = +e.target.value.replace(/([^0-9|-])|$/g, '')
   })
   $input.on('focus', documentListenEnterEvent)
   $input.on('blur', documentUnlistenEnterEvent)
