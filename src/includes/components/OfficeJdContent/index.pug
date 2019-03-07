@@ -7,31 +7,31 @@
 .yzw-content.J_HomeContent
   include ../../mixins/SideBar/index.pug
   +SideBar()
-.container
-  .office-jd-box
-    .jd-box-logo
-      img(src=jdLogo)
-    .jd-box-info
-      p.info= jdInfoText
-      p.info= jdInfoText2
-      p.info= jdInfoText3
-  .office-jd-toolBar.mt20
-    .toolBar-showType
-      a.active(href='javascript:;',title='大图') <span class='yzwfont icon-gird'></span>大图
-      a(href='javascript:;',title='列表') <span class='yzwfont icon-list'></span>列表
-    .toolBar-search
-      .input-search
-        input(type='text', placeholder='在结果中搜索')
-      a.search-btn(href='javascript:;') 搜索
-  .row.mt20
-    //- Goods Grid Layout
-    include ../../mixins/GoodsGrid/index.pug
-    +GoodsGrid(pageNum)
+  .container
+    .office-jd-box
+      .jd-box-logo
+        img(src=jdLogo)
+      .jd-box-info
+        p.info= jdInfoText
+        p.info= jdInfoText2
+        p.info= jdInfoText3
+    .office-jd-toolBar.mt20
+      .toolBar-showType
+        a.active(href='javascript:;',title='大图') <span class='yzwfont icon-gird'></span>大图
+        a(href='javascript:;',title='列表') <span class='yzwfont icon-list'></span>列表
+      .toolBar-search
+        .input-search
+          input(type='text', placeholder='在结果中搜索')
+        a.search-btn(href='javascript:;') 搜索
+    .row.mt20
+      //- Goods Grid Layout
+      include ../../mixins/GoodsGrid/index.pug
+      +GoodsGrid(pageNum)
 
-    //- Goods List Layout
-    include ../../mixins/GoodsList/index.pug
-    +GoodsList(pageNum)
+      //- Goods List Layout
+      include ../../mixins/GoodsList/index.pug
+      +GoodsList(pageNum)
 
-    include ../../mixins/BlockPagination/index.pug
-    +BlockPagination(totalLength, currentPage, pageNum).gap20.gap-b-40
+      include ../../mixins/BlockPagination/index.pug
+      +BlockPagination(totalLength, currentPage, pageNum).gap20.gap-b-40
 

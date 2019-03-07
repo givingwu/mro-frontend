@@ -1,7 +1,6 @@
 import '../../assets/style/office.scss'
 import $ from 'jquery'
 import '../../common'
-import '../../utils/LazyLoadModule'
 import '../../includes/mixins/SearchTab'
 import '../../includes/mixins/CategoryMenu'
 import '../../includes/mixins/OpacityBanner'
@@ -12,7 +11,6 @@ import '../../plugins/jquery.nav'
 window.$ = $
 
 $(function () {
-  $('.J_LazyModule').initLazyModule()
   $('.J_SideBar').initSideBar()
   $('.J_PageNav ul').onePageNav({
     paddingTop: 76

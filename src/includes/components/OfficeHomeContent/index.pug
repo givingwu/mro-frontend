@@ -10,44 +10,44 @@ include ../../mixins/GoodsCard/index.pug
   +OpacityBanner()
   include ../../mixins/SideBar/index.pug
   +SideBar()
-.container
-  .office-section
-    +Floor('热卖榜', '精挑细选，为您选购', 1)
-    +GoodsCard(5, 1)
-  .office-section
-    +Floor('折扣榜', '精挑细选，为您选购', 2)
-    +GoodsCard(5, 2)
-  .office-section
-    +Floor('品牌榜', '精挑细选，为您选购', 3)
-    .brands
-      .row.brand-list
-        each brand, index in brands
-          .col.col-3.brand-item
-            .brand-item-img
-              img(src=brand.href, alt=brand.title)
-            a(href=`/brands/${++index}`).brand-item-mask.brand-item-link
-              .brand-item-tit
-                span= brand.title
-              .brand-item-btn
-                span 点击查看
-.office-tab-container
-  .office-tab-bar.J_NavFix
-    .office-tab-nav.J_PageNav
-      ul
-        each tab , index in tabs
-          li(class=`${index === 0 ? 'tab-item current' : 'tab-item'}`)
-            a(href=`#floor_${index+1}`)= tab
   .container
-    .office-tab-content
-      each tab , index in tabs
-        .tab-content(id=`floor_${index+1}`)
-          .office-floor
-            .floor-sign(class=`floor-sign-${index+1}`)= `F${index+1}`
-            h3.title= tab
-              small.desc= '全球领先.优质资源.阳光采购'
-          case index
-            when 1
-              +GoodsCard(5, 3)
-            default
-              +GoodsCard(5, 4)
+    .office-section
+      +Floor('热卖榜', '精挑细选，为您选购', 1)
+      +GoodsCard(5, 1)
+    .office-section
+      +Floor('折扣榜', '精挑细选，为您选购', 2)
+      +GoodsCard(5, 2)
+    .office-section
+      +Floor('品牌榜', '精挑细选，为您选购', 3)
+      .brands
+        .row.brand-list
+          each brand, index in brands
+            .col.col-3.brand-item
+              .brand-item-img
+                img(src=brand.href, alt=brand.title)
+              a(href=`/brands/${++index}`).brand-item-mask.brand-item-link
+                .brand-item-tit
+                  span= brand.title
+                .brand-item-btn
+                  span 点击查看
+  .office-tab-container
+    .office-tab-bar.J_NavFix
+      .office-tab-nav.J_PageNav
+        ul
+          each tab , index in tabs
+            li(class=`${index === 0 ? 'tab-item current' : 'tab-item'}`)
+              a(href=`#floor_${index+1}`)= tab
+    .container
+      .office-tab-content
+        each tab , index in tabs
+          .tab-content(id=`floor_${index+1}`)
+            .office-floor
+              .floor-sign(class=`floor-sign-${index+1}`)= `F${index+1}`
+              h3.title= tab
+                small.desc= '全球领先.优质资源.阳光采购'
+            case index
+              when 1
+                +GoodsCard(5, 3)
+              default
+                +GoodsCard(5, 4)
 
