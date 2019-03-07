@@ -7,9 +7,11 @@ export default {
       <div class="yzw-tab J_HomeTab">
         <div class="yzw-tab-hd">
           <div class="row yzw-tab-list">
-            {{each data item index }}
+            {{each data item index}}
               {{if item && item.children && item.children.length}}
-                <a class="col col-8 yzw-tab-item J_TabItem {{ index === 0 ? 'active' : ''}}"><span>{{item.title}}</span></a>
+                <a class="col col-8 yzw-tab-item J_TabItem {{index === 0 ? 'active' : ''}}">
+                  <span>{{item.title}}</span>
+                </a>
               {{/if}}
             {{/each}}
           </div>
@@ -18,13 +20,13 @@ export default {
           {{each data item index}}
             {{if item && item.children && item.children.length}}
               {{set children = item.children}}
-              <div class="yzw-tab-cont J_TabCont {{ index === 0 ? 'active' : ''}}">
+              <div class="yzw-tab-cont J_TabCont {{index === 0 ? 'active' : ''}}">
                 <div class="panel">
                   {{each children child index }}
-                    {{if index === 0 }}
+                    {{if index === 0}}
                       <div class="panel-item panel-first">
                         <div class="panel-item-l">
-                          <img src="{{child.src}}" alt="{{child.title}}">
+                          <img src="{{child.image}}" alt="{{child.title}}">
                         </div>
                         <div class="panel-item-r yzw-small-title">
                           <h3>{{child.title}}</h3>
@@ -38,7 +40,7 @@ export default {
                           <small>{{child.desc}}</small>
                         </div>
                         <div class="panel-item-b">
-                          <img src={{child.src}} alt="{{child.title}}">
+                          <img src={{child.image}} alt="{{child.title}}">
                         </div>
                       </div>
                     {{/if}}

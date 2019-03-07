@@ -24,6 +24,7 @@ $ad-height: 100px;
 $tab-height: 400px;
 $promo-height: 427px;
 $brands-height: 160px;
+$stage-height: 480px;
 
 small {
   color: $font-gray-color-1;
@@ -107,12 +108,12 @@ small {
   }
 
   &-shell {
-    color: #ededee;
+    color: #ccc;
     font-size: 4em;
     text-align: center;
     @extend .yzwfont;
     @extend .icon-placeholder;
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: #e0e0e0;
     // background-image: url($placeholder);
     // background-position: center;
 
@@ -132,6 +133,11 @@ small {
 
     &.yzw-brands {
       line-height: $brands-height;
+    }
+
+    &.yzw-stage-wrapper {
+      font-size: 12em;
+      line-height: $stage-height;
     }
   }
 
@@ -198,6 +204,7 @@ small {
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #f6f7f8;
+    min-height: 1700px;
   }
 
   &-floor {
@@ -211,9 +218,11 @@ small {
   }
 
   &-stage {
-    height: 480px;
-    // margin-bottom: 40px;
     @extend .clearfix;
+
+    &-wrapper {
+      height: $stage-height;
+    }
 
     &-item {
       float: left;
@@ -231,7 +240,6 @@ small {
     }
 
     &-t {
-      width: 234px;
       height: 300px;
       padding: 40px 20px;
       margin-bottom: 10px;
@@ -252,7 +260,6 @@ small {
     }
 
     &-b {
-      width: $item-width;
       height: 169px;
       text-align: center;
       background-color: #fff;
@@ -279,7 +286,7 @@ small {
       &-r {
         overflow: hidden;
         width: $item-right-width;
-        height: 100px;
+        // height: 100px;
         margin-left: $item-left-gap;
 
         h4 {
@@ -291,7 +298,7 @@ small {
     &-image,
     &-t,
     &-b {
-      background-color: rgba(0, 0, 0, 0.02);
+      background-color: #fff;
     }
   }
 }
