@@ -74,17 +74,23 @@
   }
 
   &-title {
-    height: 34px;
+    height: auto;
     max-height: 34px;
-    font-weight: 400;
     @include multiple-line-hide-text($lines: 3);
 
     a {
       color: $font-black-color;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
       transition: color .2s;
 
       @include active-hover;
     }
+  }
+
+  &-bid {
+    height: 20px;
   }
 
   &-company,

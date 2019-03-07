@@ -19,10 +19,12 @@
 .product-detail
   .pd-hd
     .pd-tit
-      if winBind
-        span.tender 中标
-        i.icon.yzwicon.yzwicon-bid
-      h3= product.name
+      if product.winBind
+        h3
+          i.icon.yzwicon.yzwicon-bid
+          = product.name
+      else
+        h3= product.name
     .pd-desc
       | #{product.desc}
     if product.keywords
