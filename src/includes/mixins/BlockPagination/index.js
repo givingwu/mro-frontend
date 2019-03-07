@@ -1,5 +1,5 @@
 import $ from 'jquery'
-// getItemData
+import { parse } from 'querystring'
 import { isUndefined, setFieldAndRefresh } from '../SpecSelector'
 
 const extend = $.extend
@@ -15,6 +15,11 @@ $.fn.initBlockPagination = function $BlockPagination (options) {
   const $select = $pager.find(select)
   const selectField = $select.data('field') || 'pageSize'
   const $input = $pager.find(input)
+
+  const qsData = parse(location.search.replace(/\?/g, '')) || {}
+  const minPage = 1
+  const currPage = +qsData.pageNo || minPage
+  const maxPage = $input.data('page-max') || $input.attr('data-page-max')
   const inputField = $input.data('field') || 'pageNumber'
   let value = ''
 
@@ -24,7 +29,7 @@ $.fn.initBlockPagination = function $BlockPagination (options) {
     })
   })
   $input.on('input change', e => {
-    value = +e.target.value.replace(/([^0-9])|$/g, '')
+    value = +e.target.value.replace(/([^0-9|\-])|$/g, '')
   })
   $input.on('focus', documentListenEnterEvent)
   $input.on('blur', documentUnlistenEnterEvent)
@@ -38,8 +43,11 @@ $.fn.initBlockPagination = function $BlockPagination (options) {
 
           if (
             !isUndefined(value) &&
-            !isNaN(value)
+            !isNaN(value) &&
+            value !== currPage
           ) {
+            if (value > maxPage) value = maxPage
+            if (value < minPage) value = minPage
             return setFieldAndRefresh({
               [inputField]: value
             })

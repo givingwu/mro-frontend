@@ -16,6 +16,8 @@ $float-bar-width: 88px;
   background: #fff;
 
   &-item {
+    overflow: hidden;
+    max-width: $float-bar-width;
     width: $float-bar-width;
     padding: 15px 20px;
     color: $font-black-color;
