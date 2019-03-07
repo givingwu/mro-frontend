@@ -11,7 +11,7 @@
           a(href='javascript:;',title=nav)= nav
 .yzw-special-main.J_SpecialContent
   each nav , navIndex in navs
-    .container.J_SpecialContentList
+    .container.J_SpecialContentList(class=`${navIndex === 0 ? 'active':''}`)
       each item , index in goodsList
         .yzw-special-goods
           .special-goods-type

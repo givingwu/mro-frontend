@@ -67,7 +67,7 @@
   background-size: cover;
   .container{
     display: none;
-    &:first-child{
+    &.active{
       display: block;
     }
   }
