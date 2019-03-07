@@ -40,13 +40,12 @@ export default {
                 </li>
               {{else if index === lastIndex}}
                 <li class="yzw-stage-item yzw-stage-b">
-                  <div class="yzw-stage-b-r"></div>
+                  <div class="yzw-stage-b-r">
                     <div class="yzw-stage-t-info yzw-small-title">
                       <h4>{{item.title || '查看更多'}}</h4>
                       <small>{{item.description || '热销商品'}}</small>
                     </div>
-                  </div
-                  ><div class="yzw-stage-b-l">
+                  </div><div class="yzw-stage-b-l">
                     {{if item.image}}
                       <img src="{{item.image}}" alt="{{item.image}}>"
                     {{else}}
