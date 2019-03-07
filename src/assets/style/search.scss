@@ -17,3 +17,115 @@
 @import "RuleBar";
 @import "GoodsGrid";
 @import "GoodsList";
+
+
+// jd专区
+.office-jd-box{
+  width: 100%;
+  height: 200px;
+  padding-left: 200px;
+  margin-top: 20px;
+  position: relative;
+  .jd-box-logo{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .jd-box-info{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: url("../image/office-jd-bg.png") no-repeat;
+    background-size: cover;
+    .info{
+      line-height: 26px;
+      color: $font-black-color;
+      font-size: 13px;
+      text-align: justify;
+    }
+  }
+}
+
+.office-jd-toolBar{
+  width: 100%;
+  height: 48px;
+  background-color: #F7F8F9;
+  border: 1px solid $default-disabled-color;
+  padding-right: 240px;
+  position: relative;
+  .toolBar-showType{
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    font-size: 0;
+    a{
+      display: inline-block;
+      vertical-align: top;
+      width: 68px;
+      height: 100%;
+      text-align: center;
+      line-height: 48px;
+      font-size: 12px;
+      color: $font-gray-color;
+      border-right: 1px solid $default-disabled-color;
+      &.active{
+        background-color: #FFFFFF;
+        .yzwfont{
+          color: $primary-color;
+        }
+      }
+      .yzwfont{
+        font-size: 12px;
+        color: $font-gray-color;
+        margin-right: 6px;
+      }
+    }
+  }
+  .toolBar-search{
+    width: 230px;
+    height: 28px;
+    position: absolute;
+    top:9px;
+    right: 10px;
+    padding-right: 50px;
+    .input-search{
+      width: 100%;
+      height: 28px;
+      border: 1px solid $gray-color;
+      padding: 3px 10px;
+      background-color: #FFFFFF;
+      input{
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        border: 0;
+        outline: none;
+        font-size: 12px;
+        color: $font-black-color;
+      }
+    }
+    .search-btn{
+      width: 44px;
+      height: 100%;
+      display: inline-block;
+      vertical-align: top;
+      position: absolute;
+      top:0;
+      right: 0;
+      background-color: $primary-color;
+      text-align: center;
+      line-height: 28px;
+      font-size: 12px;
+      color: #FFFFFF;
+      &:hover{
+        background-color: $primary-active-color;
+      }
+    }
+  }
+}
