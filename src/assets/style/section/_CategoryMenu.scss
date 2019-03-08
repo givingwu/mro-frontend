@@ -93,9 +93,13 @@ $base-index: 10;
     &-title {
       height: 25px;
       line-height: 25px;
-      color: $font-black-color;
       font-size: 18px;
       margin-bottom: 4px;
+
+      a {
+        color: $font-black-color;
+        @include active-hover;
+      }
     }
 
     &-list {

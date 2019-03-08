@@ -178,12 +178,12 @@ class CategoryMenu {
       const item = data[i]
       if (item && isEmptyObject(item)) break
 
-      const { title, children } = item
+      const { title, link, children } = item
       const $panelItem = $(panelItemTpl)
       const $panelTitle = $panelItem.children(panelTitle)
       const $panelList = $panelItem.children(panelList)
 
-      title && $panelTitle.html(`<span>${title}</span>`)
+      title && $panelTitle.html(`<a href="${link}" title="${title}">${title}</a>`)
 
       if (children && children.length) {
         for (let j = 0, k = children.length; j < k; j++) {

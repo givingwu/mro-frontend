@@ -74,15 +74,18 @@ class OpacityBanner {
 
     this.onEvents($currentItem)
 
-    $currentItem.show()
-    $currentItem.animate({
-      zIndex: 1,
-      opacity: 1
-    },
-    toggleDuration,
-    () => {
-      this.handleComplete($currentItem, $currentNav, nextIndex)
-    })
+    $.when(
+      $currentItem.animate({
+        zIndex: 1,
+        opacity: 1
+      },
+      toggleDuration,
+      () => {
+        this.handleComplete($currentItem, $currentNav, nextIndex)
+      })
+    ).then(
+      $currentItem.show()
+    )
   }
 
   handleComplete ($currentItem, $currentNav, nextIndex) {
@@ -109,7 +112,6 @@ class OpacityBanner {
   onEvents ($currentItem) {
     /* https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#extra-mouseout-when-leaving-for-a-child */
     $currentItem.children('div').on('mouseenter', (e) => {
-      console.log("$currentItem.children('div').on('mouseenter')")
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
       const isChildDiv = tagName === 'DIV'
@@ -123,7 +125,6 @@ class OpacityBanner {
     })
 
     $currentItem.children('div').on('mouseleave', (e) => {
-      console.log("$currentItem.children('div').on('mouseleave')")
       let $target = $(e.target)
       const tagName = $target.prop('tagName')
       const isChildDiv = tagName === 'DIV'
