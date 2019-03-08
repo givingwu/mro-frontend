@@ -20,21 +20,21 @@
             a.type-box(href='javascript:;', title=item.type)
               span.type= item.type + navIndex
           .special-goods-list
-            ul
-              each goods in item.goods
-                li
-                  .small-box
-                    a(href='javascript:;',title=goods.title)
-                      span= goods.title
-                      .img-box
-                        img(src=goodsImg)
-                  .large-box
-                    a(href='javascrip:;',title=goods.desc)
-                      .img-box
-                        img(src=goodsImg)
-                      .goods-info
-                        p.goods-desc= goods.desc
-                        p.goods-price= goods.price
+            each goods in item.goods
+              .small-box
+                a(href='javascript:;',title=goods.title)
+                  span= goods.title
+                  .img-box
+                    img(src=goodsImg)
+            each goods in item.goods
+              .large-box
+                a(href='javascrip:;',title=goods.desc)
+                  .img-box
+                    img(src=goodsImg)
+                  .goods-info
+                    p.goods-desc= goods.desc
+                    p.goods-price= goods.price
+
       each floor in floorList
         .yzw-special-floor
           .floor-title
