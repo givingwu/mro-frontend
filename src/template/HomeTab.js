@@ -54,11 +54,6 @@ export default {
     {{/if}}
   `,
   initialize: function () {
-    $('.J_HomeTab').initTab({
-      currentIndex: 0,
-      callback: function callback (idx) {
-        console.log(idx)
-      }
-    })
+    $('.J_HomeTab').initTab()
   }
 }

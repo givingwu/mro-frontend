@@ -1,36 +1,27 @@
-import $ from 'jquery'
+import $, { extend } from 'jquery'
 import { debounce } from 'throttle-debounce'
 import ScrollObserver from '../../../utils/ScrollObserver'
-// import '../../../plugins/jquery.sticky'
 
-// const noop = $.noop
-const extend = $.extend
-// const isFunction = $.isFunction
 const defaults = {
-  el: '.J_SideBar',
-  gap: 30,
-  go2top: '.J_BackTop',
-  qrcode: '.J_QRCode',
-  scrollWrapper: '.J_HomeContent',
-  debounceTime: 300,
-  durationTime: 300,
-  containerWidth: 1200
+  el: '.J_FloorBar',
+  gap: 40,
+  debounce: 300,
+  containerWidth: 1200,
+  scrollWrapper: '.J_Floors'
 }
 
-export default class SideBar {
+export default class FloorBar {
   constructor (options) {
     this.options = extend({}, defaults, options)
-    const { el, go2top, qrcode } = this.options
+    const { el } = this.options
 
     this.$win = $(window)
     this.$el = $(el)
-    this.$go2top = $(el).find(go2top)
-    this.$qrcode = $(el).find(qrcode)
 
     this.initScrollObserver()
-    // this.initSticky()
     this.initLayout()
     this.bindEvents()
+    console.log(this)
   }
 
   initScrollObserver () {
@@ -43,14 +34,13 @@ export default class SideBar {
       relative: scrollWrapper,
       callback: (instance) => {
         const { offset: { y }, eh, rh } = instance
-        const maxTop = rh - eh - 40 /* padding-bottom */ - 20 /* top */ - 2 /* border */
-        // console.log(' scrollTop: ', y, ' maxTop: ', maxTop)
+        const maxTop = rh - eh - 40 /* padding-bottom */ - 90 /* top */ - 0 /* border */
 
         if (y >= 0) {
           if (y < maxTop) {
             this.$el.css({
               position: 'fixed',
-              top: 20
+              top: 90
             })
           } else {
             this.$el.css({
@@ -61,7 +51,7 @@ export default class SideBar {
         } else {
           this.$el.css({
             position: 'absolute',
-            top: 20,
+            top: 90,
             bottom: 'auto'
           })
         }
@@ -70,15 +60,13 @@ export default class SideBar {
   }
 
   initLayout () {
+    const { gap, containerWidth } = this.options
     const winWidth = this.$win.width()
     const eleWidth = this.$el.width()
-    const containerWidth = this.options.containerWidth
 
-    if (winWidth <= containerWidth + eleWidth + this.options.gap) {
-      const left = winWidth / 2 - eleWidth
-
+    if (winWidth <= containerWidth + eleWidth + gap) {
       this.$el.css({
-        marginLeft: left
+        marginLeft: -(winWidth / 2)
       })
     } else {
       this.$el.removeAttr('style')
@@ -86,22 +74,13 @@ export default class SideBar {
   }
 
   bindEvents () {
-    const { debounceTime } = this.options
-
-    this.$win.on('resize', debounce(debounceTime, this.initLayout).bind(this))
-    this.$go2top.click(() => {
-      this.go2topWithAnimate()
-    })
-  }
-
-  go2topWithAnimate () {
-    $('html').animate({ scrollTop: 0 }, this.options.durationTime)
+    this.$win.on('resize', debounce(this.options.debounce, this.initLayout).bind(this))
   }
 }
 
-$.fn.initSideBar = function $initSideBar (options = {}) {
+$.fn.initFloorBar = function $floorBar (options = {}) {
   return this.each(function () {
-    return new SideBar({
+    return new FloorBar({
       ...options,
       el: this
     })

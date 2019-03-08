@@ -1,3 +1,5 @@
+// import ScrollObserver from '../utils/ScrollObserver'
+
 export default {
   template: `
     {{if data}}
@@ -62,6 +64,27 @@ export default {
   `,
   // template: `{{data}}`,
   initialize () {
-    console.log('J_LazyStage initialized success!')
+    // const $bars = $('.J_FloorBar').children()
+    // const activeCls = 'active'
+    // let activeIndex = 0
+
+    /* $('.J_LazyStage').each(function () {
+      return new ScrollObserver({
+        el: this,
+        relative: $(this).parent(),
+        callback ({ state, $el, $relative }) {
+          activeIndex = $relative.index()
+
+          if (state > 0) {
+            $bars.eq()
+              .addClass(activeCls)
+              .siblings()
+              .removeClass(activeCls)
+          } else {
+            $bars.eq(activeIndex).removeClass(activeCls)
+          }
+        }
+      })
+    }) */
   }
 }

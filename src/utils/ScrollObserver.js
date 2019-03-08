@@ -40,8 +40,6 @@ export default class ScrollObserver {
 
     if (relative) {
       this.$relative = $(relative)
-      this.rw = this.$relative.width()
-      this.rh = this.$relative.height()
     }
 
     this.state = TRIGGERS.DEFAULT // default state: 0
@@ -59,8 +57,14 @@ export default class ScrollObserver {
   }
 
   checkState ($target) {
-    const { callback, always } = this.options
+    const { callback, always, relative } = this.options
     const { x: posX, y: posY } = this.pos
+
+    if (relative) {
+      this.rw = this.$relative.width()
+      this.rh = this.$relative.height()
+    }
+
     const x = $target.scrollLeft()
     const y = $target.scrollTop()
     let state = TRIGGERS.DEFAULT
@@ -75,8 +79,6 @@ export default class ScrollObserver {
       x: x - posX,
       y: y - posY
     }
-
-    // console.log(this.eventName, 'always: ', always, x, posX, y, posY)
 
     if (always) {
       /* 对于 always 的滚动回调来说，offset 更常用  */
@@ -116,7 +118,8 @@ export default class ScrollObserver {
     }
   }
 
-  _inView ($el) {}
+  /* Check does current element visible in viewport */
+  /* _inView ($el) {} */
 
   _geneEleBounding ($el, pos) {
     /* eslint-disable-next-line */

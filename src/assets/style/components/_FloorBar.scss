@@ -1,13 +1,13 @@
-$float-bar-gap: 40px;
-$float-bar-width: 88px;
+$floor-bar-gap: 40px;
+$floor-bar-width: 88px;
 
-.float-bar {
+.floor-bar {
   position: absolute; /* fixed */
   top: 90px;
   // bottom: 50px;
   left: 50%;
   text-align: center;
-  margin-left: -($container-width / 2) - $float-bar-width - $float-bar-gap;
+  margin-left: -($container-width / 2) - $floor-bar-width - $floor-bar-gap;
   width: 50px;
   background: rgba(255,255,255,1);
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1);
@@ -17,8 +17,8 @@ $float-bar-width: 88px;
 
   &-item {
     overflow: hidden;
-    max-width: $float-bar-width;
-    width: $float-bar-width;
+    max-width: $floor-bar-width;
+    width: $floor-bar-width;
     padding: 15px 20px;
     color: $font-black-color;
     font-weight:500;

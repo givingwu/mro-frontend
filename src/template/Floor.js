@@ -24,8 +24,6 @@ export default {
     {{/if}}
   `,
   initialize () {
-    $('.J_LazyStage').initLazyModule(() => {
-      console.log('Floor > J_LazyStage initialized success!')
-    })
+    $('.J_LazyStage').initLazyModule()
   }
 }
